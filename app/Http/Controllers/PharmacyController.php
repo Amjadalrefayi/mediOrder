@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pharmacy;
+use App\Http\Resources\PharmacyResources;
+use App\Http\Resources\SimplePharmacyResources;
+use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
 
-class PharmacyController extends Controller
+class PharmacyController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,11 @@ class PharmacyController extends Controller
      */
     public function index()
     {
-        //
+        $pharmacies = Pharmacy::latest()->paginate(5);
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
+            'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
+            'previousPageUrl' => $pharmacies->previousPageUrl()
+        ]);
     }
 
     /**
