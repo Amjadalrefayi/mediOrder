@@ -46,6 +46,7 @@ class CustomerController extends BaseController
             'gender'=>$input['gender'],
             'location'=> $input['location'],
             'image' => $input['image'],
+            'state' => true
         ]);
 
         $user->remember_token = $this->AuthCon->token($user);
