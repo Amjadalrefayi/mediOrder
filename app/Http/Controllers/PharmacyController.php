@@ -46,12 +46,12 @@ class PharmacyController extends BaseController
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'phone' => 'required',
-            'location' => 'required',
-            'image' => 'nullable',
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'phone'=> 'required|min:13',
+            'location'=> 'required',
+            'image' => 'mimes:jpeg,jpg,png | nullable',
         ]);
 
         if ($validator->fails()) {
