@@ -18,7 +18,7 @@ class ProductController extends BaseController
      */
     public function index()
     {
-        $products = Product::paginate(2);
+        $products = Product::paginate(5);
         return $this->sendResponse(ProductResources::collection($products), [
             'current_page' => $products->currentPage(),
             'nextPageUrl' => $products->nextPageUrl(),
