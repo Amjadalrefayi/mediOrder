@@ -77,7 +77,7 @@ class PharmacyController extends BaseController
         $data['Token']=$pharmacy['remember_token'];
         $data['name'] = $pharmacy->name;
         $data['email'] = $pharmacy->email;
-        return $this->sendResponse($data, 'User registed successfully');
+        return $this->sendResponse($data, 'Pharmacy registed successfully');
     }
 
     /**
