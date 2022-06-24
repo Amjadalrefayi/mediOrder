@@ -51,9 +51,13 @@ class PharmacyController extends BaseController
      * @param  \App\Models\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function show(Pharmacy $pharmacy)
-    {
-        //
+    public function show($id){
+
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $phrmacy = Pharmacy::find($id);
+        return $this->sendResponse(new PharmacyResources($phrmacy), 'Pharmacy show successfully');
     }
 
     /**
@@ -85,8 +89,13 @@ class PharmacyController extends BaseController
      * @param  \App\Models\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pharmacy $pharmacy)
-    {
-        //
+    public function destroy($id){
+
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $pharmacy->delete();
+        return $this->sendResponse('', 'Pharmacy deleted successfully');
     }
 }
