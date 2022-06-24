@@ -7,6 +7,7 @@ use App\Http\Resources\PharmacyResources;
 use App\Http\Resources\SimplePharmacyResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PharmacyController extends BaseController
 {
@@ -42,7 +43,35 @@ class PharmacyController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'location' => 'required',
+            'image' => 'nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+
+
+        $input = $request->all();
+        $pharmacy = Pharmacy::create([
+            'name' =>  $input['name'],
+            'email' =>  $input['email'],
+            'password' =>  $input['password'],
+            'phone'=> $input['phone'],
+            'location'=> $input['location'],
+            'image' => $input['image'],
+            'state' => true
+        ]);
+        $data['id']=$pharmacy['id'];
+        $data['Token']=$pharmacy['remember_token'];
+        $data['name'] = $pharmacy->name;
+        $data['email'] = $pharmacy->email;
+        return $this->sendResponse($data, 'User registed successfully');
     }
 
     /**
