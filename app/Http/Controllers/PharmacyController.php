@@ -45,6 +45,7 @@ class PharmacyController extends BaseController
      */
     public function store(Request $request)
     {
+        $this->AuthCon  = new AuthController();
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
