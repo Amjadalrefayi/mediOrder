@@ -9,12 +9,18 @@ use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Pharmacy Management
+ *
+ * APIs to manage the Pharmacy
+ */
 class PharmacyController extends BaseController
 {
 
     protected AuthController $AuthCon;
     /**
-     * Display a listing of the resource.
+     * Get All pharmacies
+     *
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +44,7 @@ class PharmacyController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Add pharmacy
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -82,7 +88,8 @@ class PharmacyController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * Show specified pharmacy
+     *
      *
      * @param  \App\Models\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
@@ -108,7 +115,7 @@ class PharmacyController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update  specified  pharmacy
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pharmacy  $pharmacy
@@ -120,7 +127,7 @@ class PharmacyController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete specified pharamcy
      *
      * @param  \App\Models\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response

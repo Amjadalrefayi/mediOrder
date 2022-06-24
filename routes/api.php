@@ -56,5 +56,6 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
     Route::put('/update/{id}', [PharmacyController::class, 'update']);
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
     Route::delete('/delete/{id}', [PharmacyController::class, 'destroy']);
+    Route::get('/products/{pharmacy_id}', [ProductController::class, 'showPharmacyProducts']);
 
 });

@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\ProductResources;
+use App\Models\Pharmacy;
 
+/**
+ * @group Product Management
+ *
+ * APIs to manage the product
+ */
 class ProductController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * show All products
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +34,25 @@ class ProductController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show pharmacy Products
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showPharmacyProducts($id)
+    {
+        $pharmacy = Pharmacy::find($id);
+        $products = Product::paginate(5)->where('pharmacy_id',$id);
+        return $this->sendResponse(ProductResources::collection($products), [
+            'current_page' => $products->currentPage(),
+            'nextPageUrl' => $products->nextPageUrl(),
+            'previousPageUrl' => $products->previousPageUrl(),
+        ]);
+
+    }
+
+    /**
+     * Show the form for creating a new resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +62,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Add product
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -51,7 +75,6 @@ class ProductController extends BaseController
             'image'=>'required',
             'price'=>'required',
             'type'=>'required',
-            'available'=>'required',
             'amount',
         ]);
 
@@ -63,6 +86,7 @@ class ProductController extends BaseController
        // $image->move('uploads/products', $newImage);
         $input = $request->all();
         $input['pharmacy_id'] = Auth::id();
+        $input['available'] = true;
         $input['image'] = 'uploads/products/';
         $product = Product::create($input);
 
@@ -70,7 +94,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * show specific Product
      *
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
@@ -86,7 +110,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource
      *
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
@@ -97,7 +121,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update specified Product
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Product  $product
@@ -137,7 +161,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete specified product
      *
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response

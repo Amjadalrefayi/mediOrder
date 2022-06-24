@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('price');
             $table->string('type');
-            $table->string('available');
+            $table->boolean('available');
             $table->string('amount')->nullable();
             $table->softDeletes();
             $table->timestamps();

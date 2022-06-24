@@ -14,11 +14,20 @@ use App\Http\Controllers\AuthController;
 use App\Http\Resources\CustomerResources;
 use App\Http\Resources\SimpleCustomerResources;
 
+/**
+ * @group Customer Management
+ *
+ * APIs to manage the customer
+ */
 class CustomerController extends BaseController
 {
 
     protected AuthController $AuthCon;
 
+    /**
+     * Customer Register
+     *
+     */
     public function register(Request $request){
 
         $this->AuthCon  = new AuthController();
@@ -61,7 +70,7 @@ class CustomerController extends BaseController
 
 
     /**
-     * Display a listing of the resource.
+     * Get all Customers.
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +82,7 @@ class CustomerController extends BaseController
 
 
     /**
-     * Display the specified resource.
+     * Show specified customer.
      *
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
@@ -89,7 +98,8 @@ class CustomerController extends BaseController
 
 
     /**
-     * Update the specified resource in storage.
+     * Update Profile
+     *
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Customer  $customer
@@ -122,7 +132,7 @@ class CustomerController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete specific Customer
      *
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
