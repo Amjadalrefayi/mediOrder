@@ -45,7 +45,7 @@ class ProductController extends BaseController
             return $this->sendError('Not Found');
         }
         $pharmacy = Pharmacy::find($id);
-        $products = Product::paginate(5)->where('pharmacy_id',$id);
+        $products = Product::paginate(5)->where('pharmacy_id',$id)->get();
         return $this->sendResponse(ProductResources::collection($products), [
             'nextPageUrl' => $products->nextPageUrl(),
             'previousPageUrl' => $products->previousPageUrl(),
