@@ -92,7 +92,7 @@ class AuthController extends BaseController
         $data['token'] = $user->remember_token;
         $data['name'] = Auth::user()->name;
         $data['email'] = Auth::user()->email;
-        return $this->sendResponse($data,' User logedIn successfully');
+        return $this->sendResponse($data,' TM logedIn successfully');
 
     }
 
