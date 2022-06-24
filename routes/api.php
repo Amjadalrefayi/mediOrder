@@ -51,6 +51,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
 
 Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], function () {
 
+    Route::post('/store', [PharmacyController::class, 'store']);
     Route::get('/index', [PharmacyController::class, 'index']);
     Route::put('/update/{id}', [PharmacyController::class, 'update']);
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
