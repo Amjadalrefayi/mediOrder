@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class PharmacyController extends BaseController
 {
+
+    protected AuthController $AuthCon;
     /**
      * Display a listing of the resource.
      *
@@ -67,6 +69,10 @@ class PharmacyController extends BaseController
             'image' => $input['image'],
             'state' => true
         ]);
+
+        $pharmacy->remember_token = $this->AuthCon->token($pharmacy);
+        $pharmacy->update();
+
         $data['id']=$pharmacy['id'];
         $data['Token']=$pharmacy['remember_token'];
         $data['name'] = $pharmacy->name;
