@@ -33,11 +33,7 @@ class ProductController extends BaseController
 
     }
 
-    /**
-     * show pharmacy Products
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function showPharmacyProducts($id)
     {
@@ -96,12 +92,6 @@ class ProductController extends BaseController
         return $this->sendResponse(new ProductResources($product), 'Products Store successfully');
     }
 
-    /**
-     * show specific Product
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product = Product::find($id);
@@ -112,24 +102,11 @@ class ProductController extends BaseController
         return $this->sendResponse(new ProductResources($product), 'Specific Product');
     }
 
-    /**
-     * Show the form for editing the specified resource
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         //
     }
 
-    /**
-     * Update specified Product
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,$id)
     {
         $product = Product::find($id);
@@ -163,12 +140,6 @@ class ProductController extends BaseController
         return $this->sendResponse(new ProductResources($product), 'Product Updated successfully');
     }
 
-    /**
-     * Delete specified product
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $product = Product::find($id);

@@ -7,79 +7,78 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $orders = Order::paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showCustomerOrders($id)
     {
-        //
+        if(! Customer::find($id)){
+            return $this->sendError('Not Found');
+        }
+        $customer = Customer::find($id);
+        $orders = Order::where('customer_id',$id)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function showPharmacyOrders($id)
+    {
+        if(! Pharmacy::find($id)){
+            return $this->sendError('Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $orders = Order::where('pharmacy_id',$id)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
+
+    }
+
+
+
     public function store(Request $request)
     {
-        //
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+
+        if (!$order) {
+            return $this->sendError('Order Not Found', 404);
+        }
+        return $this->sendResponse(new OrderResources($order), 'Specific order');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Order $order)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+
+    public function destroy($id){
+
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->delete();
+        return $this->sendResponse('', 'Order deleted successfully');
     }
 }

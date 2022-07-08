@@ -48,6 +48,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
 
 });
 
+// //------pharmacy------//
 
 Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], function () {
 
@@ -57,5 +58,19 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
     Route::delete('/delete/{id}', [PharmacyController::class, 'destroy']);
     Route::get('/products/{pharmacy_id}', [ProductController::class, 'showPharmacyProducts']);
+
+});
+// //------Order------//
+
+Route::group(['prefix' => 'order', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/store', [OrderController::class, 'store']);
+    Route::get('/index', [OrderController::class, 'index']);
+    Route::put('/update/{id}', [OrderController::class, 'update']);
+    Route::get('/show/{id}', [OrderController::class, 'show']);
+    Route::delete('/delete/{id}', [OrderController::class, 'destroy']);
+    Route::get('/products/{customer_id}', [OrderController::class, 'showCustomerOrders']);
+    Route::get('/products/{pharmacy_id}', [OrderController::class, 'showPharmacyOrders']);
+
 
 });
