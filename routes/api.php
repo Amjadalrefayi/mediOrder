@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\AddressController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -57,5 +58,16 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
     Route::delete('/delete/{id}', [PharmacyController::class, 'destroy']);
     Route::get('/products/{pharmacy_id}', [ProductController::class, 'showPharmacyProducts']);
+
+});
+
+//------Address CRUD------//
+
+Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/index', [AddressController::class, 'index']);
+    Route::post('/store', [AddressController::class, 'store']);
+    Route::get('/show/{id}', [AddressController::class, 'show']);
+    Route::put('/update/{id}', [AddressController::class, 'update']);
+    Route::delete('/delete/{id}', [AddressController::class, 'destroy']);
 
 });

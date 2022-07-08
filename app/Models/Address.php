@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
-    protected $fillable=['customer_id' , 'driver_id', 'pharmacy_id' , 'longitude' , 'latitude'];
+    protected $fillable=['name','description','customer_id' , 'driver_id', 'pharmacy_id' , 'longitude' , 'latitude'];
 
     /**
      * Get the customer that owns the Address

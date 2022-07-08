@@ -123,13 +123,7 @@ class ProductController extends BaseController
         //
     }
 
-    /**
-     * Update specified Product
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request,$id)
     {
         $product = Product::find($id);
