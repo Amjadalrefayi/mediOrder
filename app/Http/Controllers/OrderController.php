@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Resources\OrderResources;
+use App\Http\Resources\SimpleOrderResources;
+use App\Http\Controllers\BaseController as BaseController;
+use Illuminate\Support\Facades\Validator;
 
-class OrderController extends Controller
+
+class OrderController extends BaseController
 {
-
+    protected AuthController $AuthCon;
     public function index()
     {
         $orders = Order::paginate(5);
