@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('mysql://upbnznfjjpkwve5p:smzQXjv2u8FQK7pO35UX@birnnwapzqw3zi7zo9oq-mysql.services.clever-cloud.com:3306/birnnwapzqw3zi7zo9oq'),
-            'host' => env('DB_HOST', 'birnnwapzqw3zi7zo9oq-mysql.services.clever-cloud.com'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'birnnwapzqw3zi7zo9oq'),
-            'username' => env('DB_USERNAME', 'upbnznfjjpkwve5p'),
-            'password' => env('DB_PASSWORD', 'smzQXjv2u8FQK7pO35UX'),
+            'url' => env('mysql://avnadmin:AVNS_62QFaPopU28gzSIpqty@mysql-b3124c5-iteamjad-e91a.aivencloud.com:15389/defaultdb?ssl-mode=REQUIRED'),
+            'host' => env('DB_HOST', 'mysql-b3124c5-iteamjad-e91a.aivencloud.com'),
+            'port' => env('DB_PORT', '15389'),
+            'database' => env('DB_DATABASE', 'defaultdb'),
+            'username' => env('DB_USERNAME', 'avnadmin'),
+            'password' => env('DB_PASSWORD', 'AVNS_62QFaPopU28gzSIpqty'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
