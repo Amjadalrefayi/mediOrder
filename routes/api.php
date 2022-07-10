@@ -18,6 +18,17 @@ use App\Http\Controllers\AddressController;
 |
 */
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
+
+
+});
+
+
+Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {
+
+
+});
+
 
 //------Rigeter / Login------//
 
