@@ -10,9 +10,20 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\AddressResources;
+
+
+/**
+ * @group Address Management
+ *
+ * APIs to manage the address
+ */
 class AddressController extends BaseController
 {
 
+     /**
+     * Get all addresses
+     *
+     */
     public function index()
     {
         $addresses= Address::paginate(5);
@@ -25,7 +36,10 @@ class AddressController extends BaseController
     }
 
 
-
+    /**
+     * add address
+     *
+     */
     public function store(Request $request)
     {
 
@@ -57,7 +71,10 @@ class AddressController extends BaseController
         return $this->sendResponse(new AddressResources($Address), 'Address Store successfully');
     }
 
-
+    /**
+     * Show address
+     *
+     */
     public function show($id)
     {
         $Address = Address::find($id);
@@ -70,7 +87,10 @@ class AddressController extends BaseController
     }
 
 
-
+    /**
+     * Update address
+     *
+     */
     public function update(Request $request, $id)
     {
         $Address = Address::find($id);
@@ -98,10 +118,6 @@ class AddressController extends BaseController
         return $this->sendError('Not Valid to update', 'This Address for another user');
       }
 
-
-
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
@@ -124,15 +140,17 @@ class AddressController extends BaseController
         return $this->sendResponse(new AddressResources($Address), 'Address Updated successfully');
     }
 
+     /**
+     * Delete address
+     *
+     */
     public function destroy($id)
     {
-
 
         $Address = Address::find($id);
         if (is_null($Address)) {
             return $this->sendError('Address Not Found', 404);
         }
-
 
         if(Customer::find(Auth::id()))
         {
@@ -151,7 +169,6 @@ class AddressController extends BaseController
               if(Auth::id() != $Address->pharmacy_id)
           return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
-
 
         $Address->delete();
 

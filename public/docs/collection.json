@@ -10,17 +10,17 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "a834d355-1217-43d0-9552-a3ceacbbfcfd",
+        "_postman_id": "71aefe21-b3e6-42f5-a22f-360739c7dce0",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Endpoints",
-            "description": "",
+            "name": "Address Management",
+            "description": "\nAPIs to manage the address",
             "item": [
                 {
-                    "name": "api\/Address\/index",
+                    "name": "Get all addresses",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -68,7 +68,7 @@
                     ]
                 },
                 {
-                    "name": "api\/Address\/store",
+                    "name": "add address",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -89,7 +89,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"reprehenderit\",\"description\":\"mollitia\",\"longitude\":\"amet\",\"latitude\":\"labore\"}"
+                            "raw": "{\"name\":\"doloribus\",\"description\":\"optio\",\"longitude\":\"amet\",\"latitude\":\"voluptate\"}"
                         },
                         "description": "",
                         "auth": {
@@ -99,7 +99,7 @@
                     "response": []
                 },
                 {
-                    "name": "api\/Address\/show\/{id}",
+                    "name": "Show address",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -110,7 +110,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "modi",
+                                    "value": "quaerat",
                                     "description": "The ID of the show."
                                 }
                             ]
@@ -155,7 +155,7 @@
                     ]
                 },
                 {
-                    "name": "api\/Address\/update\/{id}",
+                    "name": "Update address",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -166,7 +166,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "assumenda",
+                                    "value": "est",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -184,7 +184,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"qui\",\"description\":\"facere\",\"longitude\":\"nisi\",\"latitude\":\"praesentium\"}"
+                            "raw": "{\"name\":\"eos\",\"description\":\"sunt\",\"longitude\":\"rerum\",\"latitude\":\"voluptatibus\"}"
                         },
                         "description": "",
                         "auth": {
@@ -194,7 +194,7 @@
                     "response": []
                 },
                 {
-                    "name": "api\/Address\/delete\/{id}",
+                    "name": "Delete address",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -205,7 +205,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ipsam",
+                                    "value": "minus",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -257,7 +257,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"vlh\",\"email\":\"lynch.cathy@example.net\",\"password\":\"qfz\",\"phone\":\"rqzzj\",\"gender\":\"male\",\"location\":\"ea\"}"
+                            "raw": "{\"name\":\"rsp\",\"email\":\"wolff.florian@example.org\",\"password\":\"\",\"phone\":\"eupgn\",\"gender\":\"male\",\"location\":\"aliquid\"}"
                         },
                         "description": "",
                         "auth": {
@@ -326,7 +326,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "libero",
+                                    "value": "cupiditate",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -344,7 +344,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"\",\"password\":\"jhrxf\",\"phone\":\"wxvkacmfy\",\"gender\":\"male\"}"
+                            "raw": "{\"name\":\"z\",\"password\":\"sttp\",\"phone\":\"ubfjlejcnpjhb\",\"gender\":\"female\"}"
                         },
                         "description": "",
                         "auth": {
@@ -365,7 +365,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quaerat",
+                                    "value": "non",
                                     "description": "The ID of the show."
                                 }
                             ]
@@ -421,7 +421,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ut",
+                                    "value": "omnis",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -473,7 +473,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"c\",\"email\":\"rita24@example.com\",\"password\":\"eywa\",\"phone\":\"cucqlebxfyxc\",\"location\":\"labore\"}"
+                            "raw": "{\"name\":\"hkj\",\"email\":\"balistreri.vilma@example.org\",\"password\":\"v\",\"phone\":\"bxgiwkij\",\"location\":\"dolor\"}"
                         },
                         "description": "",
                         "auth": {
@@ -542,7 +542,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "15",
+                                    "value": "6",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -578,7 +578,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "veritatis",
+                                    "value": "laborum",
                                     "description": "The ID of the show."
                                 }
                             ]
@@ -634,7 +634,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "magni",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -734,7 +734,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"laborum\",\"company\":\"eum\",\"image\":\"et\",\"price\":\"dignissimos\",\"type\":\"laudantium\"}"
+                            "raw": "{\"name\":\"eos\",\"company\":\"minus\",\"image\":\"repellendus\",\"price\":\"officia\",\"type\":\"asperiores\"}"
                         },
                         "description": "",
                         "auth": {
@@ -755,7 +755,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "nihil",
+                                    "value": "explicabo",
                                     "description": "The ID of the show."
                                 }
                             ]
@@ -811,7 +811,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "libero",
+                                    "value": "quisquam",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -829,7 +829,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"accusantium\",\"company\":\"eaque\",\"type\":\"eos\"}"
+                            "raw": "{\"name\":\"eligendi\",\"company\":\"nisi\",\"type\":\"in\"}"
                         },
                         "description": "",
                         "auth": {
@@ -878,7 +878,7 @@
                                 {
                                     "id": "pharmacy_id",
                                     "key": "pharmacy_id",
-                                    "value": "14",
+                                    "value": "16",
                                     "description": "The ID of the pharmacy."
                                 }
                             ]
@@ -950,7 +950,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"daugherty.citlalli@example.net\",\"password\":\"p\"}"
+                            "raw": "{\"email\":\"kovacek.zachariah@example.org\",\"password\":\"if\"}"
                         },
                         "description": "",
                         "auth": {

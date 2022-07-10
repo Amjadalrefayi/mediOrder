@@ -9,7 +9,7 @@ servers:
 paths:
   /api/Address/index:
     get:
-      summary: ''
+      summary: 'Get all addresses'
       description: ''
       parameters:
         -
@@ -646,11 +646,11 @@ paths:
                     items:
                       type: object
       tags:
-        - Endpoints
+        - 'Address Management'
       security: []
   /api/Address/store:
     post:
-      summary: ''
+      summary: 'add address'
       description: ''
       parameters:
         -
@@ -669,7 +669,7 @@ paths:
             type: string
       responses: {  }
       tags:
-        - Endpoints
+        - 'Address Management'
       requestBody:
         required: true
         content:
@@ -680,11 +680,11 @@ paths:
                 name:
                   type: string
                   description: ''
-                  example: reprehenderit
+                  example: doloribus
                 description:
                   type: string
                   description: ''
-                  example: mollitia
+                  example: optio
                 longitude:
                   type: string
                   description: ''
@@ -692,7 +692,7 @@ paths:
                 latitude:
                   type: string
                   description: ''
-                  example: labore
+                  example: voluptate
               required:
                 - name
                 - description
@@ -701,7 +701,7 @@ paths:
       security: []
   '/api/Address/show/{id}':
     get:
-      summary: ''
+      summary: 'Show address'
       description: ''
       parameters:
         -
@@ -1338,20 +1338,20 @@ paths:
                     items:
                       type: object
       tags:
-        - Endpoints
+        - 'Address Management'
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the show.'
-        example: modi
+        example: quaerat
         required: true
         schema:
           type: string
   '/api/Address/update/{id}':
     put:
-      summary: ''
+      summary: 'Update address'
       description: ''
       parameters:
         -
@@ -1370,7 +1370,7 @@ paths:
             type: string
       responses: {  }
       tags:
-        - Endpoints
+        - 'Address Management'
       requestBody:
         required: true
         content:
@@ -1381,19 +1381,19 @@ paths:
                 name:
                   type: string
                   description: ''
-                  example: qui
+                  example: eos
                 description:
                   type: string
                   description: ''
-                  example: facere
+                  example: sunt
                 longitude:
                   type: string
                   description: ''
-                  example: nisi
+                  example: rerum
                 latitude:
                   type: string
                   description: ''
-                  example: praesentium
+                  example: voluptatibus
               required:
                 - name
                 - description
@@ -1405,13 +1405,13 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: assumenda
+        example: est
         required: true
         schema:
           type: string
   '/api/Address/delete/{id}':
     delete:
-      summary: ''
+      summary: 'Delete address'
       description: ''
       parameters:
         -
@@ -1430,14 +1430,14 @@ paths:
             type: string
       responses: {  }
       tags:
-        - Endpoints
+        - 'Address Management'
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: ipsam
+        example: minus
         required: true
         schema:
           type: string
@@ -1473,19 +1473,19 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 3 characters.'
-                  example: vlh
+                  example: rsp
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: lynch.cathy@example.net
+                  example: wolff.florian@example.org
                 password:
                   type: string
                   description: 'Must be at least 8 characters.'
-                  example: qfz
+                  example: ''
                 phone:
                   type: string
                   description: 'Must be at least 13 characters.'
-                  example: rqzzj
+                  example: eupgn
                 gender:
                   type: string
                   description: 'Must be one of <code>male</code> or <code>female</code>.'
@@ -1493,7 +1493,7 @@ paths:
                 location:
                   type: string
                   description: ''
-                  example: ea
+                  example: aliquid
                 image:
                   type: string
                   description: ''
@@ -2178,19 +2178,19 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 3 characters.'
-                  example: ''
+                  example: z
                 password:
                   type: string
                   description: 'Must be at least 8 characters.'
-                  example: jhrxf
+                  example: sttp
                 phone:
                   type: string
                   description: 'Must be at least 13 characters.'
-                  example: wxvkacmfy
+                  example: ubfjlejcnpjhb
                 gender:
                   type: string
                   description: 'Must be one of <code>male</code> or <code>female</code>.'
-                  example: male
+                  example: female
                 location:
                   type: string
                   description: ''
@@ -2205,7 +2205,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: libero
+        example: cupiditate
         required: true
         schema:
           type: string
@@ -2855,7 +2855,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the show.'
-        example: quaerat
+        example: non
         required: true
         schema:
           type: string
@@ -2887,7 +2887,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: ut
+        example: omnis
         required: true
         schema:
           type: string
@@ -2923,23 +2923,23 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 3 characters.'
-                  example: c
+                  example: hkj
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: rita24@example.com
+                  example: balistreri.vilma@example.org
                 password:
                   type: string
                   description: 'Must be at least 8 characters.'
-                  example: eywa
+                  example: v
                 phone:
                   type: string
                   description: 'Must be at least 13 characters.'
-                  example: cucqlebxfyxc
+                  example: bxgiwkij
                 location:
                   type: string
                   description: ''
-                  example: labore
+                  example: dolor
                 image:
                   type: string
                   description: ''
@@ -3620,7 +3620,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: 15
+        example: 6
         required: true
         schema:
           type: integer
@@ -4270,7 +4270,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the show.'
-        example: veritatis
+        example: laborum
         required: true
         schema:
           type: string
@@ -4302,7 +4302,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: qui
+        example: magni
         required: true
         schema:
           type: string
@@ -4979,23 +4979,23 @@ paths:
                 name:
                   type: string
                   description: ''
-                  example: laborum
+                  example: eos
                 company:
                   type: string
                   description: ''
-                  example: eum
+                  example: minus
                 image:
                   type: string
                   description: ''
-                  example: et
+                  example: repellendus
                 price:
                   type: string
                   description: ''
-                  example: dignissimos
+                  example: officia
                 type:
                   type: string
                   description: ''
-                  example: laudantium
+                  example: asperiores
               required:
                 - name
                 - company
@@ -5649,7 +5649,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the show.'
-        example: nihil
+        example: explicabo
         required: true
         schema:
           type: string
@@ -5685,15 +5685,15 @@ paths:
                 name:
                   type: string
                   description: ''
-                  example: accusantium
+                  example: eligendi
                 company:
                   type: string
                   description: ''
-                  example: eaque
+                  example: nisi
                 type:
                   type: string
                   description: ''
-                  example: eos
+                  example: in
               required:
                 - name
                 - company
@@ -5704,7 +5704,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: libero
+        example: quisquam
         required: true
         schema:
           type: string
@@ -6377,7 +6377,7 @@ paths:
         in: path
         name: pharmacy_id
         description: 'The ID of the pharmacy.'
-        example: 14
+        example: 16
         required: true
         schema:
           type: integer
@@ -6413,19 +6413,19 @@ paths:
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: daugherty.citlalli@example.net
+                  example: kovacek.zachariah@example.org
                 password:
                   type: string
                   description: 'Must be at least 8 characters.'
-                  example: p
+                  example: if
               required:
                 - email
                 - password
       security: []
 tags:
   -
-    name: Endpoints
-    description: ''
+    name: 'Address Management'
+    description: "\nAPIs to manage the address"
   -
     name: 'Customer Management'
     description: "\nAPIs to manage the customer"

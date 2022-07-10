@@ -22,14 +22,14 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: daugherty.citlalli@example.net
+        example: kovacek.zachariah@example.org
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: p
+        example: if
         type: string
         custom: []
     responses: []

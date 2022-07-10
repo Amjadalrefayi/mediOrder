@@ -400,35 +400,35 @@ endpoints:
         name: name
         description: ''
         required: true
-        example: laborum
+        example: eos
         type: string
         custom: []
       company:
         name: company
         description: ''
         required: true
-        example: eum
+        example: minus
         type: string
         custom: []
       image:
         name: image
         description: ''
         required: true
-        example: et
+        example: repellendus
         type: string
         custom: []
       price:
         name: price
         description: ''
         required: true
-        example: dignissimos
+        example: officia
         type: string
         custom: []
       type:
         name: type
         description: ''
         required: true
-        example: laudantium
+        example: asperiores
         type: string
         custom: []
     responses: []
@@ -450,7 +450,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: nihil
+        example: explicabo
         type: string
         custom: []
     queryParameters: []
@@ -833,7 +833,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: libero
+        example: quisquam
         type: string
         custom: []
     queryParameters: []
@@ -842,21 +842,21 @@ endpoints:
         name: name
         description: ''
         required: true
-        example: accusantium
+        example: eligendi
         type: string
         custom: []
       company:
         name: company
         description: ''
         required: true
-        example: eaque
+        example: nisi
         type: string
         custom: []
       type:
         name: type
         description: ''
         required: true
-        example: eos
+        example: in
         type: string
         custom: []
     responses: []
@@ -895,7 +895,7 @@ endpoints:
         name: pharmacy_id
         description: 'The ID of the pharmacy.'
         required: true
-        example: 14
+        example: 16
         type: integer
         custom: []
     queryParameters: []

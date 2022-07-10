@@ -70,24 +70,24 @@
                                                 </ul>
                     
                     <ul id="tocify-header-2" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="endpoints">
-                    <a href="#endpoints">Endpoints</a>
+                <li class="tocify-item level-1" data-unique="address-management">
+                    <a href="#address-management">Address Management</a>
                 </li>
-                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-Address-index">
-                        <a href="#endpoints-GETapi-Address-index">GET api/Address/index</a>
+                                    <ul id="tocify-subheader-address-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="address-management-GETapi-Address-index">
+                        <a href="#address-management-GETapi-Address-index">Get all addresses</a>
                     </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-Address-store">
-                        <a href="#endpoints-POSTapi-Address-store">POST api/Address/store</a>
+                                    <li class="tocify-item level-2" data-unique="address-management-POSTapi-Address-store">
+                        <a href="#address-management-POSTapi-Address-store">add address</a>
                     </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-Address-show--id-">
-                        <a href="#endpoints-GETapi-Address-show--id-">GET api/Address/show/{id}</a>
+                                    <li class="tocify-item level-2" data-unique="address-management-GETapi-Address-show--id-">
+                        <a href="#address-management-GETapi-Address-show--id-">Show address</a>
                     </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-PUTapi-Address-update--id-">
-                        <a href="#endpoints-PUTapi-Address-update--id-">PUT api/Address/update/{id}</a>
+                                    <li class="tocify-item level-2" data-unique="address-management-PUTapi-Address-update--id-">
+                        <a href="#address-management-PUTapi-Address-update--id-">Update address</a>
                     </li>
-                                    <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-Address-delete--id-">
-                        <a href="#endpoints-DELETEapi-Address-delete--id-">DELETE api/Address/delete/{id}</a>
+                                    <li class="tocify-item level-2" data-unique="address-management-DELETEapi-Address-delete--id-">
+                        <a href="#address-management-DELETEapi-Address-delete--id-">Delete address</a>
                     </li>
                                                     </ul>
                             </ul>
@@ -199,11 +199,11 @@ You can switch the language used with the tabs at the top right (or from the nav
         <h1 id="authenticating-requests">Authenticating requests</h1>
 <p>This API is not authenticated.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="address-management">Address Management</h1>
 
-    
+    <p>APIs to manage the address</p>
 
-            <h2 id="endpoints-GETapi-Address-index">GET api/Address/index</h2>
+            <h2 id="address-management-GETapi-Address-index">Get all addresses</h2>
 
 <p>
 </p>
@@ -646,7 +646,7 @@ access-control-allow-origin: *
         </p>
                     </form>
 
-            <h2 id="endpoints-POSTapi-Address-store">POST api/Address/store</h2>
+            <h2 id="address-management-POSTapi-Address-store">add address</h2>
 
 <p>
 </p>
@@ -663,10 +663,10 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"reprehenderit\",
-    \"description\": \"mollitia\",
+    \"name\": \"doloribus\",
+    \"description\": \"optio\",
     \"longitude\": \"amet\",
-    \"latitude\": \"labore\"
+    \"latitude\": \"voluptate\"
 }"
 </code></pre></div>
 
@@ -682,10 +682,10 @@ const headers = {
 };
 
 let body = {
-    "name": "reprehenderit",
-    "description": "mollitia",
+    "name": "doloribus",
+    "description": "optio",
     "longitude": "amet",
-    "latitude": "labore"
+    "latitude": "voluptate"
 };
 
 fetch(url, {
@@ -743,7 +743,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-Address-store"
-               value="reprehenderit"
+               value="doloribus"
                data-component="body" hidden>
     <br>
 
@@ -753,7 +753,7 @@ fetch(url, {
                 <input type="text"
                name="description"
                data-endpoint="POSTapi-Address-store"
-               value="mollitia"
+               value="optio"
                data-component="body" hidden>
     <br>
 
@@ -773,14 +773,14 @@ fetch(url, {
                 <input type="text"
                name="latitude"
                data-endpoint="POSTapi-Address-store"
-               value="labore"
+               value="voluptate"
                data-component="body" hidden>
     <br>
 
         </p>
         </form>
 
-            <h2 id="endpoints-GETapi-Address-show--id-">GET api/Address/show/{id}</h2>
+            <h2 id="address-management-GETapi-Address-show--id-">Show address</h2>
 
 <p>
 </p>
@@ -793,14 +793,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://medi-order.herokuapp.com/api/Address/show/modi" \
+    --get "https://medi-order.herokuapp.com/api/Address/show/quaerat" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/Address/show/modi"
+    "https://medi-order.herokuapp.com/api/Address/show/quaerat"
 );
 
 const headers = {
@@ -1227,14 +1227,14 @@ access-control-allow-origin: *
                 <input type="text"
                name="id"
                data-endpoint="GETapi-Address-show--id-"
-               value="modi"
+               value="quaerat"
                data-component="url" hidden>
     <br>
 <p>The ID of the show.</p>
             </p>
                     </form>
 
-            <h2 id="endpoints-PUTapi-Address-update--id-">PUT api/Address/update/{id}</h2>
+            <h2 id="address-management-PUTapi-Address-update--id-">Update address</h2>
 
 <p>
 </p>
@@ -1247,21 +1247,21 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://medi-order.herokuapp.com/api/Address/update/assumenda" \
+    "https://medi-order.herokuapp.com/api/Address/update/est" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"qui\",
-    \"description\": \"facere\",
-    \"longitude\": \"nisi\",
-    \"latitude\": \"praesentium\"
+    \"name\": \"eos\",
+    \"description\": \"sunt\",
+    \"longitude\": \"rerum\",
+    \"latitude\": \"voluptatibus\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/Address/update/assumenda"
+    "https://medi-order.herokuapp.com/api/Address/update/est"
 );
 
 const headers = {
@@ -1270,10 +1270,10 @@ const headers = {
 };
 
 let body = {
-    "name": "qui",
-    "description": "facere",
-    "longitude": "nisi",
-    "latitude": "praesentium"
+    "name": "eos",
+    "description": "sunt",
+    "longitude": "rerum",
+    "latitude": "voluptatibus"
 };
 
 fetch(url, {
@@ -1331,7 +1331,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="PUTapi-Address-update--id-"
-               value="assumenda"
+               value="est"
                data-component="url" hidden>
     <br>
 <p>The ID of the update.</p>
@@ -1342,7 +1342,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-Address-update--id-"
-               value="qui"
+               value="eos"
                data-component="body" hidden>
     <br>
 
@@ -1352,7 +1352,7 @@ fetch(url, {
                 <input type="text"
                name="description"
                data-endpoint="PUTapi-Address-update--id-"
-               value="facere"
+               value="sunt"
                data-component="body" hidden>
     <br>
 
@@ -1362,7 +1362,7 @@ fetch(url, {
                 <input type="text"
                name="longitude"
                data-endpoint="PUTapi-Address-update--id-"
-               value="nisi"
+               value="rerum"
                data-component="body" hidden>
     <br>
 
@@ -1372,14 +1372,14 @@ fetch(url, {
                 <input type="text"
                name="latitude"
                data-endpoint="PUTapi-Address-update--id-"
-               value="praesentium"
+               value="voluptatibus"
                data-component="body" hidden>
     <br>
 
         </p>
         </form>
 
-            <h2 id="endpoints-DELETEapi-Address-delete--id-">DELETE api/Address/delete/{id}</h2>
+            <h2 id="address-management-DELETEapi-Address-delete--id-">Delete address</h2>
 
 <p>
 </p>
@@ -1392,14 +1392,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://medi-order.herokuapp.com/api/Address/delete/ipsam" \
+    "https://medi-order.herokuapp.com/api/Address/delete/minus" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/Address/delete/ipsam"
+    "https://medi-order.herokuapp.com/api/Address/delete/minus"
 );
 
 const headers = {
@@ -1461,7 +1461,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="DELETEapi-Address-delete--id-"
-               value="ipsam"
+               value="minus"
                data-component="url" hidden>
     <br>
 <p>The ID of the delete.</p>
@@ -1489,12 +1489,12 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vlh\",
-    \"email\": \"lynch.cathy@example.net\",
-    \"password\": \"qfz\",
-    \"phone\": \"rqzzj\",
+    \"name\": \"rsp\",
+    \"email\": \"wolff.florian@example.org\",
+    \"password\": \"\",
+    \"phone\": \"eupgn\",
     \"gender\": \"male\",
-    \"location\": \"ea\"
+    \"location\": \"aliquid\"
 }"
 </code></pre></div>
 
@@ -1510,12 +1510,12 @@ const headers = {
 };
 
 let body = {
-    "name": "vlh",
-    "email": "lynch.cathy@example.net",
-    "password": "qfz",
-    "phone": "rqzzj",
+    "name": "rsp",
+    "email": "wolff.florian@example.org",
+    "password": "",
+    "phone": "eupgn",
     "gender": "male",
-    "location": "ea"
+    "location": "aliquid"
 };
 
 fetch(url, {
@@ -1573,7 +1573,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-auth-customer-register"
-               value="vlh"
+               value="rsp"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters.</p>
@@ -1583,7 +1583,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-auth-customer-register"
-               value="lynch.cathy@example.net"
+               value="wolff.florian@example.org"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address.</p>
@@ -1593,7 +1593,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-auth-customer-register"
-               value="qfz"
+               value=""
                data-component="body" hidden>
     <br>
 <p>Must be at least 8 characters.</p>
@@ -1603,7 +1603,7 @@ fetch(url, {
                 <input type="text"
                name="phone"
                data-endpoint="POSTapi-auth-customer-register"
-               value="rqzzj"
+               value="eupgn"
                data-component="body" hidden>
     <br>
 <p>Must be at least 13 characters.</p>
@@ -1623,7 +1623,7 @@ fetch(url, {
                 <input type="text"
                name="location"
                data-endpoint="POSTapi-auth-customer-register"
-               value="ea"
+               value="aliquid"
                data-component="body" hidden>
     <br>
 
@@ -2096,21 +2096,21 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://medi-order.herokuapp.com/api/customer/update/libero" \
+    "https://medi-order.herokuapp.com/api/customer/update/cupiditate" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"\",
-    \"password\": \"jhrxf\",
-    \"phone\": \"wxvkacmfy\",
-    \"gender\": \"male\"
+    \"name\": \"z\",
+    \"password\": \"sttp\",
+    \"phone\": \"ubfjlejcnpjhb\",
+    \"gender\": \"female\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/customer/update/libero"
+    "https://medi-order.herokuapp.com/api/customer/update/cupiditate"
 );
 
 const headers = {
@@ -2119,10 +2119,10 @@ const headers = {
 };
 
 let body = {
-    "name": "",
-    "password": "jhrxf",
-    "phone": "wxvkacmfy",
-    "gender": "male"
+    "name": "z",
+    "password": "sttp",
+    "phone": "ubfjlejcnpjhb",
+    "gender": "female"
 };
 
 fetch(url, {
@@ -2180,7 +2180,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="PUTapi-customer-update--id-"
-               value="libero"
+               value="cupiditate"
                data-component="url" hidden>
     <br>
 <p>The ID of the update.</p>
@@ -2191,7 +2191,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-customer-update--id-"
-               value=""
+               value="z"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters.</p>
@@ -2201,7 +2201,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="PUTapi-customer-update--id-"
-               value="jhrxf"
+               value="sttp"
                data-component="body" hidden>
     <br>
 <p>Must be at least 8 characters.</p>
@@ -2211,7 +2211,7 @@ fetch(url, {
                 <input type="text"
                name="phone"
                data-endpoint="PUTapi-customer-update--id-"
-               value="wxvkacmfy"
+               value="ubfjlejcnpjhb"
                data-component="body" hidden>
     <br>
 <p>Must be at least 13 characters.</p>
@@ -2221,7 +2221,7 @@ fetch(url, {
                 <input type="text"
                name="gender"
                data-endpoint="PUTapi-customer-update--id-"
-               value="male"
+               value="female"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>male</code> or <code>female</code>.</p>
@@ -2261,14 +2261,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://medi-order.herokuapp.com/api/customer/show/quaerat" \
+    --get "https://medi-order.herokuapp.com/api/customer/show/non" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/customer/show/quaerat"
+    "https://medi-order.herokuapp.com/api/customer/show/non"
 );
 
 const headers = {
@@ -2695,7 +2695,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="id"
                data-endpoint="GETapi-customer-show--id-"
-               value="quaerat"
+               value="non"
                data-component="url" hidden>
     <br>
 <p>The ID of the show.</p>
@@ -2715,14 +2715,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://medi-order.herokuapp.com/api/customer/delete/ut" \
+    "https://medi-order.herokuapp.com/api/customer/delete/omnis" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/customer/delete/ut"
+    "https://medi-order.herokuapp.com/api/customer/delete/omnis"
 );
 
 const headers = {
@@ -2784,7 +2784,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="DELETEapi-customer-delete--id-"
-               value="ut"
+               value="omnis"
                data-component="url" hidden>
     <br>
 <p>The ID of the delete.</p>
@@ -2812,11 +2812,11 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"c\",
-    \"email\": \"rita24@example.com\",
-    \"password\": \"eywa\",
-    \"phone\": \"cucqlebxfyxc\",
-    \"location\": \"labore\"
+    \"name\": \"hkj\",
+    \"email\": \"balistreri.vilma@example.org\",
+    \"password\": \"v\",
+    \"phone\": \"bxgiwkij\",
+    \"location\": \"dolor\"
 }"
 </code></pre></div>
 
@@ -2832,11 +2832,11 @@ const headers = {
 };
 
 let body = {
-    "name": "c",
-    "email": "rita24@example.com",
-    "password": "eywa",
-    "phone": "cucqlebxfyxc",
-    "location": "labore"
+    "name": "hkj",
+    "email": "balistreri.vilma@example.org",
+    "password": "v",
+    "phone": "bxgiwkij",
+    "location": "dolor"
 };
 
 fetch(url, {
@@ -2894,7 +2894,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-pharmacy-store"
-               value="c"
+               value="hkj"
                data-component="body" hidden>
     <br>
 <p>Must be at least 3 characters.</p>
@@ -2904,7 +2904,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-pharmacy-store"
-               value="rita24@example.com"
+               value="balistreri.vilma@example.org"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address.</p>
@@ -2914,7 +2914,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-pharmacy-store"
-               value="eywa"
+               value="v"
                data-component="body" hidden>
     <br>
 <p>Must be at least 8 characters.</p>
@@ -2924,7 +2924,7 @@ fetch(url, {
                 <input type="text"
                name="phone"
                data-endpoint="POSTapi-pharmacy-store"
-               value="cucqlebxfyxc"
+               value="bxgiwkij"
                data-component="body" hidden>
     <br>
 <p>Must be at least 13 characters.</p>
@@ -2934,7 +2934,7 @@ fetch(url, {
                 <input type="text"
                name="location"
                data-endpoint="POSTapi-pharmacy-store"
-               value="labore"
+               value="dolor"
                data-component="body" hidden>
     <br>
 
@@ -3407,14 +3407,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://medi-order.herokuapp.com/api/pharmacy/update/15" \
+    "https://medi-order.herokuapp.com/api/pharmacy/update/6" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/pharmacy/update/15"
+    "https://medi-order.herokuapp.com/api/pharmacy/update/6"
 );
 
 const headers = {
@@ -3476,7 +3476,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="PUTapi-pharmacy-update--id-"
-               value="15"
+               value="6"
                data-component="url" hidden>
     <br>
 <p>The ID of the update.</p>
@@ -3496,14 +3496,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://medi-order.herokuapp.com/api/pharmacy/show/veritatis" \
+    --get "https://medi-order.herokuapp.com/api/pharmacy/show/laborum" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/pharmacy/show/veritatis"
+    "https://medi-order.herokuapp.com/api/pharmacy/show/laborum"
 );
 
 const headers = {
@@ -3930,7 +3930,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="id"
                data-endpoint="GETapi-pharmacy-show--id-"
-               value="veritatis"
+               value="laborum"
                data-component="url" hidden>
     <br>
 <p>The ID of the show.</p>
@@ -3950,14 +3950,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://medi-order.herokuapp.com/api/pharmacy/delete/qui" \
+    "https://medi-order.herokuapp.com/api/pharmacy/delete/magni" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/pharmacy/delete/qui"
+    "https://medi-order.herokuapp.com/api/pharmacy/delete/magni"
 );
 
 const headers = {
@@ -4019,7 +4019,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="DELETEapi-pharmacy-delete--id-"
-               value="qui"
+               value="magni"
                data-component="url" hidden>
     <br>
 <p>The ID of the delete.</p>
@@ -4490,11 +4490,11 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"laborum\",
-    \"company\": \"eum\",
-    \"image\": \"et\",
-    \"price\": \"dignissimos\",
-    \"type\": \"laudantium\"
+    \"name\": \"eos\",
+    \"company\": \"minus\",
+    \"image\": \"repellendus\",
+    \"price\": \"officia\",
+    \"type\": \"asperiores\"
 }"
 </code></pre></div>
 
@@ -4510,11 +4510,11 @@ const headers = {
 };
 
 let body = {
-    "name": "laborum",
-    "company": "eum",
-    "image": "et",
-    "price": "dignissimos",
-    "type": "laudantium"
+    "name": "eos",
+    "company": "minus",
+    "image": "repellendus",
+    "price": "officia",
+    "type": "asperiores"
 };
 
 fetch(url, {
@@ -4572,7 +4572,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-products-store"
-               value="laborum"
+               value="eos"
                data-component="body" hidden>
     <br>
 
@@ -4582,7 +4582,7 @@ fetch(url, {
                 <input type="text"
                name="company"
                data-endpoint="POSTapi-products-store"
-               value="eum"
+               value="minus"
                data-component="body" hidden>
     <br>
 
@@ -4592,7 +4592,7 @@ fetch(url, {
                 <input type="text"
                name="image"
                data-endpoint="POSTapi-products-store"
-               value="et"
+               value="repellendus"
                data-component="body" hidden>
     <br>
 
@@ -4602,7 +4602,7 @@ fetch(url, {
                 <input type="text"
                name="price"
                data-endpoint="POSTapi-products-store"
-               value="dignissimos"
+               value="officia"
                data-component="body" hidden>
     <br>
 
@@ -4612,7 +4612,7 @@ fetch(url, {
                 <input type="text"
                name="type"
                data-endpoint="POSTapi-products-store"
-               value="laudantium"
+               value="asperiores"
                data-component="body" hidden>
     <br>
 
@@ -4632,14 +4632,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://medi-order.herokuapp.com/api/products/show/nihil" \
+    --get "https://medi-order.herokuapp.com/api/products/show/explicabo" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/products/show/nihil"
+    "https://medi-order.herokuapp.com/api/products/show/explicabo"
 );
 
 const headers = {
@@ -5066,7 +5066,7 @@ access-control-allow-origin: *
                 <input type="text"
                name="id"
                data-endpoint="GETapi-products-show--id-"
-               value="nihil"
+               value="explicabo"
                data-component="url" hidden>
     <br>
 <p>The ID of the show.</p>
@@ -5086,20 +5086,20 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://medi-order.herokuapp.com/api/products/update/libero" \
+    "https://medi-order.herokuapp.com/api/products/update/quisquam" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"accusantium\",
-    \"company\": \"eaque\",
-    \"type\": \"eos\"
+    \"name\": \"eligendi\",
+    \"company\": \"nisi\",
+    \"type\": \"in\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/products/update/libero"
+    "https://medi-order.herokuapp.com/api/products/update/quisquam"
 );
 
 const headers = {
@@ -5108,9 +5108,9 @@ const headers = {
 };
 
 let body = {
-    "name": "accusantium",
-    "company": "eaque",
-    "type": "eos"
+    "name": "eligendi",
+    "company": "nisi",
+    "type": "in"
 };
 
 fetch(url, {
@@ -5168,7 +5168,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="PUTapi-products-update--id-"
-               value="libero"
+               value="quisquam"
                data-component="url" hidden>
     <br>
 <p>The ID of the update.</p>
@@ -5179,7 +5179,7 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-products-update--id-"
-               value="accusantium"
+               value="eligendi"
                data-component="body" hidden>
     <br>
 
@@ -5189,7 +5189,7 @@ fetch(url, {
                 <input type="text"
                name="company"
                data-endpoint="PUTapi-products-update--id-"
-               value="eaque"
+               value="nisi"
                data-component="body" hidden>
     <br>
 
@@ -5199,7 +5199,7 @@ fetch(url, {
                 <input type="text"
                name="type"
                data-endpoint="PUTapi-products-update--id-"
-               value="eos"
+               value="in"
                data-component="body" hidden>
     <br>
 
@@ -5297,14 +5297,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://medi-order.herokuapp.com/api/pharmacy/products/14" \
+    --get "https://medi-order.herokuapp.com/api/pharmacy/products/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://medi-order.herokuapp.com/api/pharmacy/products/14"
+    "https://medi-order.herokuapp.com/api/pharmacy/products/16"
 );
 
 const headers = {
@@ -5731,7 +5731,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="pharmacy_id"
                data-endpoint="GETapi-pharmacy-products--pharmacy_id-"
-               value="14"
+               value="16"
                data-component="url" hidden>
     <br>
 <p>The ID of the pharmacy.</p>
@@ -5759,8 +5759,8 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"daugherty.citlalli@example.net\",
-    \"password\": \"p\"
+    \"email\": \"kovacek.zachariah@example.org\",
+    \"password\": \"if\"
 }"
 </code></pre></div>
 
@@ -5776,8 +5776,8 @@ const headers = {
 };
 
 let body = {
-    "email": "daugherty.citlalli@example.net",
-    "password": "p"
+    "email": "kovacek.zachariah@example.org",
+    "password": "if"
 };
 
 fetch(url, {
@@ -5835,7 +5835,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-auth-login"
-               value="daugherty.citlalli@example.net"
+               value="kovacek.zachariah@example.org"
                data-component="body" hidden>
     <br>
 <p>Must be a valid email address.</p>
@@ -5845,7 +5845,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-auth-login"
-               value="p"
+               value="if"
                data-component="body" hidden>
     <br>
 <p>Must be at least 8 characters.</p>
