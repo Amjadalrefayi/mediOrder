@@ -25,7 +25,7 @@ class AddressController extends BaseController
         $addresses= Address::paginate(5);
         return $this->sendResponse(AddressResources::collection($addresses), [
             'current_page' =>  $addresses->currentPage(),
-            'nextPageUrl' =>  'll',
+            'nextPageUrl' =>  $addresses->nextPageUrl() ,
             'previousPageUrl' =>  $addresses->previousPageUrl(),
         ] );
 

@@ -30,4 +30,18 @@ class Driver extends User
     {
         return $this->hasMany(Address::class);
     }
+
+
+ /**
+     * Get all of the complaints for the Driver
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
+
+
+
 }
