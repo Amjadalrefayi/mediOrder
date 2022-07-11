@@ -6,7 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AddressController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -60,6 +63,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
 
 });
 
+// //------pharmacy------//
 
 Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], function () {
 
@@ -72,6 +76,31 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
 });
 
+// //------Order------//
+
+Route::group(['prefix' => 'order', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/store', [OrderController::class, 'store']);
+    Route::get('/index', [OrderController::class, 'index']);
+    Route::put('/update/{id}', [OrderController::class, 'update']);
+    Route::get('/show/{id}', [OrderController::class, 'show']);
+    Route::delete('/delete/{id}', [OrderController::class, 'destroy']);
+    Route::get('/products/{customer_id}', [OrderController::class, 'showCustomerOrders']);
+    Route::get('/products/{pharmacy_id}', [OrderController::class, 'showPharmacyOrders']);
+
+
+});
+// //------Driver------//
+
+Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/store', [DriverController::class, 'store']);
+    Route::get('/index', [DriverController::class, 'index']);
+    Route::put('/update/{id}', [DriverController::class, 'update']);
+    Route::get('/show/{id}', [DriverController::class, 'show']);
+    Route::delete('/delete/{id}', [DriverController::class, 'destroy']);
+
+
 //------Address CRUD------//
 
 Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function () {
@@ -80,5 +109,6 @@ Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function
     Route::get('/show/{id}', [AddressController::class, 'show']);
     Route::put('/update/{id}', [AddressController::class, 'update']);
     Route::delete('/delete/{id}', [AddressController::class, 'destroy']);
+
 
 });
