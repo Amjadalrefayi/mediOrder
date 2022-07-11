@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\AddressResources;
-
+use Symfony\Component\Console\Input\Input;
 
 /**
  * @group Address Management
@@ -44,10 +44,10 @@ class AddressController extends BaseController
     {
 
         $validator = Validator::make($request->all(), [
-            'name'=>'required',
-            'description'=>'required',
-            'longitude' =>'required',
-            'latitude'=>'required'
+            'name'=>'required|max:255',
+            'description'=>'required|max:255',
+            'latitude' =>'required|numeric|between:-90,90',
+            'longitude'=>'required|numeric|between:-180,180'
         ]);
 
         if ($validator->fails()) {
