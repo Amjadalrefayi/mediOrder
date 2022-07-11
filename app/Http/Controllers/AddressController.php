@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Customer;
 use App\Models\Pharmacy;
 use App\Models\Driver;
@@ -10,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\AddressResources;
-use Symfony\Component\Console\Input\Input;
 
 /**
  * @group Address
@@ -29,17 +29,40 @@ class AddressController extends BaseController
         $addresses= Address::paginate(5);
         return $this->sendResponse(AddressResources::collection($addresses), [
             'current_page' =>  $addresses->currentPage(),
-            'nextPageUrl' =>  $addresses->nextPageUrl(),
+            'nextPageUrl' =>  $addresses->nextPageUrl() ,
             'previousPageUrl' =>  $addresses->previousPageUrl(),
         ] );
 
     }
 
+    public function useraddress()
+    {
+        $user = User::find(Auth::id())->first();
+
+        if($user->type === 'App\Models\Customer')
+        $addresses=Customer::find(Auth::id())->addresses()->paginate(5);
+
+
+         if($user->type === 'App\Models\Pharmacy')
+         $addresses=Pharmacy::find(Auth::id())->addresses()->paginate(5);
+
+         if($user->type === 'App\Models\Driver')
+         $addresses=Driver::find(Auth::id())->addresses()->paginate(5);
+
+
+         return $this->sendResponse(AddressResources::collection($addresses), [
+             'current_page' =>  $addresses->currentPage(),
+             'nextPageUrl' =>  $addresses->nextPageUrl(),
+             'previousPageUrl' =>  $addresses->previousPageUrl(),
+         ] );
+
+    }
 
     /**
      * add address
      *
      */
+
     public function store(Request $request)
     {
 
@@ -56,15 +79,18 @@ class AddressController extends BaseController
 
         $input = $request->all();
 
-        if(Customer::find(Auth::id()))
+
+        $user = User::find(Auth::id())->first();
+
+        if($user->type === 'App\Models\Customer')
         $input['customer_id'] = Auth::id();
 
-        if(Driver::find(Auth::id()))
-        $input['driver_id'] = Auth::id();
-
-        if(Pharmacy::find(Auth::id()))
+        if($user->type === 'App\Models\Pharmacy')
         $input['pharmacy_id'] = Auth::id();
 
+
+        if($user->type === 'App\Models\Driver')
+        $input['driver_id'] = Auth::id();
 
         $Address = Address::create($input);
 
@@ -100,23 +126,26 @@ class AddressController extends BaseController
         }
 
 
-        if(Customer::find(Auth::id()))
-      {
-            if( Auth::id() != $Address->customer_id)
-        return $this->sendError('Not Valid to update', 'This Address for another user');
-      }
 
-        if(Driver::find(Auth::id()))
-      {
-            if(Auth::id() != $Address-> driver_id)
-        return $this->sendError('Not Valid to update', 'This Address for another user');
-      }
 
-        if(Pharmacy::find(Auth::id()))
-      {
+        $user = User::find(Auth::id())->first();
+
+        if($user->type === 'App\Models\Customer')
+       {
+        if( Auth::id() != $Address->customer_id)
+        return $this->sendError('Not Valid to update', 'This Address for another user');
+       }
+
+        if($user->type === 'App\Models\Pharmacy')
+        {
             if(Auth::id() != $Address->pharmacy_id)
-        return $this->sendError('Not Valid to update', 'This Address for another user');
-      }
+            return $this->sendError('Not Valid to update', 'This Address for another user');
+        }
+        if($user->type === 'App\Models\Driver')
+        {
+            if(Auth::id() != $Address-> driver_id)
+            return $this->sendError('Not Valid to update', 'This Address for another user');
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -152,22 +181,26 @@ class AddressController extends BaseController
             return $this->sendError('Address Not Found', 404);
         }
 
+        $user = User::find(Auth::id())->first();
+
+        if($user->type === 'App\Models\Customer')
         if(Customer::find(Auth::id()))
         {
-              if( Auth::id() != $Address->customer_id)
-          return $this->sendError('Not Valid to delete', 'This Address for another user');
+
+            if( Auth::id() != $Address->customer_id)
+            return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
 
-          if(Driver::find(Auth::id()))
+        if($user->type === 'App\Models\Pharmacy')
         {
-              if(Auth::id() != $Address-> driver_id)
-          return $this->sendError('Not Valid to delete', 'This Address for another user');
+            if(Auth::id() != $Address->pharmacy_id)
+            return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
-
-          if(Pharmacy::find(Auth::id()))
+        if($user->type === 'App\Models\Driver')
         {
-              if(Auth::id() != $Address->pharmacy_id)
-          return $this->sendError('Not Valid to delete', 'This Address for another user');
+
+            if(Auth::id() != $Address-> driver_id)
+            return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
 
         $Address->delete();

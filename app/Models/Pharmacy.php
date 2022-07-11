@@ -31,4 +31,30 @@ class Pharmacy extends User
     {
         return $this->hasMany(Product::class);
     }
+
+
+    /**
+     * Get all of the addresses for the Pharmacy
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    /**
+     * Get all of the complaints for the Pharmacy
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
+
+
+
+
+
 }

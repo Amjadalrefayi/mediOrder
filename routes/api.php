@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\AddressController;
 
 /*
@@ -21,6 +23,10 @@ use App\Http\Controllers\AddressController;
 |
 */
 
+Route::get('loginHome', function(){
+  return view('auth.login');
+ })->name('loginHome');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
 
 
@@ -31,6 +37,7 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmac
 
 
 });
+
 
 
 //------Rigeter / Login------//
@@ -105,10 +112,26 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
 
 //------Address CRUD------//
 
-Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'address', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/index', [AddressController::class, 'index']);
+    Route::get('/useraddress', [AddressController::class, 'useraddress']);
     Route::post('/store', [AddressController::class, 'store']);
     Route::get('/show/{id}', [AddressController::class, 'show']);
     Route::put('/update/{id}', [AddressController::class, 'update']);
     Route::delete('/delete/{id}', [AddressController::class, 'destroy']);
+});
+
+//------complaint CRUD------//
+
+Route::group(['prefix' => 'complaint', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/index', [ComplaintController::class, 'index']);
+    Route::get('/usercomplaints', [ComplaintController::class, 'usercomplaints']);
+    Route::get('/complaintstrashed', [ComplaintController::class, 'complaintstrashed']);
+    Route::get('/usertrashedcomplaints', [ComplaintController::class, 'usertrashedcomplaints']);
+    Route::post('/store', [ComplaintController::class, 'store']);
+    Route::get('/show/{id}', [ComplaintController::class, 'show']);
+    Route::put('/update/{id}', [ComplaintController::class, 'update']);
+    Route::delete('/softdelete/{id}', [ComplaintController::class, 'softdelete']);
+    Route::delete('/hdelete/{id}', [ComplaintController::class, 'hdelete']);
+
 });

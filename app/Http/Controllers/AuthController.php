@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController as BaseController;
 
 /**
@@ -84,6 +85,7 @@ class AuthController extends BaseController
      */
     public function login(Request $request){
 
+       // return view('welcome')->with('data', $request->email);
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users',
             'password' => 'required|min:8',
@@ -96,12 +98,18 @@ class AuthController extends BaseController
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return $this->sendError('Unauthorized', 401);
         }
-        $user = User::find(Auth::id());
+        $user = User::find(Auth::id())->first();
         $data['id'] = $user->id;
-        $data['token'] = $user->remember_token;
+        $data['token'] = $this->token($user);
         $data['name'] = Auth::user()->name;
         $data['email'] = Auth::user()->email;
-        return $this->sendResponse($data,' User logedIn successfully');
+
+        if($user->type === 'App\Models\Admin')
+           return view('admin')->with('data', $request->email);
+        //   return $this->sendResponse($data,' Admin logedIn successfully');
+
+           if($user->type === 'App\Models\Customer')
+            return $this->sendResponse($data,' User logedIn successfully');
 
     }
 
