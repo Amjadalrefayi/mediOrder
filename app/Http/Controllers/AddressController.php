@@ -13,13 +13,17 @@ use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\AddressResources;
 
 /**
- * @group Address Management
+ * @group Address
  *
- * APIs to manage the Addresss
+ * APIs to manage the address
  */
 class AddressController extends BaseController
 {
 
+     /**
+     * Get all addresses
+     *
+     */
     public function index()
     {
         $addresses= Address::paginate(5);
@@ -54,14 +58,19 @@ class AddressController extends BaseController
 
     }
 
+    /**
+     * add address
+     *
+     */
+
     public function store(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'name'=>'required',
-            'description'=>'required',
-            'longitude' =>'required',
-            'latitude'=>'required'
+            'name'=>'required|max:255',
+            'description'=>'required|max:255',
+            'latitude' =>'required|numeric|between:-90,90',
+            'longitude'=>'required|numeric|between:-180,180'
         ]);
 
         if ($validator->fails()) {
@@ -88,7 +97,10 @@ class AddressController extends BaseController
         return $this->sendResponse(new AddressResources($Address), 'Address Store successfully');
     }
 
-
+    /**
+     * Show address
+     *
+     */
     public function show($id)
     {
         $Address = Address::find($id);
@@ -101,7 +113,10 @@ class AddressController extends BaseController
     }
 
 
-
+    /**
+     * Update address
+     *
+     */
     public function update(Request $request, $id)
     {
         $Address = Address::find($id);
@@ -132,8 +147,6 @@ class AddressController extends BaseController
             return $this->sendError('Not Valid to update', 'This Address for another user');
         }
 
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
@@ -156,22 +169,22 @@ class AddressController extends BaseController
         return $this->sendResponse(new AddressResources($Address), 'Address Updated successfully');
     }
 
+     /**
+     * Delete address
+     *
+     */
     public function destroy($id)
     {
-
 
         $Address = Address::find($id);
         if (is_null($Address)) {
             return $this->sendError('Address Not Found', 404);
         }
 
-
-
-
-
         $user = User::find(Auth::id())->first();
 
         if($user->type === 'App\Models\Customer')
+        if(Customer::find(Auth::id()))
         {
 
             if( Auth::id() != $Address->customer_id)
@@ -189,9 +202,6 @@ class AddressController extends BaseController
             if(Auth::id() != $Address-> driver_id)
             return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
-
-
-
 
         $Address->delete();
 
