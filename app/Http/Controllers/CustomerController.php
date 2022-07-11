@@ -38,7 +38,7 @@ class CustomerController extends BaseController
             'phone'=> 'required|min:13',
             'gender'=>'in:male,female|nullable',
             'location'=> 'required',
-            'image' => 'mimes:jpeg,jpg,png | nullable',
+            'image' => 'mimes:jpeg,jpg,png|nullable',
         ]);
 
         if ($validator->fails()) {
@@ -47,6 +47,16 @@ class CustomerController extends BaseController
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
+
+        if(array_key_exists('image',$input)){
+            $image = $request->image;
+            if($image){
+                $saveImage = time() . $image->getClientOriginalName();
+                $image->move('uploads/profile', $saveImage);
+                $input['image'] = 'uploads/profile/' . $saveImage;
+            }
+        }
+
         $user = Customer::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
