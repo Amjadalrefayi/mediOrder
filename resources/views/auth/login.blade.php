@@ -13,7 +13,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href={{asset('loginPage/fonts/iconic/css/material-design-iconic-font.min.css')}}>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/animate/animate.css')}}"">
+	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/animate/animate.css')}}>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/css-hamburgers/hamburgers.min.css')}}>
 <!--===============================================================================================-->
