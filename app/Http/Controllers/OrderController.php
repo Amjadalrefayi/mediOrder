@@ -8,6 +8,8 @@ use App\Http\Resources\OrderResources;
 use App\Http\Resources\SimpleOrderResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Customer;
+use App\Models\Pharmacy;
 
 
 class OrderController extends BaseController

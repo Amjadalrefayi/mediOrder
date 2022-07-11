@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
-use App\Http\Resources\DriverResources;
 use App\Http\Resources\SimpleDriverResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
@@ -124,6 +123,10 @@ class DriverController extends BaseController
             'location'=> 'required',
             'image' => 'mimes:jpeg,jpg,png | nullable',
         ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
 
         $driver->name = $request->name;
         $driver->email = $request->email;

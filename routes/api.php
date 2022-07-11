@@ -100,6 +100,8 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
     Route::get('/show/{id}', [DriverController::class, 'show']);
     Route::delete('/delete/{id}', [DriverController::class, 'destroy']);
 
+});
+
 
 //------Address CRUD------//
 
@@ -109,6 +111,4 @@ Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function
     Route::get('/show/{id}', [AddressController::class, 'show']);
     Route::put('/update/{id}', [AddressController::class, 'update']);
     Route::delete('/delete/{id}', [AddressController::class, 'destroy']);
-
-
 });
