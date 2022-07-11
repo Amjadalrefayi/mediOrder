@@ -9,11 +9,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Driver
+ *
+ * APIs to manage the driver
+ */
 class DriverController extends BaseController
 {
     protected AuthController $AuthCon;
+
     /**
-     * Display a listing of the resource.
+     * Get all Drivers
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +34,7 @@ class DriverController extends BaseController
 
 
     /**
-     * Store a newly created resource in storage.
+     * Add driver
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -76,7 +82,7 @@ class DriverController extends BaseController
 
 
     /**
-     * Display the specified resource.
+     * Show the specified driver.
      *
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Http\Response
@@ -103,7 +109,7 @@ class DriverController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Driver.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Driver  $driver
@@ -143,7 +149,7 @@ class DriverController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the specified driver.
      *
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Http\Response

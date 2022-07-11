@@ -13,7 +13,7 @@ use App\Http\Resources\AddressResources;
 use Symfony\Component\Console\Input\Input;
 
 /**
- * @group Address Management
+ * @group Address
  *
  * APIs to manage the address
  */

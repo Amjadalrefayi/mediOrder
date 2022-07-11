@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Customer;
 use App\Models\Pharmacy;
 
-
+/**
+ * @group Order
+ *
+ * APIs to manage the orders
+ */
 class OrderController extends BaseController
 {
     protected AuthController $AuthCon;

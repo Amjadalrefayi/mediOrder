@@ -24,42 +24,42 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: rsp
+        example: zj
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: wolff.florian@example.org
+        example: ruthe.greenfelder@example.org
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: ''
+        example: wbejtiar
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: eupgn
+        example: hap
         type: string
         custom: []
       gender:
         name: gender
         description: 'Must be one of <code>male</code> or <code>female</code>.'
         required: false
-        example: male
+        example: female
         type: string
         custom: []
       location:
         name: location
         description: ''
         required: true
-        example: aliquid
+        example: cumque
         type: string
         custom: []
       image:
@@ -464,7 +464,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: cupiditate
+        example: doloribus
         type: string
         custom: []
     queryParameters: []
@@ -473,21 +473,21 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: false
-        example: z
+        example: tq
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: false
-        example: sttp
+        example: uxeyp
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: false
-        example: ubfjlejcnpjhb
+        example: r
         type: string
         custom: []
       gender:
@@ -530,7 +530,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: non
+        example: dicta
         type: string
         custom: []
     queryParameters: []
@@ -913,7 +913,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: omnis
+        example: expedita
         type: string
         custom: []
     queryParameters: []
