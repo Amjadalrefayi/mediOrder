@@ -71,25 +71,27 @@ class ProductController extends BaseController
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'company'=>'required',
-            'image'=>'required',
-            'price'=>'required',
+            'image'=>'required|image',
+            'price'=>'required|numeric',
             'type'=>'required',
-            'amount',
+            'amount' => 'numeric',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
-        //image = $request->image;
-        //$newImage = time() . $image;
-       // $image->move('uploads/products', $newImage);
         $input = $request->all();
+
+        $image = $request->image;
+        $saveImage = time() . $image->getClientOriginalName();
+        $image->move('uploads/products', $saveImage);
+        $input['image'] = 'uploads/products/' . $saveImage;
+
         $input['pharmacy_id'] = Auth::id();
         $input['available'] = true;
-        $input['image'] = 'uploads/products/';
         $product = Product::create($input);
 
-        return $this->sendResponse(new ProductResources($product), 'Products Store successfully');
+        return $this->sendResponse(new ProductResources($product), 'Product Store successfully');
     }
 
     public function show($id)
