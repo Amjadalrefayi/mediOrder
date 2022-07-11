@@ -33,11 +33,7 @@ class ProductController extends BaseController
 
     }
 
-    /**
-     * show pharmacy Products
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function showPharmacyProducts($id)
     {
@@ -75,33 +71,29 @@ class ProductController extends BaseController
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'company'=>'required',
-            'image'=>'required',
-            'price'=>'required',
+            'image'=>'required|image',
+            'price'=>'required|numeric',
             'type'=>'required',
-            'amount',
+            'amount' => 'numeric',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
-        //image = $request->image;
-        //$newImage = time() . $image;
-       // $image->move('uploads/products', $newImage);
         $input = $request->all();
+
+        $image = $request->image;
+        $saveImage = time() . $image->getClientOriginalName();
+        $image->move('uploads/products', $saveImage);
+        $input['image'] = 'uploads/products/' . $saveImage;
+
         $input['pharmacy_id'] = Auth::id();
         $input['available'] = true;
-        $input['image'] = 'uploads/products/';
         $product = Product::create($input);
 
-        return $this->sendResponse(new ProductResources($product), 'Products Store successfully');
+        return $this->sendResponse(new ProductResources($product), 'Product Store successfully');
     }
 
-    /**
-     * show specific Product
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product = Product::find($id);
@@ -112,17 +104,10 @@ class ProductController extends BaseController
         return $this->sendResponse(new ProductResources($product), 'Specific Product');
     }
 
-    /**
-     * Show the form for editing the specified resource
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         //
     }
-
 
     public function update(Request $request,$id)
     {
@@ -157,12 +142,6 @@ class ProductController extends BaseController
         return $this->sendResponse(new ProductResources($product), 'Product Updated successfully');
     }
 
-    /**
-     * Delete specified product
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $product = Product::find($id);

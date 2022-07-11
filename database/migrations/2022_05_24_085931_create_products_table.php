@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('company');
             $table->string('image');
-            $table->string('price');
+            $table->double('price');
             $table->string('type');
             $table->boolean('available');
-            $table->string('amount')->nullable();
+            $table->integer('amount')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

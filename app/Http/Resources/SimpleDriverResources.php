@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AddressResources extends JsonResource
+class SimpleDriverResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,17 +14,15 @@ class AddressResources extends JsonResource
      */
     public function toArray($request)
     {
+        //return parent::toArray($request);
         return[
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'description'=>$this->description,
-            'longitude'=>$this->longitude,
-            'latitude'=>$this->latitude
+            'name' =>$this->name,
+            'email' =>$this->email,
+            'phone' => $this->phone,
+            'gender' => $this->gender,
+            'location' => $this->location,
+            'image' => $this->image,
+
         ];
-
-
-
-
-
     }
 }
