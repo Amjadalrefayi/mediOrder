@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->longText('description');
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('driver_id')->unsigned()->nullable();
+            $table->integer('pharmacy_id')->unsigned()->nullable();
             $table->double('longitude');
             $table->double('latitude');
             $table->timestamps();

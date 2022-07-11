@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,17 @@ use App\Http\Controllers\OrderController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
+
+
+});
+
+
+Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {
+
+
+});
 
 
 //------Rigeter / Login------//
@@ -63,6 +75,7 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
     Route::get('/products/{pharmacy_id}', [ProductController::class, 'showPharmacyProducts']);
 
 });
+
 // //------Order------//
 
 Route::group(['prefix' => 'order', 'middleware' => ['auth:sanctum']], function () {
@@ -86,6 +99,16 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
     Route::put('/update/{id}', [DriverController::class, 'update']);
     Route::get('/show/{id}', [DriverController::class, 'show']);
     Route::delete('/delete/{id}', [DriverController::class, 'destroy']);
+
+
+//------Address CRUD------//
+
+Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/index', [AddressController::class, 'index']);
+    Route::post('/store', [AddressController::class, 'store']);
+    Route::get('/show/{id}', [AddressController::class, 'show']);
+    Route::put('/update/{id}', [AddressController::class, 'update']);
+    Route::delete('/delete/{id}', [AddressController::class, 'destroy']);
 
 
 });

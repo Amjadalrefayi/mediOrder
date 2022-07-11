@@ -1,14 +1,14 @@
-name: 'Pharmacy Management'
+name: 'Customer Management'
 description: |-
 
-  APIs to manage the Pharmacy
+  APIs to manage the customer
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/pharmacy/store
+    uri: api/auth/customer/register
     metadata:
-      title: 'Add pharmacy'
+      title: 'Customer Register'
       description: ''
       authenticated: false
       custom: []
@@ -22,35 +22,42 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: r
+        example: rsp
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: jude.wisozk@example.net
+        example: wolff.florian@example.org
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: uecep
+        example: ''
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: fpa
+        example: eupgn
+        type: string
+        custom: []
+      gender:
+        name: gender
+        description: 'Must be one of <code>male</code> or <code>female</code>.'
+        required: false
+        example: male
         type: string
         custom: []
       location:
         name: location
         description: ''
         required: true
-        example: sapiente
+        example: aliquid
         type: string
         custom: []
       image:
@@ -65,9 +72,9 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/pharmacy/index
+    uri: api/customer/index
     metadata:
-      title: 'Get All pharmacies'
+      title: 'Get all Customers.'
       description: ''
       authenticated: false
       custom: []
@@ -390,7 +397,7 @@ endpoints:
                   },
                   {
                       "file": "D:\\Coding\\laravel\\mediOrder\\vendor\\symfony\\console\\Application.php",
-                      "line": 989,
+                      "line": 998,
                       "function": "run",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
@@ -441,9 +448,9 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/pharmacy/update/{id}'
+    uri: 'api/customer/update/{id}'
     metadata:
-      title: 'Update  specified  pharmacy'
+      title: 'Update Profile'
       description: ''
       authenticated: false
       custom: []
@@ -455,19 +462,61 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: 9
-        type: integer
+        example: cupiditate
+        type: string
         custom: []
     queryParameters: []
-    bodyParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must be at least 3 characters.'
+        required: false
+        example: z
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'Must be at least 8 characters.'
+        required: false
+        example: sttp
+        type: string
+        custom: []
+      phone:
+        name: phone
+        description: 'Must be at least 13 characters.'
+        required: false
+        example: ubfjlejcnpjhb
+        type: string
+        custom: []
+      gender:
+        name: gender
+        description: 'Must be one of <code>male</code> or <code>female</code>.'
+        required: false
+        example: female
+        type: string
+        custom: []
+      location:
+        name: location
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+      image:
+        name: image
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
     responses: []
     responseFields: []
   -
     httpMethods:
       - GET
-    uri: 'api/pharmacy/show/{id}'
+    uri: 'api/customer/show/{id}'
     metadata:
-      title: 'Show specified pharmacy'
+      title: 'Show specified customer.'
       description: ''
       authenticated: false
       custom: []
@@ -479,7 +528,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: veniam
+        example: non
         type: string
         custom: []
     queryParameters: []
@@ -797,7 +846,7 @@ endpoints:
                   },
                   {
                       "file": "D:\\Coding\\laravel\\mediOrder\\vendor\\symfony\\console\\Application.php",
-                      "line": 989,
+                      "line": 998,
                       "function": "run",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
@@ -848,9 +897,9 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/pharmacy/delete/{id}'
+    uri: 'api/customer/delete/{id}'
     metadata:
-      title: 'Delete specified pharamcy'
+      title: 'Delete specific Customer'
       description: ''
       authenticated: false
       custom: []
@@ -862,7 +911,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: nihil
+        example: omnis
         type: string
         custom: []
     queryParameters: []
