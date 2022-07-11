@@ -18,12 +18,8 @@ class AddressResources extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'description'=>$this->description,
-            'customer_id'=>$this->customer_id,
-            'driver_id'=>$this->driver_id,
-            'pharmacy_id'=>$this->pharmacy_id,
             'longitude'=>$this->longitude,
             'latitude'=>$this->latitude
-
         ];
 
 
