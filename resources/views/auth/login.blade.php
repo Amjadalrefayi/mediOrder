@@ -23,8 +23,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/daterangepicker/daterangepicker.css')}}>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href={{asset(url('/loginPage/css/util.css'))}}>
-	<link rel="stylesheet" type="text/css" href={{asset(url('/loginPage/css/util.css'))}}>
+	<link rel="stylesheet" type="text/css" href={{asset(url('loginPage/css/util.css'))}}>
+	<link rel="stylesheet" type="text/css" href={{asset(url('loginPage/css/util.css'))}}>
 <!--===============================================================================================-->
 </head>
 <body>
