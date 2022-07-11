@@ -49,7 +49,16 @@ class AuthController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
 
+        if(!$request->image == null){
+            $image = $request->image;
+            $saveImage = time() . $image;
+            $image->move('uploads/profile', $saveImage);
+
+        }
+
+
         $input = $request->all();
+        $input['image'] = 'uploads/profile' . $saveImage;
         $input['password'] = Hash::make($input['password']);
         $user = Customer::create([
             'name' =>  $input['name'],
