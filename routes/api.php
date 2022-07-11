@@ -18,6 +18,10 @@ use App\Http\Controllers\AddressController;
 |
 */
 
+Route::get('loginHome', function(){
+  return view('auth.login');
+ })->name('loginHome');
+
 
 //------Rigeter / Login------//
 
@@ -65,6 +69,7 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
 Route::group(['prefix' => 'Address', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/index', [AddressController::class, 'index']);
+    Route::get('/useraddress', [AddressController::class, 'useraddress']);
     Route::post('/store', [AddressController::class, 'store']);
     Route::get('/show/{id}', [AddressController::class, 'show']);
     Route::put('/update/{id}', [AddressController::class, 'update']);
