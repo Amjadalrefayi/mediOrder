@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Http\Resources\CartResources;
+use App\Http\Controllers\BaseController as BaseController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -14,7 +18,12 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::paginate(5);
+        return $this->sendResponse(CartResources::collection($carts), [
+            'current_page' => $products->currentPage(),
+            'nextPageUrl' => $products->nextPageUrl(),
+            'previousPageUrl' => $products->previousPageUrl(),
+        ]);
     }
 
     /**
@@ -35,7 +44,28 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'company'=>'required',
+            'image'=>'required',
+            'price'=>'required',
+            'type'=>'required',
+            'amount',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+        //image = $request->image;
+        //$newImage = time() . $image;
+       // $image->move('uploads/products', $newImage);
+        $input = $request->all();
+        $input['pharmacy_id'] = Auth::id();
+        $input['available'] = true;
+        $input['image'] = 'uploads/products/';
+        $product = Product::create($input);
+
+        return $this->sendResponse(new ProductResources($product), 'Products Store successfully');
     }
 
     /**
@@ -44,7 +74,7 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function showCartForSpecificOrder($id)
     {
         //
     }
