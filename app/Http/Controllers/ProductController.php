@@ -34,18 +34,22 @@ class ProductController extends BaseController
 
     }
 
-
-
+    /**
+     * show All pharmacy products
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showPharmacyProducts($id)
     {
         if(! Pharmacy::find($id)){
-            return $this->sendError('Not Found');
+            return $this->sendError('','Not Found');
         }
 
         if(Customer::find(Auth::id())) {
             $products = Product::where('pharmacy_id',$id)->paginate(5);
             return $this->sendResponse(ProductResources::collection($products), 'Get All Products');
         }
+
         $products = Product::where('pharmacy_id',$id)->paginate(5);
         return $this->sendResponse(ProductResources::collection($products), [
             'current_page' => $products->currentPage(),
