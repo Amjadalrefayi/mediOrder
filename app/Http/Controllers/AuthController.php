@@ -92,11 +92,11 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
+            return $this->sendError('', $validator->errors() );
         }
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return $this->sendError('Unauthorized', 401);
+            return $this->sendError('Unauthorized', 'Unauthorized');
         }
         $user = User::find(Auth::id())->first();
         $data['id'] = $user->id;

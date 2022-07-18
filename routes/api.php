@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
@@ -27,6 +26,7 @@ Route::get('loginHome', function(){
   return view('auth.login');
  })->name('loginHome');
 
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
 
 
@@ -39,6 +39,8 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmac
 });
 
 
+Route::post('/cart', [OrderController::class, 'customerPhOrderStore']);
+Route::get('/pro', [ProductController::class, 'index']);
 
 //------Rigeter / Login------//
 
