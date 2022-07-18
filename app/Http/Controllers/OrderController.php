@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Resources\OrderResources;
 use App\Http\Resources\SimpleOrderResources;
 use App\Http\Controllers\BaseController as BaseController;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Customer;
 use App\Models\Pharmacy;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @group Order
@@ -61,10 +64,57 @@ class OrderController extends BaseController
 
 
 
-    public function store(Request $request)
+    public function customerOrderStore(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'note'=>'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+
 
     }
+
+    public function customerPhOrderStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'pharmacy_id' =>'required|exists:users,id',
+            'products' => 'array|required',
+            'products.*.id' => 'required|exists:products,id',
+            'products.*.count' => 'required|integer|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+        $products = $request->products;
+        $total_price=0;
+
+        $order = new Order();
+        foreach($products as $item){
+            Cart::create([
+                'order_id' ,
+                'product_id' => $item['id'],
+                'count' => $item['count']
+            ]);
+            $product=Product::find(1)->first();
+            $total_price += $product->price * $item['count'];
+        }
+
+        $order->pharmacy_id = $request['pharmacy_id'];
+        $order->customer_id = 1;
+        $order->total_price = $total_price;
+        $order->save();
+        $order->refresh();
+
+
+    }
+
+
+
 
 
     public function show($id)
