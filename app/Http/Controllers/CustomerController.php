@@ -42,7 +42,7 @@ class CustomerController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
+            return $this->sendError('',$validator->errors());
         }
 
         $input = $request->all();
