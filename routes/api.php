@@ -9,6 +9,8 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SupporterController;
+
 
 use App\Http\Controllers\AddressController;
 
@@ -133,5 +135,17 @@ Route::group(['prefix' => 'complaint', 'middleware' => ['auth:sanctum']], functi
     Route::put('/update/{id}', [ComplaintController::class, 'update']);
     Route::delete('/softdelete/{id}', [ComplaintController::class, 'softdelete']);
     Route::delete('/hdelete/{id}', [ComplaintController::class, 'hdelete']);
+
+});
+
+// //------supporter CRUD------//
+
+Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/store', [SupporterController::class, 'store']);
+    Route::get('/index', [SupporterController::class, 'index']);
+    Route::put('/update/{id}', [SupporterController::class, 'update']);
+    Route::get('/show/{id}', [SupporterController::class, 'show']);
+    Route::delete('/delete/{id}', [SupporterController::class, 'destroy']);
 
 });

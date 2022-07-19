@@ -44,29 +44,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'company'=>'required',
-            'image'=>'required',
-            'price'=>'required',
-            'type'=>'required',
-            'amount',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
-        }
-        //image = $request->image;
-        //$newImage = time() . $image;
-       // $image->move('uploads/products', $newImage);
-        $input = $request->all();
-        $input['pharmacy_id'] = Auth::id();
-        $input['available'] = true;
-        $input['image'] = 'uploads/products/';
-        $product = Product::create($input);
-
-        return $this->sendResponse(new ProductResources($product), 'Products Store successfully');
-    }
+         }
 
     /**
      * Display the specified resource.
