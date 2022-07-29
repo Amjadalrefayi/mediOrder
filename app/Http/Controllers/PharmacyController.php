@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pharmacy;
+use App\Models\Order;
+use App\Enums\orderStatue;
 use App\Http\Resources\PharmacyResources;
+use App\Http\Resources\OrderResources;
 use App\Http\Resources\SimplePharmacyResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
@@ -30,6 +33,34 @@ class PharmacyController extends BaseController
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
             'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
             'previousPageUrl' => $pharmacies->previousPageUrl()
+        ]);
+    }
+
+    public function showPharmacesPendingOrders($id)
+    {
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::PROCESSING)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
+    }
+
+    public function showPharmacesDoneOrders($id)
+    {
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::DONE)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
         ]);
     }
 

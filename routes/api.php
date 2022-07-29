@@ -78,6 +78,8 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
     Route::post('/store', [PharmacyController::class, 'store']);
     Route::get('/index', [PharmacyController::class, 'index']);
+    Route::get('/showPharmacesPendingOrders/{id}', [PharmacyController::class, 'showPharmacesPendingOrders']);
+    Route::get('/showPharmacesDoneOrders/{id}', [PharmacyController::class, 'showPharmacesDoneOrders']);
     Route::put('/update/{id}', [PharmacyController::class, 'update']);
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
     Route::delete('/delete/{id}', [PharmacyController::class, 'destroy']);
