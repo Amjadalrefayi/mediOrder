@@ -776,28 +776,28 @@ endpoints:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: sslybgbwxjiamctmlsgfdsrzfgsjychqtz
+        example: hlvckvzmdccitrqlanchzqonpmsogidswjqejzltufesyqethprxpaltxrvnhdlwbwkrqcbuvdttjjoznbumzrwbmtmmatolusziereaoudldqgofbtdzqmfvrwioabcfddnmgrbapdselgucvodphfnurwrpcdcvvnzimscwzpvkqmupttlvsivzhulmvxzfpndravsuwnekyzysmakmisqgkaylmipy
         type: string
         custom: []
       description:
         name: description
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: kgqwqowdabgcphcnwufjoceuzipsdsldgyzbubieugotvfwduezcsavlhkdkltbnkhadthauuzbwtnuswmlgiqwaucmhqwdlqpmpjkyiyhwfyzouyvuzitnhbitajeaokkurjrcvlgpccwhucggnkwnrxhqluyiozuhbbxbibpmqwkrpzqarzflqkaqejeckpocgwcktowzqwfijvayivrf
+        example: aebdcyqbcdjqecdacoozgjguzwgiyeuempkkmrshgpgvwyeogoqwfkdjcuxlvxbrdoegrjandtmadvfjsxihvcztdbjxoycvlmcbxtifutfberqcihqeybxlxriiaiyxtuqquqayaxuijvckhmtrexgxqswgzgfijjwgpzslyyk
         type: string
         custom: []
       latitude:
         name: latitude
         description: 'Must be between -90 and 90.'
         required: true
-        example: -59
+        example: -73
         type: number
         custom: []
       longitude:
         name: longitude
         description: 'Must be between -180 and 180.'
         required: true
-        example: 162
+        example: 89
         type: number
         custom: []
     responses: []
@@ -819,7 +819,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: placeat
+        example: animi
         type: string
         custom: []
     queryParameters: []
@@ -1202,7 +1202,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: dicta
+        example: quia
         type: string
         custom: []
     queryParameters: []
@@ -1211,28 +1211,28 @@ endpoints:
         name: name
         description: ''
         required: true
-        example: ut
+        example: adipisci
         type: string
         custom: []
       description:
         name: description
         description: ''
         required: true
-        example: facere
+        example: neque
         type: string
         custom: []
       longitude:
         name: longitude
         description: ''
         required: true
-        example: porro
+        example: iusto
         type: string
         custom: []
       latitude:
         name: latitude
         description: ''
         required: true
-        example: est
+        example: id
         type: string
         custom: []
     responses: []
@@ -1254,7 +1254,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: autem
+        example: voluptatem
         type: string
         custom: []
     queryParameters: []

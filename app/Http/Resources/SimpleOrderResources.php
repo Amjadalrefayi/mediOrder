@@ -18,12 +18,14 @@ class SimpleOrderResources extends JsonResource
         return[
 
             'id' => $this->id,
-            // 'customer_id' => $this->customer_id,
-            // 'pharmacy_id' => $this->pharmacy_id,
+            'customer_id' => $this->customer_id,
+            'pharmacy_id' => $this->pharmacy_id,
             // 'driver_id' => $this->driver_id,
-            // 'remember_token' => $this->remember_token,
+            'image' => $this->image,
+            'lng' => $this->lng,
+            'lat' => $this->lat,
+            'status' => $this->state,
             'total_price' => $this->total_price,
-            'expected_time' =>$this->expected_time
         ];
     }
 }

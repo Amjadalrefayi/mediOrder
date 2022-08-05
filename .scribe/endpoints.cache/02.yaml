@@ -15,7 +15,7 @@ endpoints:
       authenticated: false
       custom: []
     headers:
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     queryParameters: []
@@ -24,50 +24,50 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: u
+        example: ''
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: qhessel@example.net
+        example: considine.rhea@example.com
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: etbpsxqm
+        example: wheli
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: cveb
+        example: jvwdvnfgznq
         type: string
         custom: []
       gender:
         name: gender
         description: 'Must be one of <code>male</code> or <code>female</code>.'
         required: false
-        example: female
+        example: male
         type: string
         custom: []
       location:
         name: location
         description: ''
         required: true
-        example: quia
+        example: qui
         type: string
         custom: []
       image:
         name: image
-        description: ''
+        description: 'Must be an image.'
         required: false
         example: null
-        type: string
+        type: file
         custom: []
     responses: []
     responseFields: []
@@ -464,7 +464,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: rem
+        example: sint
         type: string
         custom: []
     queryParameters: []
@@ -473,21 +473,21 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: false
-        example: p
+        example: uv
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: false
-        example: l
+        example: b
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: false
-        example: tpxtfatk
+        example: isxlhun
         type: string
         custom: []
       gender:
@@ -530,7 +530,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: est
+        example: mollitia
         type: string
         custom: []
     queryParameters: []
@@ -913,7 +913,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: quasi
+        example: architecto
         type: string
         custom: []
     queryParameters: []

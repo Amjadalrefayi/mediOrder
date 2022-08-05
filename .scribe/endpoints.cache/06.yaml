@@ -24,35 +24,35 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: ''
+        example: qu
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: nella.hagenes@example.com
+        example: ubashirian@example.net
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: ''
+        example: qbywod
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: fwyq
+        example: spawoje
         type: string
         custom: []
       location:
         name: location
         description: ''
         required: true
-        example: dolorum
+        example: provident
         type: string
         custom: []
       image:
@@ -457,7 +457,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: 17
+        example: 6
         type: integer
         custom: []
     queryParameters: []
@@ -481,7 +481,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: aut
+        example: perspiciatis
         type: string
         custom: []
     queryParameters: []
@@ -864,7 +864,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: voluptates
+        example: sunt
         type: string
         custom: []
     queryParameters: []

@@ -22,28 +22,28 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: gk
+        example: ib
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: meaghan01@example.net
+        example: collier.jaida@example.net
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: ms
+        example: gmqn
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: uyxmb
+        example: ufzfudlvqgjh
         type: string
         custom: []
       gender:
@@ -57,7 +57,7 @@ endpoints:
         name: location
         description: ''
         required: true
-        example: fugiat
+        example: sint
         type: string
         custom: []
       image:
@@ -462,7 +462,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: ea
+        example: qui
         type: string
         custom: []
     queryParameters: []
@@ -471,21 +471,21 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: false
-        example: t
+        example: ''
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: false
-        example: uvfceew
+        example: vxj
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: false
-        example: gym
+        example: mok
         type: string
         custom: []
       gender:
@@ -499,7 +499,7 @@ endpoints:
         name: location
         description: ''
         required: true
-        example: ea
+        example: illum
         type: string
         custom: []
       image:
@@ -528,7 +528,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: pariatur
+        example: expedita
         type: string
         custom: []
     queryParameters: []
@@ -911,7 +911,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: fuga
+        example: ut
         type: string
         custom: []
     queryParameters: []

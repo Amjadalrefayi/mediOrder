@@ -2,6 +2,7 @@
 
 use App\Enum\OrderState;
 use App\Enums\orderStatue;
+use App\Enums\orderType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,9 +21,16 @@ return new class extends Migration
             $table->integer('customer_id')->unsigned();
             $table->integer('pharmacy_id')->unsigned()->nullable();
             $table->integer('driver_id')->unsigned()->nullable();
+
+            $table->string('image')->nullable();
+            $table->string('text')->nullable();
+
             $table->unsignedTinyInteger('state')->default(orderStatue::CREATED);
+            $table->unsignedTinyInteger('type')->default(orderType::DEFAULT);
             $table->string('total_price')->nullable();
             $table->string('expected_time')->nullable();
+            $table->double('lng');
+            $table->double('lat');
             $table->softDeletes();
             $table->timestamps();
         });

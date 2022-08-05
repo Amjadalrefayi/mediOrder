@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\orderStatue;
+use App\Enums\orderType;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Resources\OrderResources;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends BaseController
 {
     protected AuthController $AuthCon;
+
     public function index()
     {
         $orders = Order::paginate(5);
@@ -32,50 +35,45 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function showCustomerOrders($id)
+    public function showLiveCustomerOrders()
     {
-        if(! Customer::find($id)){
-            return $this->sendError('Not Found');
-        }
-        $customer = Customer::find($id);
-        $orders = Order::where('customer_id',$id)->paginate(5);
-        return $this->sendResponse(OrderResources::collection($orders), [
-            'current_page' => $orders->currentPage(),
-            'nextPageUrl' => $orders->nextPageUrl(),
-            'previousPageUrl' => $orders->previousPageUrl(),
-        ]);
-
+       $orders = Order::where('customer_id', Auth::id())->whereNotIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
+       return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
     }
 
-    public function showPharmacyOrders($id)
+    public function showHistoryCustomerOrders()
     {
-        if(! Pharmacy::find($id)){
-            return $this->sendError('Not Found');
-        }
-        $pharmacy = Pharmacy::find($id);
-        $orders = Order::where('pharmacy_id',$id)->paginate(5);
-        return $this->sendResponse(OrderResources::collection($orders), [
-            'current_page' => $orders->currentPage(),
-            'nextPageUrl' => $orders->nextPageUrl(),
-            'previousPageUrl' => $orders->previousPageUrl(),
-        ]);
-
+       $orders = Order::where('customer_id', Auth::id())->whereIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
+       return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all history order successfully');
     }
 
-
-
-    public function customerOrderStore(Request $request)
+    public function rashetaCustomerOrder(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'note'=>'required',
-
+            'text'=>'max:255',
+            'image' => 'required|image',
+            'lat' => 'required|between: -90,90',
+            'lng' => 'required|between: -180,180',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
 
+        $image = $request->image;
+        $saveImage = time() . $image->getClientOriginalName();
+        $image->move('uploads/orders', $saveImage);
+        $input['image'] = 'uploads/orders/' . $saveImage;
 
+        $order = new Order();
+        $order->type = orderType::RASHETA;
+        $order->customer_id = Auth::id();
+        $order->lat = $request->lat;
+        $order->lng = $request->lng;
+        $order->image = $input['image'];
+        $order->save();
+        $order->refresh();
+        return $this->sendResponse(new SimpleOrderResources($order), 'Order stored successfully');
     }
 
     public function customerPhOrderStore(Request $request)
@@ -85,37 +83,40 @@ class OrderController extends BaseController
             'products' => 'array|required',
             'products.*.id' => 'required|exists:products,id',
             'products.*.count' => 'required|integer|min:0',
+            'lat' => 'required|between: -90,90',
+            'lng' => 'required|between: -180,180',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
+
         $products = $request->products;
         $total_price=0;
 
         $order = new Order();
+        $order->pharmacy_id = $request['pharmacy_id'];
+        $order->customer_id = Auth::id();
+        $order->lat = $request['lat'];
+        $order->lng = $request['lng'];
+        $order->save();
         foreach($products as $item){
             Cart::create([
-                'order_id' ,
+                'order_id' => $order->id ,
                 'product_id' => $item['id'],
                 'count' => $item['count']
             ]);
-            $product=Product::find(1)->first();
+            $product=Product::find($item['id']);
             $total_price += $product->price * $item['count'];
         }
-
-        $order->pharmacy_id = $request['pharmacy_id'];
-        $order->customer_id = 1;
         $order->total_price = $total_price;
         $order->save();
         $order->refresh();
 
+        return $this->sendResponse(new SimpleOrderResources($order), 'Order stored successfully');
 
+        return new SimpleOrderResources($order);
     }
-
-
-
-
 
     public function show($id)
     {

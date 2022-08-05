@@ -11,10 +11,11 @@ use BenSampo\Enum\Enum;
  */
 final class orderStatue extends Enum
 {
-    const CREATED = 0;
-    const ACCEPTED = 1;
-    const REJECTED = 2;
-    const PROCESSING = 3;
-    const DELIVERING = 4;
-    const DONE = 5;
+    const CREATED = 1;
+    const ACCEPTED = 2;
+    const REJECTED = 3;
+    const PROCESSING = 4;
+    const DELIVERING = 5;
+    const DONE = 6;
+    const SOS = 7;
 }

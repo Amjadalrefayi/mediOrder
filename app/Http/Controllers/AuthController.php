@@ -48,11 +48,11 @@ class AuthController extends BaseController
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return $this->sendError('', 'Unauthorized');
         }
-        $user = User::find(Auth::id())->first();
+        $user = User::where('email',$request->email)->first();
         $data['id'] = $user->id;
         $data['token'] = $this->token($user);
-        $data['name'] = Auth::user()->name;
-        $data['email'] = Auth::user()->email;
+        $data['name'] = $user->name;
+        $data['email'] = $user->email;
 
         if($user->type === 'App\Models\Admin')
            return view('admin')->with('data', $request->email);

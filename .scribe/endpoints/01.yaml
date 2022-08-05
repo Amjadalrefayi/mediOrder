@@ -1526,7 +1526,7 @@ endpoints:
         name: note
         description: ''
         required: true
-        example: totam
+        example: tempora
         type: string
         custom: []
     responses: []
@@ -1548,7 +1548,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: temporibus
+        example: esse
         type: string
         custom: []
     queryParameters: []
@@ -1931,7 +1931,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: aperiam
+        example: praesentium
         type: string
         custom: []
     queryParameters: []
@@ -1940,7 +1940,7 @@ endpoints:
         name: note
         description: ''
         required: true
-        example: adipisci
+        example: qui
         type: string
         custom: []
     responses: []
@@ -1962,7 +1962,7 @@ endpoints:
         name: id
         description: 'The ID of the softdelete.'
         required: true
-        example: non
+        example: et
         type: string
         custom: []
     queryParameters: []
@@ -1986,7 +1986,7 @@ endpoints:
         name: id
         description: 'The ID of the hdelete.'
         required: true
-        example: eos
+        example: provident
         type: string
         custom: []
     queryParameters: []

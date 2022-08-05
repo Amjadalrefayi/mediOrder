@@ -39,8 +39,8 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmac
 });
 
 
-Route::post('/cart', [OrderController::class, 'customerPhOrderStore']);
-Route::get('/pro', [ProductController::class, 'index']);
+// Route::post('/cart', [OrderController::class, 'customerPhOrderStore']);
+// Route::get('/pro', [ProductController::class, 'index']);
 
 //------Rigeter / Login------//
 
@@ -69,7 +69,10 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
     Route::put('/update/{id}', [CustomerController::class, 'update']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
-
+   Route::post('order/default', [OrderController::class, 'customerPhOrderStore']);
+   Route::post('order/prescription', [OrderController::class, 'rashetaCustomerOrder']);
+    Route::get('order/live', [OrderController::class, 'showLiveCustomerOrders']);
+    Route::get('order/history', [OrderController::class, 'showHistoryCustomerOrders']);
 });
 
 // //------pharmacy------//
