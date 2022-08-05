@@ -166,12 +166,12 @@ a {
     color: #1DC7EA;
 }
 
-a:hover, a:focus {
+a:hover, a:focus,a:active {
     color: #42d0ed;
     text-decoration: none;
 }
 
-a:focus, a:active,
+/* a:focus, a:active,
 button::-moz-focus-inner,
 input::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
@@ -180,7 +180,7 @@ input[type="submit"]::-moz-focus-inner,
 select::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
     outline: 0;
-}
+} */
 
 .ui-slider-handle:focus,
 .navbar-toggle,
@@ -499,12 +499,12 @@ input:focus {
 
 .sidebar[data-color="purple"]:after {
     background: #9368E9;
-    background: -moz-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9368E9), color-stop(100%, #943bea));
-    background: -webkit-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -o-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
+    background: -moz-linear-gradient(top, #f00a0a 0%, #eb0c0c 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8a1814), color-stop(100%, #c32a2a));
+    background: -webkit-linear-gradient(top, #bc1414 0%, #bc1a1a 100%);
+    background: -o-linear-gradient(top, #e10909 0%, #e10202 100%);
+    background: -ms-linear-gradient(top, #f10000 0%, #fc0707 100%);
+    background: linear-gradient(to bottom, #e80505 0%, #d80202 100%);
     background-size: 150% 150%;
 }
 

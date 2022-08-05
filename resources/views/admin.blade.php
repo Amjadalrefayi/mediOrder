@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -6,7 +6,9 @@
 <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -205,7 +207,7 @@ table.table .avatar {
 }
 /* Modal styles */
 .modal .modal-dialog {
-	max-width: 400px;
+	max-width: 600px;
 }
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
 	padding: 20px 30px;
@@ -483,10 +485,12 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
+<iframe src={{ asset(route('loginHome')) }} style="border:2px solid red;" title="Iframe Example"></iframe>
+
 </body>
-</html> --}}
+</html>
 
-
+{{--
 <!doctype html>
 <html lang="en">
   <head>
@@ -546,4 +550,4 @@ $(document).ready(function(){
     <script src={{ asset('admindash/js/bootstrap.min.js')}}></script>
     <script src={{ asset('admindash/js/main.js') }}></script>
   </body>
-</html>
+</html> --}}

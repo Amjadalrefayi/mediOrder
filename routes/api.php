@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ComplaintController;
 
@@ -22,7 +24,32 @@ use App\Http\Controllers\ComplaintController;
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
+Route::get('loginHome', function(){
+  return view('auth.login');
+ })->name('loginHome');
+
+
+
+   Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
+   Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
+
+   Route::get('pharmacy/all', [PharmacyController::class, 'index'])->name('pharmacytable');
+   Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
+   Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
+   Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
+   Route::get('/editpharmacy/{pharmacy}', [PharmacyController::class, 'edit'])->name('editpharmacypage');
+   Route::put('/updatepharmacy/{id}', [PharmacyController::class, 'update'])->name('updatepharmacy');
+
+
+   Route::get('/driver/all', [DriverController::class, 'index'])->name('drivertable');
+   Route::delete('/deletedriver/{id}', [DriverController::class, 'destroy'])->name('deletedriver');
+   Route::get('driver/create', [DriverController::class, 'create'])->name('createdriver');
+   Route::post('/storedriver', [DriverController::class, 'store'])->name('storedriver');
+   Route::get('/editdriver/{driver}', [DriverController::class, 'edit'])->name('editdriverpage');
+   Route::put('/updatedriver/{id}', [DriverController::class, 'update'])->name('updatedriver');
+
+
+   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
 
 
 });
@@ -55,12 +82,11 @@ Route::group(['prefix' => 'products', 'middleware' => ['auth:sanctum']], functio
 
 // //------Customer------//
 
+
 Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], function () {
 
-    Route::get('/index', [CustomerController::class, 'index']);
     Route::put('/update/{id}', [CustomerController::class, 'update']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
-    Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
 
 });
 
@@ -70,8 +96,9 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
     Route::post('/store', [PharmacyController::class, 'store']);
     Route::get('/index', [PharmacyController::class, 'index']);
-    Route::put('/update/{id}', [PharmacyController::class, 'update']);
+
     Route::get('/show/{id}', [PharmacyController::class, 'show']);
+
     Route::delete('/delete/{id}', [PharmacyController::class, 'destroy']);
     Route::get('/products/{pharmacy_id}', [ProductController::class, 'showPharmacyProducts']);
 

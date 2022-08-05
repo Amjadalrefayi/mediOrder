@@ -208,8 +208,6 @@ class AddressController extends BaseController
             return $this->sendError('Not Valid to delete', 'This Address for another user');
         }
 
-
-
         $Address->delete();
 
         return $this->sendResponse('', 'Address Deleted successfully');
