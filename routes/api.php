@@ -151,3 +151,15 @@ Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], functi
     Route::delete('/delete/{id}', [SupporterController::class, 'destroy']);
 
 });
+
+// //------Admin CRUD------//
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/store', [AdminController::class, 'store']);
+    Route::get('/index', [AdminController::class, 'index']);
+    Route::put('/update/{id}', [AdminController::class, 'update']);
+    Route::get('/show/{id}', [AdminController::class, 'show']);
+    Route::delete('/delete/{id}', [AdminController::class, 'destroy']);
+
+});

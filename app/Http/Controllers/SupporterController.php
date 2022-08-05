@@ -23,8 +23,8 @@ class SupporterController extends BaseController
     {
         $supporters = Supporter::latest()->paginate(5);
         return $this->sendResponse(SimpleSupporterResources::collection($supporters),[
-            'nextPageUrl' =>  $drivers->nextPageUrl() ,
-            'previousPageUrl' => $drivers->previousPageUrl()
+            'nextPageUrl' =>  $supporters->nextPageUrl() ,
+            'previousPageUrl' => $supporters->previousPageUrl()
         ]);
     }
 
