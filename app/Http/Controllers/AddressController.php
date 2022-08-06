@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Http\Resources\AddressResources;
+use Symfony\Component\Console\Input\Input;
 
 /**
  * @group Address
@@ -62,7 +63,6 @@ class AddressController extends BaseController
      * add address
      *
      */
-
     public function store(Request $request)
     {
 
@@ -147,6 +147,8 @@ class AddressController extends BaseController
             return $this->sendError('Not Valid to update', 'This Address for another user');
         }
 
+
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
@@ -181,10 +183,13 @@ class AddressController extends BaseController
             return $this->sendError('Address Not Found', 404);
         }
 
+
+
+
+
         $user = User::find(Auth::id())->first();
 
         if($user->type === 'App\Models\Customer')
-        if(Customer::find(Auth::id()))
         {
 
             if( Auth::id() != $Address->customer_id)

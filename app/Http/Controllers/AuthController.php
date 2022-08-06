@@ -105,7 +105,7 @@ class AuthController extends BaseController
         $data['email'] = Auth::user()->email;
 
         if($user->type === 'App\Models\Admin')
-           return view('admin')->with('data', $request->email);
+           return redirect()->route('customertable');
         //   return $this->sendResponse($data,' Admin logedIn successfully');
 
            if($user->type === 'App\Models\Customer')

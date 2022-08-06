@@ -85,9 +85,11 @@ class CustomerController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
         $customers = Customer::latest()->paginate(5);
-        return $this->sendResponse(CustomerResources::collection($customers),
-        'All Customers sent');
+        return view('dashboard.dashboard')->with('customers',$customers);
+        // return $this->sendResponse(CustomerResources::collection($customers),
+        // 'All Customers sent');
     }
 
 
@@ -154,6 +156,7 @@ class CustomerController extends BaseController
         }
         $customer = Customer::find($id);
         $customer->delete();
+        return redirect()->route('home');
         return $this->sendResponse('', 'Customer deleted successfully');
     }
 

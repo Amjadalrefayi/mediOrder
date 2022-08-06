@@ -13,7 +13,13 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href={{asset('https://medi-order.herokuapp.com/loginPage/fonts/iconic/css/material-design-iconic-font.min.css')}}>
 <!--===============================================================================================-->
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href={{asset('https://medi-order.herokuapp.com/loginPage/vendor/animate/animate.css')}}>
+||||||| c2a5ae4
+	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/animate/animate.css')}}"">
+=======
+	<link rel="stylesheet" type="text/css" href={{asset('loginPage/vendor/animate/animate.css')}}>
+>>>>>>> 97c74b2491479d3c68abdb84429bcd6fb57d39fe
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href={{asset('https://medi-order.herokuapp.com/loginPage/vendor/css-hamburgers/hamburgers.min.css')}}>
 <!--===============================================================================================-->
