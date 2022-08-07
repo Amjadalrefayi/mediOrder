@@ -75,7 +75,7 @@ class AdminController extends BaseController
         ]);
 
         $admin->remember_token = $this->AuthCon->token($admin);
-        $admin->update();
+        $admin->save();
 
         $data['id']=$admin['id'];
         $data['Token']=$admin['remember_token'];
