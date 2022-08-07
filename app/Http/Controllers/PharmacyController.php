@@ -32,24 +32,14 @@ class PharmacyController extends BaseController
      */
     public function index()
     {
-        $user = User::find(Auth::id())->first();
-        if($user->type === 'App\Models\Admin')
-     {
+        $pharmacies = Pharmacy::latest()->get();
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
+    }
+
+    public function indexForAdmin()
+    {
         $pharmacies = Pharmacy::latest()->paginate(5);
-
-
-         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
-
-     }
-
-        $pharmacies = Pharmacy::latest()->paginate(5);
-
-
-        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
-            'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
-            'previousPageUrl' => $pharmacies->previousPageUrl()
-        ]);
-
+        return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
     }
 
     public function showPharmacesPendingOrders($id)

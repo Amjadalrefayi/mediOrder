@@ -35,7 +35,7 @@ Route::get('loginHome', function(){
    Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
 
-   Route::get('pharmacy/all', [PharmacyController::class, 'index'])->name('pharmacytable');
+   Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
    Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
    Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
    Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
