@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
