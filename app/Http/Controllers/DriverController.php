@@ -30,22 +30,8 @@ class DriverController extends BaseController
      */
     public function index()
     {
-
-
-        $user = User::find(Auth::id())->first();
-        if($user->type === 'App\Models\Admin')
-     {
         $drivers = Driver::latest()->paginate(5);
-
-
          return view('dashboard.drivertable')->with('drivers',$drivers);
-
-     }
-        $drivers = Driver::latest()->paginate(5);
-        return $this->sendResponse(SimpleDriverResources::collection($drivers),[
-            'nextPageUrl' =>  $drivers->nextPageUrl() ,
-            'previousPageUrl' => $drivers->previousPageUrl()
-        ]);
     }
 
 

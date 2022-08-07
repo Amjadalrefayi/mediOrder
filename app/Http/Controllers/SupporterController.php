@@ -24,20 +24,8 @@ class SupporterController extends BaseController
      */
     public function index()
     {
-        $user = User::find(Auth::id())->first();
-        if($user->type === 'App\Models\Admin')
-     {
         $supporters = Supporter::latest()->paginate(5);
-
-
-         return view('dashboard.supportertable')->with('supporters',$supporters);
-
-     }
-        $supporters = Supporter::latest()->paginate(5);
-        return $this->sendResponse(SimpleSupporterResources::collection($supporters),[
-            'nextPageUrl' =>  $supporters->nextPageUrl() ,
-            'previousPageUrl' => $supporters->previousPageUrl()
-        ]);
+        return view('dashboard.supportertable')->with('supporters',$supporters);
     }
 
     /**
