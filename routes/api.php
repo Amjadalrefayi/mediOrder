@@ -57,6 +57,7 @@ Route::get('loginHome', function(){
    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
    Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
+   });
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
 
 

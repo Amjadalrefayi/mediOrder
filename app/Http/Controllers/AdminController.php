@@ -8,7 +8,7 @@ use App\Http\Resources\AdminResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     protected AuthController $AuthCon;
     /**
