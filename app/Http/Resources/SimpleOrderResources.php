@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
+use App\Models\Pharmacy;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,12 +19,22 @@ class SimpleOrderResources extends JsonResource
         return[
 
             'id' => $this->id,
-            // 'customer_id' => $this->customer_id,
-            // 'pharmacy_id' => $this->pharmacy_id,
-            // 'driver_id' => $this->driver_id,
-            // 'remember_token' => $this->remember_token,
+            'customer_id' => $this->customer_id,
+            'pharmacy_id' => $this->getPharmacy(),
+            'image' => $this->image,
+            'lng' => $this->lng,
+            'lat' => $this->lat,
+            'status' => $this->state,
             'total_price' => $this->total_price,
-            'expected_time' =>$this->expected_time
         ];
+    }
+
+    public function getPharmacy()
+    {
+        if ($this->pharmacy_id != null) {
+            $pharmacy = Pharmacy::find($this->pharmacy_id);
+            return new SimplePharmacyResources($pharmacy);
+        }
+        return null;
     }
 }

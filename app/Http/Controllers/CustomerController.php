@@ -38,11 +38,11 @@ class CustomerController extends BaseController
             'phone'=> 'required|min:13',
             'gender'=>'in:male,female|nullable',
             'location'=> 'required',
-            'image' => 'mimes:jpeg,jpg,png|nullable',
+            'image' => 'image|nullable',
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
+            return $this->sendError('',$validator->errors());
         }
 
         $input = $request->all();

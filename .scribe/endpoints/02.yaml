@@ -1,19 +1,19 @@
-name: Driver
+name: 'Customer Management'
 description: |-
 
-  APIs to manage the driver
+  APIs to manage the customer
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/driver/store
+    uri: api/auth/customer/register
     metadata:
-      title: 'Add driver'
+      title: 'Customer Register'
       description: ''
       authenticated: false
       custom: []
     headers:
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     queryParameters: []
@@ -22,59 +22,59 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: true
-        example: tjz
+        example: ''
         type: string
         custom: []
       email:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: brigitte.spencer@example.com
+        example: considine.rhea@example.com
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: gpuwixs
+        example: wheli
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: true
-        example: ex
+        example: jvwdvnfgznq
         type: string
         custom: []
       gender:
         name: gender
         description: 'Must be one of <code>male</code> or <code>female</code>.'
         required: false
-        example: female
+        example: male
         type: string
         custom: []
       location:
         name: location
         description: ''
         required: true
-        example: omnis
+        example: qui
         type: string
         custom: []
       image:
         name: image
-        description: ''
+        description: 'Must be an image.'
         required: false
         example: null
-        type: string
+        type: file
         custom: []
     responses: []
     responseFields: []
   -
     httpMethods:
       - GET
-    uri: api/driver/index
+    uri: api/customer/index
     metadata:
-      title: 'Get all Drivers'
+      title: 'Get all Customers.'
       description: ''
       authenticated: false
       custom: []
@@ -448,9 +448,9 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/driver/update/{id}'
+    uri: 'api/customer/update/{id}'
     metadata:
-      title: 'Update the specified Driver.'
+      title: 'Update Profile'
       description: ''
       authenticated: false
       custom: []
@@ -462,7 +462,7 @@ endpoints:
         name: id
         description: 'The ID of the update.'
         required: true
-        example: perspiciatis
+        example: sint
         type: string
         custom: []
     queryParameters: []
@@ -471,21 +471,21 @@ endpoints:
         name: name
         description: 'Must be at least 3 characters.'
         required: false
-        example: rq
+        example: uv
         type: string
         custom: []
       password:
         name: password
         description: 'Must be at least 8 characters.'
         required: false
-        example: tdrvvf
+        example: b
         type: string
         custom: []
       phone:
         name: phone
         description: 'Must be at least 13 characters.'
         required: false
-        example: ''
+        example: isxlhun
         type: string
         custom: []
       gender:
@@ -498,8 +498,8 @@ endpoints:
       location:
         name: location
         description: ''
-        required: true
-        example: at
+        required: false
+        example: null
         type: string
         custom: []
       image:
@@ -514,9 +514,9 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/driver/show/{id}'
+    uri: 'api/customer/show/{id}'
     metadata:
-      title: 'Show the specified driver.'
+      title: 'Show specified customer.'
       description: ''
       authenticated: false
       custom: []
@@ -528,7 +528,7 @@ endpoints:
         name: id
         description: 'The ID of the show.'
         required: true
-        example: vel
+        example: mollitia
         type: string
         custom: []
     queryParameters: []
@@ -897,9 +897,9 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/driver/delete/{id}'
+    uri: 'api/customer/delete/{id}'
     metadata:
-      title: 'Delete the specified driver.'
+      title: 'Delete specific Customer'
       description: ''
       authenticated: false
       custom: []
@@ -911,7 +911,7 @@ endpoints:
         name: id
         description: 'The ID of the delete.'
         required: true
-        example: assumenda
+        example: architecto
         type: string
         custom: []
     queryParameters: []
