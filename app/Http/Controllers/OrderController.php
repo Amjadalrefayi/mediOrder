@@ -37,20 +37,38 @@ class OrderController extends BaseController
 
     public function showLiveCustomerOrders()
     {
-       $orders = Order::where('customer_id', Auth::id())->whereNotIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
+       $orders = Order::latest()->where('customer_id', Auth::id())->whereNotIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
     }
 
     public function showHistoryCustomerOrders()
     {
-       $orders = Order::where('customer_id', Auth::id())->whereIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
+       $orders = Order::latest()->where('customer_id', Auth::id())->whereIn('state',[orderStatue::DONE, orderStatue::SOS])->get();
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all history order successfully');
+    }
+
+    public function showLiveDriverOrders()
+    {
+       $orders = Order::latest()->where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING])->get();
+       return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
+    }
+
+    public function showHistoryDriverOrders()
+    {
+       $orders = Order::latest()->where('driver_id', Auth::id())->whereNotIn('state',[orderStatue::DELIVERING, orderStatue::ACCEPTED])->get();
+       return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all history order successfully');
+    }
+
+    public function showDriverOrders()
+    {
+       $orders = Order::latest()->where('state', orderStatue::ACCEPTED())->get();
+       return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all order successfully');
     }
 
     public function rashetaCustomerOrder(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'text'=>'max:255',
+            'text'=>'max:255|nullable',
             'image' => 'required|image',
             'lat' => 'required|between: -90,90',
             'lng' => 'required|between: -180,180',
@@ -65,12 +83,18 @@ class OrderController extends BaseController
         $image->move('uploads/orders', $saveImage);
         $input['image'] = 'uploads/orders/' . $saveImage;
 
+        if(array_key_exists('text',$input)){
+        }
+
         $order = new Order();
         $order->type = orderType::RASHETA;
         $order->customer_id = Auth::id();
         $order->lat = $request->lat;
         $order->lng = $request->lng;
         $order->image = $input['image'];
+        if(array_key_exists('text',$input)){
+            $order->text = $input['text'];
+        }
         $order->save();
         $order->refresh();
         return $this->sendResponse(new SimpleOrderResources($order), 'Order stored successfully');
@@ -114,8 +138,6 @@ class OrderController extends BaseController
         $order->refresh();
 
         return $this->sendResponse(new SimpleOrderResources($order), 'Order stored successfully');
-
-        return new SimpleOrderResources($order);
     }
 
     public function show($id)

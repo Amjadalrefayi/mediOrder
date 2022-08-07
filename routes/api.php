@@ -69,8 +69,8 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
     Route::put('/update/{id}', [CustomerController::class, 'update']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
-   Route::post('order/default', [OrderController::class, 'customerPhOrderStore']);
-   Route::post('order/prescription', [OrderController::class, 'rashetaCustomerOrder']);
+    Route::post('order/default', [OrderController::class, 'customerPhOrderStore']);
+    Route::post('order/prescription', [OrderController::class, 'rashetaCustomerOrder']);
     Route::get('order/live', [OrderController::class, 'showLiveCustomerOrders']);
     Route::get('order/history', [OrderController::class, 'showHistoryCustomerOrders']);
 });
@@ -102,16 +102,18 @@ Route::group(['prefix' => 'order', 'middleware' => ['auth:sanctum']], function (
 
 
 });
+
 // //------Driver------//
 
 Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function () {
-
     Route::post('/store', [DriverController::class, 'store']);
     Route::get('/index', [DriverController::class, 'index']);
     Route::put('/update/{id}', [DriverController::class, 'update']);
     Route::get('/show/{id}', [DriverController::class, 'show']);
     Route::delete('/delete/{id}', [DriverController::class, 'destroy']);
-
+    Route::get('order', [OrderController::class, 'showDriverOrders']);
+    Route::get('order/live', [OrderController::class, 'showLiveDriverOrders']);
+    Route::get('order/history', [OrderController::class, 'showHistoryDriverOrders']);
 });
 
 

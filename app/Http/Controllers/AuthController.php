@@ -58,7 +58,7 @@ class AuthController extends BaseController
            return view('admin')->with('data', $request->email);
         //   return $this->sendResponse($data,' Admin logedIn successfully');
 
-           if($user->type === 'App\Models\Customer')
+           if($user->type === 'App\Models\Customer' or $user->type === 'App\Models\Driver')
             return $this->sendResponse($data,' User logedIn successfully');
 
     }

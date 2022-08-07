@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\orderStatue;
 use App\Models\Driver;
 use App\Http\Resources\SimpleDriverResources;
 use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\SimpleOrderResources;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,8 +59,6 @@ class DriverController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
-
-
         $input = $request->all();
         $driver = Driver::create([
             'name' =>  $input['name'],
@@ -79,6 +81,45 @@ class DriverController extends BaseController
         return $this->sendResponse($data, 'Driver registed successfully');
     }
 
+    public function makeOrderDelivering($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+
+        if($order->driver_id != Auth::id()) {
+            return $this->sendError('' , 'You dont have own this order');
+        }
+
+        $order->state = orderStatue::DELIVERING;
+        $order->save();
+        $order->refresh();
+        return new SimpleOrderResources($order);
+    }
+
+    public function makeOrderSOS($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+
+        if($order->driver_id != Auth::id()) {
+            return $this->sendError('' , 'You dont have own this order');
+        }
+
+        $order->state = orderStatue::SOS;
+        $order->save();
+        $order->refresh();
+        return new SimpleOrderResources($order);
+    }
+
+    public function GetOrderDelivering($id)
+    {
+
+
+    }
 
 
     /**
