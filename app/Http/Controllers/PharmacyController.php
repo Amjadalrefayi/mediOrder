@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Pharmacy;
+use App\Models\Order;
+use App\Enums\orderStatue;
 use App\Http\Resources\PharmacyResources;
+use App\Http\Resources\OrderResources;
 use App\Http\Resources\SimplePharmacyResources;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @group Pharmacy Management
@@ -28,6 +32,52 @@ class PharmacyController extends BaseController
      */
     public function index()
     {
+        $user = User::find(Auth::id())->first();
+        if($user->type === 'App\Models\Admin')
+     {
+        $pharmacies = Pharmacy::latest()->paginate(5);
+
+
+         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
+
+     }
+
+        $pharmacies = Pharmacy::latest()->paginate(5);
+
+
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
+            'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
+            'previousPageUrl' => $pharmacies->previousPageUrl()
+        ]);
+
+    }
+
+    public function showPharmacesPendingOrders($id)
+    {
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::PROCESSING)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
+    }
+
+    public function showPharmacesDoneOrders($id)
+    {
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::DONE)->paginate(5);
+        return $this->sendResponse(OrderResources::collection($orders), [
+            'current_page' => $orders->currentPage(),
+            'nextPageUrl' => $orders->nextPageUrl(),
+            'previousPageUrl' => $orders->previousPageUrl(),
+        ]);
         if(Customer::find(Auth::id())) {
             $pharmacies = Pharmacy::latest()->get();
             return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
@@ -49,7 +99,7 @@ class PharmacyController extends BaseController
      */
     public function create()
     {
-        //
+        return view('dashboard.createpharmacy');
     }
 
     /**
@@ -74,8 +124,12 @@ class PharmacyController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
 
-
         $input = $request->all();
+
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
         $image = $request->image;
         $saveImage = time() . $image->getClientOriginalName();
         $image->move('uploads/pharmacies', $saveImage);
@@ -98,6 +152,7 @@ class PharmacyController extends BaseController
         $data['Token']=$pharmacy['remember_token'];
         $data['name'] = $pharmacy->name;
         $data['email'] = $pharmacy->email;
+        return redirect()->route('pharmacytable');
         return $this->sendResponse($data, 'Pharmacy registed successfully');
     }
 
@@ -125,7 +180,7 @@ class PharmacyController extends BaseController
      */
     public function edit(Pharmacy $pharmacy)
     {
-        //
+        return view('dashboard.editpharmacy')->with('pharmacy',$pharmacy);
     }
 
     /**
@@ -135,9 +190,36 @@ class PharmacyController extends BaseController
      * @param  \App\Models\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pharmacy $pharmacy)
+    public function update(Request $request,  $id)
     {
-        //
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $validator = Validator::make($request->all(), [
+            'name' => 'min:3|nullable',
+            'password' => 'min:8|nullable',
+            'phone'=> 'min:13|nullable',
+            'location'=> 'nullable',
+            'image' => 'mimes:jpeg,jpg,png | nullable',
+        ]);
+
+
+        $input = $request->all();
+
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
+
+        $pharmacy->name = $input['name'];
+        $pharmacy->password = $input['password'] = Hash::make($request['password']);
+        $pharmacy->phone = $input['phone'];
+        $pharmacy->location = $input['location'];
+        $pharmacy->image = $input['image'];
+        $pharmacy->update();
+
+        return redirect()->route('pharmacytable');
     }
 
     /**
@@ -153,6 +235,7 @@ class PharmacyController extends BaseController
         }
         $pharmacy = Pharmacy::find($id);
         $pharmacy->delete();
+        return redirect()->route('pharmacytable');
         return $this->sendResponse('', 'Pharmacy deleted successfully');
     }
 }

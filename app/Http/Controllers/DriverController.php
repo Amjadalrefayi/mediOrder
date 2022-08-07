@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Enums\orderStatue;
 use App\Models\Driver;
 use App\Http\Resources\SimpleDriverResources;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @group Driver
@@ -29,11 +31,34 @@ class DriverController extends BaseController
      */
     public function index()
     {
+
+
+        $user = User::find(Auth::id())->first();
+        if($user->type === 'App\Models\Admin')
+     {
+        $drivers = Driver::latest()->paginate(5);
+
+
+         return view('dashboard.drivertable')->with('drivers',$drivers);
+
+     }
         $drivers = Driver::latest()->paginate(5);
         return $this->sendResponse(SimpleDriverResources::collection($drivers),[
             'nextPageUrl' =>  $drivers->nextPageUrl() ,
             'previousPageUrl' => $drivers->previousPageUrl()
         ]);
+    }
+
+
+
+  /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('dashboard.createdriver');
     }
 
 
@@ -60,6 +85,11 @@ class DriverController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
         $input = $request->all();
+
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
         $driver = Driver::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
@@ -78,6 +108,7 @@ class DriverController extends BaseController
         $data['Token']=$driver['remember_token'];
         $data['name'] = $driver->name;
         $data['email'] = $driver->email;
+        return redirect()->route('drivertable');
         return $this->sendResponse($data, 'Driver registed successfully');
     }
 
@@ -146,7 +177,9 @@ class DriverController extends BaseController
      */
     public function edit(Driver $driver)
     {
-        //
+
+        return view('dashboard.editdriver')->with('driver',$driver);
+
     }
 
     /**
@@ -156,7 +189,7 @@ class DriverController extends BaseController
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function update($id , Request  $request)
+    public function update(Request  $request,$id )
     {
         if(! Driver::find($id)) {
             return $this->sendError('' , 'Not Found');
@@ -175,15 +208,24 @@ class DriverController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
 
-        $driver->name = $request->name;
-        $driver->email = $request->email;
-        $driver->password = $request['password'] = Hash::make($request['password']);
-        $driver->phone = $request->phone;
-        $driver->gender = $request->gender;
-        $driver->location = $request->location;
-        $driver->image = $request->image;
-        $driver->state = $request->state;
+        $input = $request->all();
+
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
+
+        $driver->name = $input['name'];
+        $driver->password = $input['password'] = Hash::make($request['password']);
+        $driver->phone = $input['phone'];
+        $driver->location = $input['location'];
+        $driver->image = $input['image'];
+        $driver->gender = $input['gender'];
+
         $driver->update();
+
+        return redirect()->route('drivertable');
+
         return $this->sendResponse('', 'Driver updated successfully');
 
 
@@ -202,6 +244,7 @@ class DriverController extends BaseController
         }
         $driver = Driver::find($id);
         $driver->delete();
+        return redirect()->route('drivertable');
         return $this->sendResponse('', 'Driver deleted successfully');
 
     }
