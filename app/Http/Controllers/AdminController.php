@@ -60,6 +60,9 @@ class AdminController extends BaseController
 
 
         $input = $request->all();
+
+        $input['password'] = Hash::make($input['password']);
+
         $admin = Admin::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
