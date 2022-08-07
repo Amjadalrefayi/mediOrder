@@ -67,6 +67,7 @@ class SupporterController extends BaseController
         {
             $input['image'] = null;
         }
+        $input['password'] = Hash::make($input['password']);
         $supporter = Supporter::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
@@ -86,7 +87,6 @@ class SupporterController extends BaseController
         $data['name'] = $supporter->name;
         $data['email'] = $supporter->email;
         return redirect()->route('supportertable');
-        return $this->sendResponse($data, 'Supporter registed successfully');
     }
 
     /**
