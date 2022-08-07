@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -244,6 +242,8 @@
         }
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
+
+
         }
         .modal .modal-content {
             border-radius: 3px;
@@ -255,14 +255,16 @@
         }
         .modal .modal-title {
             display: inline-block;
+
         }
         .modal .form-control {
             border-radius: 2px;
             box-shadow: none;
             border-color: #dddddd;
+
         }
         .modal textarea.form-control {
-            resize: vertical;
+             padding: 20px 30px;
         }
         .modal .btn {
             border-radius: 2px;
@@ -296,7 +298,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li >
                     <a href={{route('customertable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Customer table</p>
@@ -314,7 +316,7 @@
                         <p>Pharmacy table</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href={{route('drivertable')}}>
                         <i class="pe-7s-user"></i>
                         <p>Drivers table</p>
@@ -405,118 +407,43 @@
             </div>
         </nav>
 
-
         <div class="container-xl">
-            <div class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>Manage <b>Customer</b></h2>
-                            </div>
 
-                        </div>
-                    </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
+            <form  method="POST" action="{{route('updatesupporter',$supporter->id)}}">
+                @csrf
+                @method('PUT')
+				<div class="modal-header">
+					<h4 class="modal-title">edit supporter</h4>
 
-                                <th>name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+				</div>
+				<div class="modal-body" width="50%">
+					<div class="form-group">
+						<label>Name</label>
+						<input type="text" class="form-control" name="name" required >
+					</div>
 
-            @foreach ($customers as $customer)
-                            <tr>
-
-                                <td>{{$customer->name}}</td>
-                                <td>{{$customer->email}}</td>
-                                <td>{{$customer->location}}</td>
-                                <td>{{$customer->phone}}</td>
-                                <td style="display:flex">
-
-                                    {{-- <form action="{{ route('deletecustomer',$customer->id)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form> --}}
-                                    {{-- <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
-                                  <form action={{ route('deletecustomer',$customer->id)}} method="POST">
-       @csrf
-       @method('DELETE')
-       <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-       </form>
-                                </td>
-                            </tr>
-
-            @endforeach
-
-
-                        </tbody>
-
-
-
-
-                    </table>
-                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$customers->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($customers->hasPages())
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                @if ($customers->onFirstPage())
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"
-                                       tabindex="-1">Previous</a>
-                                </li>
-                                @else
-                                <li class="page-item"><a class="page-link"
-                                    href="{{ $customers->previousPageUrl() }}">
-                                          Previous</a>
-                                  </li>
-                                @endif
-
-                                @foreach ($customers as $element)
-                                @if (is_string($element))
-                                <li class="page-item disabled">{{ $element }}</li>
-                                @endif
-
-                                @if (is_array($element))
-                                @foreach ($customers as $page => $url)
-                                @if ($page == $paginator->currentPage())
-                                <li class="page-item active">
-                                    <a class="page-link">{{ $page }}</a>
-                                </li>
-                                @else
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="{{ $url }}">{{ $page }}</a>
-                                </li>
-                                @endif
-                                @endforeach
-                                @endif
-                                @endforeach
-
-                                @if ($customers->hasMorePages())
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="{{ $customers->nextPageUrl() }}"
-                                       rel="next">Next</a>
-                                </li>
-                                @else
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                                @endif
-                            </ul>
-                          </nav>
-                            @endif
-                    </div>
-                </div>
-            </div>
+                    <div class="form-group">
+						<label>password</label>
+						<input type="text" class="form-control" name="password" required >
+					</div>
+                    <div class="form-group">
+						<label>gender</label>
+						<input type="text" class="form-control" name="gender" required >
+					</div>
+					<div class="form-group">
+						<label>Address</label>
+						<textarea class="form-control" name="location" required></textarea>
+					</div>
+					<div class="form-group">
+						<label>Phone</label>
+						<input type="text" class="form-control" name="phone" required>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-success" value="save">
+				</div>
+			</form>
         </div>
 
 

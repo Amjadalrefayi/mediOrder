@@ -296,7 +296,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li >
                     <a href={{route('customertable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Customer table</p>
@@ -314,7 +314,7 @@
                         <p>Pharmacy table</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href={{route('drivertable')}}>
                         <i class="pe-7s-user"></i>
                         <p>Drivers table</p>
@@ -412,9 +412,12 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Manage <b>Customer</b></h2>
+                                <h2>Manage <b>Supporter</b></h2>
                             </div>
+                            <div class="col-sm-6">
+                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
 
+                            </div>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -425,31 +428,35 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Phone</th>
+                                <th>State</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
 
-            @foreach ($customers as $customer)
+                     @foreach ($supporters as $supporter)
                             <tr>
 
-                                <td>{{$customer->name}}</td>
-                                <td>{{$customer->email}}</td>
-                                <td>{{$customer->location}}</td>
-                                <td>{{$customer->phone}}</td>
+                                <td>{{$supporter->name}}</td>
+                                <td>{{$supporter->email}}</td>
+                                <td>{{$supporter->location}}</td>
+                                <td>{{$supporter->phone}}</td>
+                                <td>{{$supporter->state}}</td>
                                 <td style="display:flex">
 
-                                    {{-- <form action="{{ route('deletecustomer',$customer->id)}}" method="get">
+                                     <form action="{{route('editsupporterpage',$supporter)}}" method="get">
                                         @csrf
 
                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form> --}}
-                                    {{-- <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
-                                  <form action={{ route('deletecustomer',$customer->id)}} method="POST">
-       @csrf
-       @method('DELETE')
-       <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-       </form>
+                                        </form>
+
+                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
+
+                                    <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
+                                    @csrf
+                                     @method('DELETE')
+                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
+                                    </form>
                                 </td>
                             </tr>
 
@@ -463,30 +470,30 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$customers->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($customers->hasPages())
+                        <div class="hint-text">Showing <b>{{$supporters->count()}}</b> out of <b>5</b> entries</div>
+                        @if ($supporters->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                @if ($customers->onFirstPage())
+                                @if ($supporters->onFirstPage())
                                 <li class="page-item disabled">
                                     <a class="page-link" href="#"
                                        tabindex="-1">Previous</a>
                                 </li>
                                 @else
                                 <li class="page-item"><a class="page-link"
-                                    href="{{ $customers->previousPageUrl() }}">
+                                    href="{{ $supporters->previousPageUrl() }}">
                                           Previous</a>
                                   </li>
                                 @endif
 
-                                @foreach ($customers as $element)
+                                @foreach ($supporters as $element)
                                 @if (is_string($element))
                                 <li class="page-item disabled">{{ $element }}</li>
                                 @endif
 
                                 @if (is_array($element))
-                                @foreach ($customers as $page => $url)
-                                @if ($page == $paginator->currentPage())
+                                @foreach ($supporters as $page => $url)
+                                @if ($page == $supporters->currentPage())
                                 <li class="page-item active">
                                     <a class="page-link">{{ $page }}</a>
                                 </li>
@@ -500,10 +507,10 @@
                                 @endif
                                 @endforeach
 
-                                @if ($customers->hasMorePages())
+                                @if ($supporters->hasMorePages())
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="{{ $customers->nextPageUrl() }}"
+                                       href="{{ $supporters->nextPageUrl() }}"
                                        rel="next">Next</a>
                                 </li>
                                 @else

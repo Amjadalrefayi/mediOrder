@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supporter;
+use App\Models\User;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use App\Http\Resources\SimpleSupporterResources;
 use App\Http\Resources\SupporterResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class SupporterController extends BaseController
@@ -21,6 +24,15 @@ class SupporterController extends BaseController
      */
     public function index()
     {
+        $user = User::find(Auth::id())->first();
+        if($user->type === 'App\Models\Admin')
+     {
+        $supporters = Supporter::latest()->paginate(5);
+
+
+         return view('dashboard.supportertable')->with('supporters',$supporters);
+
+     }
         $supporters = Supporter::latest()->paginate(5);
         return $this->sendResponse(SimpleSupporterResources::collection($supporters),[
             'nextPageUrl' =>  $supporters->nextPageUrl() ,
@@ -35,7 +47,7 @@ class SupporterController extends BaseController
      */
     public function create()
     {
-        //
+        return view('dashboard.createsupporter');
     }
 
     /**
@@ -63,6 +75,10 @@ class SupporterController extends BaseController
 
 
         $input = $request->all();
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
         $supporter = Supporter::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
@@ -81,6 +97,7 @@ class SupporterController extends BaseController
         $data['Token']=$supporter['remember_token'];
         $data['name'] = $supporter->name;
         $data['email'] = $supporter->email;
+        return redirect()->route('supportertable');
         return $this->sendResponse($data, 'Supporter registed successfully');
     }
 
@@ -107,7 +124,7 @@ class SupporterController extends BaseController
      */
     public function edit(Supporter $supporter)
     {
-        //
+        return view('dashboard.editsupporter')->with('supporter',$supporter);
     }
 
     /**
@@ -117,7 +134,7 @@ class SupporterController extends BaseController
      * @param  \App\Models\Supporter  $supporter
      * @return \Illuminate\Http\Response
      */
-    public function update($id , Request  $request)
+    public function update(Request  $request , $id )
     {
         if(! Supporter::find($id)) {
             return $this->sendError('' , 'Not Found');
@@ -135,6 +152,12 @@ class SupporterController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
+        $input = $request->all();
+
+        if(!array_key_exists('image' , $input))
+        {
+            $input['image'] = null;
+        }
 
         $supporter->name = $request->name;
         $supporter->email = $request->email;
@@ -144,6 +167,7 @@ class SupporterController extends BaseController
         $supporter->location = $request->location;
         $supporter->image = $request->image;
         $supporter->update();
+        return redirect()->route('supportertable');
         return $this->sendResponse('', 'Supporter updated successfully');
 
 
@@ -162,6 +186,7 @@ class SupporterController extends BaseController
         }
         $supporter = Supporter::find($id);
         $supporter->delete();
+        return redirect()->route('supportertable');
         return $this->sendResponse('', 'Supporter deleted successfully');
 
     }

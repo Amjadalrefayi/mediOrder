@@ -303,7 +303,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href={{route('supportertable')}}>
                         <i class="pe-7s-user"></i>
                         <p>Supporter table</p>
                     </a>
