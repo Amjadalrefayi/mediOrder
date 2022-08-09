@@ -52,9 +52,9 @@ Route::get('loginHome', function(){
 
    Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
    Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
-   //Route::get('/supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
+   Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
    Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
-   Route::put('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
+   Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
    Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {

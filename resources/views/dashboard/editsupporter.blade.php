@@ -423,6 +423,11 @@
 					</div>
 
                     <div class="form-group">
+						<label>email</label>
+						<input type="text" class="form-control" name="email" required >
+					</div>
+
+                    <div class="form-group">
 						<label>password</label>
 						<input type="text" class="form-control" name="password" required >
 					</div>

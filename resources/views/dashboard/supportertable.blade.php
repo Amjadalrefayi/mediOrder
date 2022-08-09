@@ -433,10 +433,8 @@
                             </tr>
                         </thead>
                         <tbody>
-
                      @foreach ($supporters as $supporter)
                             <tr>
-
                                 <td>{{$supporter->name}}</td>
                                 <td>{{$supporter->email}}</td>
                                 <td>{{$supporter->location}}</td>
@@ -450,8 +448,6 @@
                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
                                         </form>
 
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
-
                                     <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
                                     @csrf
                                      @method('DELETE')
@@ -459,15 +455,8 @@
                                     </form>
                                 </td>
                             </tr>
-
             @endforeach
-
-
                         </tbody>
-
-
-
-
                     </table>
                      <div class="clearfix">
                         <div class="hint-text">Showing <b>{{$supporters->count()}}</b> out of <b>5</b> entries</div>
