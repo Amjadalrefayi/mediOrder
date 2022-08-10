@@ -38,8 +38,6 @@ class PharmacyController extends BaseController
 
     public function indexForAdmin()
     {
-        $user = Auth::user();
-        if($user->type == 'App\Model\Admin')
         $pharmacies = Pharmacy::latest()->paginate(5);
         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
     }
