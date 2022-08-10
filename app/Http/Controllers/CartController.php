@@ -18,12 +18,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::paginate(5);
-        return $this->sendResponse(CartResources::collection($carts), [
-            'current_page' => $products->currentPage(),
-            'nextPageUrl' => $products->nextPageUrl(),
-            'previousPageUrl' => $products->previousPageUrl(),
-        ]);
+
     }
 
     /**

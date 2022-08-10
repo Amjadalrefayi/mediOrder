@@ -30,56 +30,6 @@ class AuthController extends BaseController
     }
 
     /**
-     * User Rigester
-     *
-     */
-
-    public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'phone'=> 'required',
-            'gender'=>'in:male,female',
-            'location'=> 'required',
-            'image',
-            'state',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
-        }
-
-        if(!$request->image == null){
-            $image = $request->image;
-            $saveImage = time() . $image;
-            $image->move('uploads/profile', $saveImage);
-
-        }
-
-
-        $input = $request->all();
-        $input['image'] = 'uploads/profile' . $saveImage;
-        $input['password'] = Hash::make($input['password']);
-        $user = Customer::create([
-            'name' =>  $input['name'],
-            'email' =>  $input['email'],
-            'password' =>  $input['password'],
-            'phone'=> $input['phone'],
-            'gender'=>$input['gender'],
-            'location'=> $input['location'],
-            'image' => $input['image'],
-            'state' => $input['state'],
-        ]);
-
-        $data['token'] = $this->token($user);
-        $data['name'] = $user->name;
-        $data['email'] = $user->email;
-        return $this->sendResponse($data, 'User registed successfully');
-    }
-
-
-    /**
      * User login
      *
      */
@@ -92,13 +42,13 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Please validate error', $validator->errors());
+            return $this->sendError('', $validator->errors());
         }
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return $this->sendError('Unauthorized', 401);
+            return $this->sendError('', 'Unauthorized');
         }
-        $user = User::where('email' , $request->email)->first();
+        $user = User::where('email',$request->email)->first();
         $data['id'] = $user->id;
         $data['token'] = $this->token($user);
         $data['name'] = $user->name;
@@ -108,7 +58,7 @@ class AuthController extends BaseController
            return redirect()->route('customertable');
         //   return $this->sendResponse($data,' Admin logedIn successfully');
 
-           if($user->type === 'App\Models\Customer')
+           if($user->type === 'App\Models\Customer' or $user->type === 'App\Models\Driver')
             return $this->sendResponse($data,' User logedIn successfully');
 
     }

@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController as BaseController ;
 use App\Models\Complaint;
 use App\Models\Customer;
-
 use App\Http\Resources\ComplaintResources;
 
+/**
+ * @group Complaint
+ *
+ * APIs to manage the Complaint
+ */
 class ComplaintController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Complaint.
      *
      * @return \Illuminate\Http\Response
      */

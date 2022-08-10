@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\OrderController;
@@ -35,7 +35,7 @@ Route::get('loginHome', function(){
    Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
 
-   Route::get('pharmacy/all', [PharmacyController::class, 'index'])->name('pharmacytable');
+   Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
    Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
    Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
    Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
@@ -58,6 +58,8 @@ Route::get('loginHome', function(){
    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
    Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
+   });
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
 
 
 });
@@ -68,6 +70,10 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmac
 
 });
 
+
+
+// Route::post('/cart', [OrderController::class, 'customerPhOrderStore']);
+// Route::get('/pro', [ProductController::class, 'index']);
 
 //------Rigeter / Login------//
 
@@ -95,7 +101,11 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], functio
 
     Route::put('/update/{id}', [CustomerController::class, 'update']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
-
+    Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
+    Route::post('order/default', [OrderController::class, 'customerPhOrderStore']);
+    Route::post('order/prescription', [OrderController::class, 'rashetaCustomerOrder']);
+    Route::get('order/live', [OrderController::class, 'showLiveCustomerOrders']);
+    Route::get('order/history', [OrderController::class, 'showHistoryCustomerOrders']);
 });
 
 // //------pharmacy------//
@@ -134,16 +144,18 @@ Route::group(['prefix' => 'order', 'middleware' => ['auth:sanctum']], function (
 
 
 });
+
 // //------Driver------//
 
 Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function () {
-
     Route::post('/store', [DriverController::class, 'store']);
     Route::get('/index', [DriverController::class, 'index']);
     Route::put('/update/{id}', [DriverController::class, 'update']);
     Route::get('/show/{id}', [DriverController::class, 'show']);
     Route::delete('/delete/{id}', [DriverController::class, 'destroy']);
-
+    Route::get('order', [OrderController::class, 'showDriverOrders']);
+    Route::get('order/live', [OrderController::class, 'showLiveDriverOrders']);
+    Route::get('order/history', [OrderController::class, 'showHistoryDriverOrders']);
 });
 
 

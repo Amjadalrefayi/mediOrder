@@ -9,6 +9,7 @@ use App\Http\Resources\PharmacyResources;
 use App\Http\Resources\OrderResources;
 use App\Http\Resources\SimplePharmacyResources;
 use App\Http\Controllers\BaseController as BaseController;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -31,24 +32,14 @@ class PharmacyController extends BaseController
      */
     public function index()
     {
-        $user = User::find(Auth::id())->first();
-        if($user->type === 'App\Models\Admin')
-     {
+        $pharmacies = Pharmacy::latest()->get();
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
+    }
+
+    public function indexForAdmin()
+    {
         $pharmacies = Pharmacy::latest()->paginate(5);
-
-
-         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
-
-     }
-
-        $pharmacies = Pharmacy::latest()->paginate(5);
-
-
-        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
-            'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
-            'previousPageUrl' => $pharmacies->previousPageUrl()
-        ]);
-
+        return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
     }
 
     public function showPharmacesPendingOrders($id)
@@ -77,6 +68,18 @@ class PharmacyController extends BaseController
             'nextPageUrl' => $orders->nextPageUrl(),
             'previousPageUrl' => $orders->previousPageUrl(),
         ]);
+        if(Customer::find(Auth::id())) {
+            $pharmacies = Pharmacy::latest()->get();
+            return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
+        }
+        else {
+            $pharmacies = Pharmacy::latest()->paginate(5);
+            return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
+                'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
+                'previousPageUrl' => $pharmacies->previousPageUrl()
+            ]);
+        }
+
     }
 
     /**
@@ -104,13 +107,12 @@ class PharmacyController extends BaseController
             'password' => 'required|min:8',
             'phone'=> 'required|min:13',
             'location'=> 'required',
-            'image' => 'mimes:jpeg,jpg,png | nullable',
+            'image'=>'required|image',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
-
 
         $input = $request->all();
 
@@ -118,6 +120,10 @@ class PharmacyController extends BaseController
         {
             $input['image'] = null;
         }
+        $image = $request->image;
+        $saveImage = time() . $image->getClientOriginalName();
+        $image->move('uploads/pharmacies', $saveImage);
+        $input['image'] = 'uploads/pharmacies/' . $saveImage;
 
         $pharmacy = Pharmacy::create([
             'name' =>  $input['name'],

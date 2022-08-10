@@ -8,7 +8,7 @@ use App\Http\Resources\AdminResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     protected AuthController $AuthCon;
     /**
@@ -60,6 +60,9 @@ class AdminController extends Controller
 
 
         $input = $request->all();
+
+        $input['password'] = Hash::make($input['password']);
+
         $admin = Admin::create([
             'name' =>  $input['name'],
             'email' =>  $input['email'],
@@ -72,7 +75,7 @@ class AdminController extends Controller
         ]);
 
         $admin->remember_token = $this->AuthCon->token($admin);
-        $admin->update();
+        $admin->save();
 
         $data['id']=$admin['id'];
         $data['Token']=$admin['remember_token'];

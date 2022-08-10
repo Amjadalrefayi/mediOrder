@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
-    protected $fillable = ['order_id' , 'product_id'];
+    protected $fillable = ['order_id' , 'product_id', 'count'];
 
     /**
      * Get the order that owns the Cart
