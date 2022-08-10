@@ -32,6 +32,7 @@ class PharmacyController extends BaseController
      */
     public function index()
     {
+        Auth::id();
         $pharmacies = Pharmacy::latest()->get();
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
     }
