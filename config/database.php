@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('mysql://avnadmin:AVNS_62QFaPopU28gzSIpqty@mysql-b3124c5-iteamjad-e91a.aivencloud.com:15389/defaultdb?ssl-mode=REQUIRED'),
-            'host' => env('DB_HOST', 'mysql-b3124c5-iteamjad-e91a.aivencloud.com'),
-            'port' => env('DB_PORT', '15389'),
+            'url' => env('mysql://avnadmin:AVNS_uNyT92_NfWJCdTEjtRK@mysql-2e327df5-amjadalre11111-5965.aivencloud.com:26895/defaultdb?ssl-mode=REQUIRED'),
+            'host' => env('DB_HOST', 'mysql-2e327df5-amjadalre11111-5965.aivencloud.com'),
+            'port' => env('DB_PORT', '26895'),
             'database' => env('DB_DATABASE', 'defaultdb'),
             'username' => env('DB_USERNAME', 'avnadmin'),
-            'password' => env('DB_PASSWORD', 'AVNS_62QFaPopU28gzSIpqty'),
+            'password' => env('DB_PASSWORD', 'AVNS_uNyT92_NfWJCdTEjtRK'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
