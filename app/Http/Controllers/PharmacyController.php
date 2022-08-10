@@ -32,14 +32,14 @@ class PharmacyController extends BaseController
      */
     public function index()
     {
-        $user = Auth::user();
-        if($user->type == 'App\Model\Admin')
-            $pharmacies = Pharmacy::latest()->get();
+        $pharmacies = Pharmacy::latest()->get();
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
     }
 
     public function indexForAdmin()
     {
+        $user = Auth::user();
+        if($user->type == 'App\Model\Admin')
         $pharmacies = Pharmacy::latest()->paginate(5);
         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
     }
