@@ -150,6 +150,73 @@ class OrderController extends BaseController
         return $this->sendResponse(new OrderResources($order), 'Specific order');
     }
 
+
+    public function showPharmacyOrdersView(Request $request)
+    {
+        $pharmacy = Auth::id();
+        if(! Pharmacy::find($pharmacy)){
+            return $this->sendError('','Not Found');
+        }
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('type',orderType::DEFAULT)->latest()->paginate(5);
+        return view('pharmacydashboard.ordertable')->with('orders',$orders);
+    }
+
+
+    public function showPharmacyRashetaOrdersView(Request $request)
+    {
+        $pharmacy = Auth::id();
+        if(! Pharmacy::find($pharmacy)){
+            return $this->sendError('','Not Found');
+        }
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('type',orderType::RASHETA)->latest()->paginate(5);
+        return view('pharmacydashboard.rashetaordertable')->with('orders',$orders);
+    }
+
+
+    public function showProductsOrder(Request $request)
+    {
+        $order = Auth::id();
+        if(! Order::find($order)){
+            return $this->sendError('','Not Found');
+        }
+        $carts = Cart::where('order_id',$order)->where('type',orderType::DEFAULT)->latest()->paginate(5);
+        return view('pharmacydashboard.productorder')->with('carts',$carts);
+    }
+
+
+    public function productrashetaorder(Request $request)
+    {
+        $order = Auth::id();
+        if(! Order::find($order)){
+            return $this->sendError('','Not Found');
+        }
+        $carts = Cart::where('order_id',$order)->where('type',orderType::RASHETA)->latest()->paginate(5);
+        return view('pharmacydashboard.productrashetaorder')->with('carts',$carts);
+    }
+
+
+    public function acceptedOrdersTables(Request $request)
+    {
+        $pharmacy = Auth::id();
+        if(! Pharmacy::find($pharmacy)){
+            return $this->sendError('','Not Found');
+        }
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::ACCEPTED)->latest()->paginate(5);
+        return view('pharmacydashboard.acceptedtable')->with('orders',$orders);
+    }
+
+
+    public function rejectedOrdersTables(Request $request)
+    {
+        $pharmacy = Auth::id();
+        if(! Pharmacy::find($pharmacy)){
+            return $this->sendError('','Not Found');
+        }
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::REJECTED)->latest()->paginate(5);
+        return view('pharmacydashboard.rejectedtable')->with('orders',$orders);
+    }
+
+
     public function update(Request $request, Order $order)
     {
         //

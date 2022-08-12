@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8" />
 
-	 <link rel="icon" type="image/png" href= {{ asset('https://medi-order.herokuapp.com/dashboard/img/favicon.ico') }}>
+	 <link rel="icon" type="image/png" href= {{ asset('dashboard/img/favicon.ico') }}>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Admin DashBoard</title>
@@ -15,23 +15,23 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href= {{ asset('https://medi-order.herokuapp.com/dashboard/css/bootstrap.min.css') }} rel="stylesheet" />
+    <link href= {{ asset('dashboard/css/bootstrap.min.css') }} rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href={{ asset('https://medi-order.herokuapp.com/dashboard/css/animate.min.css') }} rel="stylesheet"/>
+    <link href={{ asset('dashboard/css/animate.min.css') }} rel="stylesheet"/>
 
     <!--  Light Bootstrap Table core CSS    -->
-    <link href={{ asset('https://medi-order.herokuapp.com/dashboard/css/light-bootstrap-dashboard.css?v=1.4.0') }} rel="stylesheet"/>
+    <link href={{ asset('dashboard/css/light-bootstrap-dashboard.css?v=1.4.0') }} rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href={{ asset('https://medi-order.herokuapp.com/dashboard/css/demo.css') }} rel="stylesheet" />
+    <link href={{ asset('dashboard/css/demo.css') }} rel="stylesheet" />
 
     <link rel="stylesheet" href={{ asset('https://fonts.googleapis.com/icon?family=Material+Icons') }}>
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href={{ asset('https://medi-order.herokuapp.com/dashboard/css/pe-icon-7-stroke.css') }} rel="stylesheet" />
+    <link href={{ asset('dashboard/css/pe-icon-7-stroke.css') }} rel="stylesheet" />
 
 
      {{-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -458,23 +458,23 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="https://medi-order.herokuapp.com/assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-	<script src="https://medi-order.herokuapp.com/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Charts Plugin -->
-	<script src="https://medi-order.herokuapp.com/assets/js/chartist.min.js"></script>
+	<script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="https://medi-order.herokuapp.com/assets/js/bootstrap-notify.js"></script>
+    <script src="assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="https://medi-order.herokuapp.com/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="https://medi-order.herokuapp.com/assets/js/demo.js"></script>
+	<script src="assets/js/demo.js"></script>
 
 	<script type="text/javascript">
     	$(document).ready(function(){
