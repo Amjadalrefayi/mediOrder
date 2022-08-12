@@ -66,18 +66,28 @@ Route::get('loginHome', function(){
    //                           -------pharmacy dashboard-------
 
    Route::get('/product/all', [ProductController::class, 'showPharmacyProductsView'])->name('producttable');
-   Route::get('/order/all', [OrderController::class, 'showPharmacyOrdersView'])->name('ordertable');
+   Route::get('/defultorder/all', [OrderController::class, 'showPharmacyOrdersView'])->name('ordertable');
    Route::get('/acceptedordertable/all', [OrderController::class, 'acceptedOrdersTables'])->name('acceptedordertable');
    Route::get('/rejectedordertable/all', [OrderController::class, 'rejectedOrdersTables'])->name('rejectedordertable');
    Route::get('/rashetaorder/all', [OrderController::class, 'showPharmacyRashetaOrdersView'])->name('rashetaordertable');
-   Route::get('/productorder/all', [OrderController::class, 'showProductsOrder'])->name('productorder');
-   Route::get('/productrashetaorder/all', [OrderController::class, 'productrashetaorder'])->name('productrashetaorder');
+   Route::get('/productorder/all/{id}', [OrderController::class, 'showProductsOrder'])->name('productorder');
    Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('deleteproduct');
    Route::get('/product/create', [ProductController::class, 'create'])->name('createproduct');
    Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
    Route::get('/editproduct/{product}', [ProductController::class, 'edit'])->name('editproductpage');
    Route::put('/updateproduct/{id}', [ProductController::class, 'update'])->name('updateproduct');
 
+
+
+   //                           -------support dashboard-------
+   Route::get('/complaint/all', [ComplaintController::class, 'index'])->name('complaintstable');
+   Route::get('/order/all', [OrderController::class, 'index'])->name('allordertable');
+   Route::get('/all/customers', [CustomerController::class, 'allcustomers'])->name('allcustomers');
+   Route::get('/all/drivers', [DriverController::class, 'alldrivers'])->name('alldrivers');
+   Route::get('/all/pharmacys', [PharmacyController::class, 'allpharmacies'])->name('allpharmacies');
+   Route::delete('/destroycustomer/{id}', [CustomerController::class, 'destroycustomer'])->name('destroycustomer');
+   Route::delete('/destroydriver/{id}', [DriverController::class, 'destroydriver'])->name('destroydriver');
+   Route::delete('/destroypharmacy/{id}', [PharmacyController::class, 'destroypharmacy'])->name('destroypharmacy');
 
 //------Rigeter / Login------//
 

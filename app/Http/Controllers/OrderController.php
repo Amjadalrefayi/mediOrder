@@ -28,11 +28,12 @@ class OrderController extends BaseController
     public function index()
     {
         $orders = Order::paginate(5);
-        return $this->sendResponse(OrderResources::collection($orders), [
-            'current_page' => $orders->currentPage(),
-            'nextPageUrl' => $orders->nextPageUrl(),
-            'previousPageUrl' => $orders->previousPageUrl(),
-        ]);
+        return view('supportdashboard.allorderstable')->with('orders',$orders);
+        // return $this->sendResponse(OrderResources::collection($orders), [
+        //     'current_page' => $orders->currentPage(),
+        //     'nextPageUrl' => $orders->nextPageUrl(),
+        //     'previousPageUrl' => $orders->previousPageUrl(),
+        // ]);
     }
 
     public function showLiveCustomerOrders()
@@ -173,26 +174,16 @@ class OrderController extends BaseController
     }
 
 
-    public function showProductsOrder(Request $request)
-    {
-        $order = Auth::id();
-        if(! Order::find($order)){
-            return $this->sendError('','Not Found');
-        }
-        $carts = Cart::where('order_id',$order)->where('type',orderType::DEFAULT)->latest()->paginate(5);
-        return view('pharmacydashboard.productorder')->with('carts',$carts);
-    }
-
-
-    public function productrashetaorder(Request $request)
-    {
-        $order = Auth::id();
-        if(! Order::find($order)){
-            return $this->sendError('','Not Found');
-        }
-        $carts = Cart::where('order_id',$order)->where('type',orderType::RASHETA)->latest()->paginate(5);
-        return view('pharmacydashboard.productrashetaorder')->with('carts',$carts);
-    }
+    // public function showProductsOrder($id)
+    // {
+    //     if(! Order::find($id)){
+    //         return $this->sendError('','Not Found');
+    //     }
+    //      $order = Order::find($id);
+    //      $carts = Cart::where('order_id', $order)->latest()->paginate(5);
+    //     // $orders= new OrderResources($order);
+    //     return view('pharmacydashboard.productorder')->with('carts',$carts);
+    // }
 
 
     public function acceptedOrdersTables(Request $request)

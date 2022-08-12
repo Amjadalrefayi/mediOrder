@@ -34,7 +34,11 @@ class DriverController extends BaseController
          return view('dashboard.drivertable')->with('drivers',$drivers);
     }
 
+    public function alldrivers(){
 
+        $drivers = Driver::latest()->paginate(5);
+        return view('supportdashboard.alldriverstable')->with('drivers',$drivers);
+    }
 
   /**
      * Show the form for creating a new resource.
@@ -231,6 +235,17 @@ class DriverController extends BaseController
         $driver->delete();
         return redirect()->route('drivertable');
         return $this->sendResponse('', 'Driver deleted successfully');
+
+    }
+
+    public function destroydriver($id)
+    {
+        if(! Driver::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $driver = Driver::find($id);
+        $driver->delete();
+        return redirect()->route('alldrivers');
 
     }
 }
