@@ -58,6 +58,15 @@ class ProductController extends BaseController
         ]);
 
     }
+    public function showPharmacyProductsView(Request $request)
+    {
+        $pharmacy = Auth::id();
+        if(! Pharmacy::find($pharmacy)){
+            return $this->sendError('','Not Found');
+        }
+        $products = Product::where('pharmacy_id',$pharmacy)->paginate(5);
+        return view('pharmacydashboard.producttable')->with('products',$products);
+    }
 
     /**
      * Show the form for creating a new resource
@@ -66,7 +75,7 @@ class ProductController extends BaseController
      */
     public function create()
     {
-
+        return view('Pharmacydashboard.createproduct');
     }
 
     /**
@@ -99,7 +108,7 @@ class ProductController extends BaseController
         $input['pharmacy_id'] = Auth::id();
         $input['available'] = true;
         $product = Product::create($input);
-
+        return redirect()->route('producttable');
         return $this->sendResponse(new ProductResources($product), 'Product Store successfully');
     }
 
@@ -115,7 +124,7 @@ class ProductController extends BaseController
 
     public function edit(Product $product)
     {
-        //
+        return view('pharmacydashboard.editproduct')->with('product',$product);
     }
 
     public function update(Request $request,$id)
@@ -147,7 +156,7 @@ class ProductController extends BaseController
         $product->company = $request->company;
         $product->type = $request->type;
         $product->update();
-
+        return redirect()->route('producttable');
         return $this->sendResponse(new ProductResources($product), 'Product Updated successfully');
     }
 
@@ -162,7 +171,7 @@ class ProductController extends BaseController
             return $this->sendError('Not Valid to delete', 'This product for another user');
         }
         $product->delete();
-
+        return redirect()->route('producttable');
         return $this->sendResponse('', 'Product Deleted successfully');
     }
 }

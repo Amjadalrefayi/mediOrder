@@ -30,7 +30,7 @@ Route::get('loginHome', function(){
   return view('auth.login');
  })->name('loginHome');
 
-
+//                           -------admain dashboard-------
 
    Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
@@ -52,28 +52,32 @@ Route::get('loginHome', function(){
 
    Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
    Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
-   Route::get('/supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
+   Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
    Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
-   Route::put('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
+   Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
-   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
-   });
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {
-
-
-});
-
-
-Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {
-
-
-});
+   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
+   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
+   Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {});
 
 
 
-// Route::post('/cart', [OrderController::class, 'customerPhOrderStore']);
-// Route::get('/pro', [ProductController::class, 'index']);
+   //                           -------pharmacy dashboard-------
+
+   Route::get('/product/all', [ProductController::class, 'showPharmacyProductsView'])->name('producttable');
+   Route::get('/order/all', [OrderController::class, 'showPharmacyOrdersView'])->name('ordertable');
+   Route::get('/acceptedordertable/all', [OrderController::class, 'acceptedOrdersTables'])->name('acceptedordertable');
+   Route::get('/rejectedordertable/all', [OrderController::class, 'rejectedOrdersTables'])->name('rejectedordertable');
+   Route::get('/rashetaorder/all', [OrderController::class, 'showPharmacyRashetaOrdersView'])->name('rashetaordertable');
+   Route::get('/productorder/all', [OrderController::class, 'showProductsOrder'])->name('productorder');
+   Route::get('/productrashetaorder/all', [OrderController::class, 'productrashetaorder'])->name('productrashetaorder');
+   Route::delete('/deleteproduct/{id}', [ProductController::class, 'destroy'])->name('deleteproduct');
+   Route::get('/product/create', [ProductController::class, 'create'])->name('createproduct');
+   Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
+   Route::get('/editproduct/{product}', [ProductController::class, 'edit'])->name('editproductpage');
+   Route::put('/updateproduct/{id}', [ProductController::class, 'update'])->name('updateproduct');
+
 
 //------Rigeter / Login------//
 

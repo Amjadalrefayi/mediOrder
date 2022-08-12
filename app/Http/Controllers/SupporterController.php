@@ -24,8 +24,42 @@ class SupporterController extends BaseController
      */
     public function index()
     {
+<<<<<<< HEAD
+    //     $user = User::find(Auth::id())->first();
+    //     if($user->type === 'App\Models\Admin')
+    //  {
+||||||| f877e64
+        $user = User::find(Auth::id())->first();
+        if($user->type === 'App\Models\Admin')
+     {
+=======
+>>>>>>> bee7948148b9f24f035a798a8ae68c314f6d9a14
         $supporters = Supporter::latest()->paginate(5);
+<<<<<<< HEAD
+
+
+         return view('dashboard.supportertable')->with('supporters',$supporters);
+
+     //}
+        $supporters = Supporter::latest()->paginate(5);
+        return $this->sendResponse(SimpleSupporterResources::collection($supporters),[
+            'nextPageUrl' =>  $supporters->nextPageUrl() ,
+            'previousPageUrl' => $supporters->previousPageUrl()
+        ]);
+||||||| f877e64
+
+
+         return view('dashboard.supportertable')->with('supporters',$supporters);
+
+     }
+        $supporters = Supporter::latest()->paginate(5);
+        return $this->sendResponse(SimpleSupporterResources::collection($supporters),[
+            'nextPageUrl' =>  $supporters->nextPageUrl() ,
+            'previousPageUrl' => $supporters->previousPageUrl()
+        ]);
+=======
         return view('dashboard.supportertable')->with('supporters',$supporters);
+>>>>>>> bee7948148b9f24f035a798a8ae68c314f6d9a14
     }
 
     /**

@@ -8,7 +8,7 @@
 	 <link rel="icon" type="image/png" href= {{ asset('dashboard/img/favicon.ico') }}>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Admin DashBoard</title>
+	<title>Pharmacy DashBoard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -244,8 +244,6 @@
         }
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
-
-
         }
         .modal .modal-content {
             border-radius: 3px;
@@ -257,16 +255,14 @@
         }
         .modal .modal-title {
             display: inline-block;
-
         }
         .modal .form-control {
             border-radius: 2px;
             box-shadow: none;
             border-color: #dddddd;
-
         }
         .modal textarea.form-control {
-             padding: 20px 30px;
+            resize: vertical;
         }
         .modal .btn {
             border-radius: 2px;
@@ -283,7 +279,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image={{asset('https://medi-order.herokuapp.com/dashboard/img/sidebar-5.jpg') }}>
+    <div class="sidebar" data-color="purple" data-image={{asset('dashboard/img/sidebar-5.jpg') }}>
 
     <!--
 
@@ -300,28 +296,34 @@
             </div>
 
             <ul class="nav">
-                <li >
-                    <a href={{route('customertable')}}>
-                        <i class="pe-7s-graph"></i>
-                        <p>Customer table</p>
-                    </a>
-                </li>
-                <li>
-                    <a href={{route('supportertable')}}>
-                        <i class="pe-7s-user"></i>
-                        <p>Supporter table</p>
-                    </a>
-                </li>
                 <li class="active">
-                    <a href={{route('pharmacytable')}} >
-                        <i class="pe-7s-user"></i>
-                        <p>Pharmacy table</p>
+                    <a href={{route('producttable')}}>
+                        <i class="pe-7s-graph"></i>
+                        <p>Product table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('drivertable')}}>
+                    <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Drivers table</p>
+                        <p>Defult Order table</p>
+                    </a>
+                </li>
+                <li>
+                    <a href={{route('rashetaordertable')}} >
+                        <i class="pe-7s-user"></i>
+                        <p>Rasheta Orders table</p>
+                    </a>
+                </li>
+                <li>
+                    <a href={{route('acceptedordertable')}}>
+                        <i class="pe-7s-user"></i>
+                        <p>Accepted Order table</p>
+                    </a>
+                </li>
+                <li>
+                    <a href={{route('rejectedordertable')}}>
+                        <i class="pe-7s-user"></i>
+                        <p>Rejected Order table</p>
                     </a>
                 </li>
 
@@ -409,42 +411,132 @@
             </div>
         </nav>
 
+
         <div class="container-xl">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Defult <b>Order</b></h2>
+                            </div>
+                           {{-- <div class="col-sm-6">
+                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
 
-            <form action={{route('storepharmacy')}} method="POST">
-                @csrf
-				<div class="modal-header">
-					<h4 class="modal-title">Add Employee</h4>
+                            </div>--}}
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Customer Id</th>
+                                <th>Pharmacy Id</th>
+                                <th>Driver Id</th>
+                                <th>State</th>
+                                <th>Total Price</th>
+                                <th>Expected Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-				</div>
-				<div class="modal-body" width="50%">
-					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" name="name" required >
-					</div>
+                     @foreach ($orders as $order)
+                            <tr>
 
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" name="email" required>
-					</div>
-                    <div class="form-group">
-						<label>password</label>
-						<input type="text" class="form-control" name="password" required >
-					</div>
-					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" name="location" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" name="phone" required>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Add">
-				</div>
-			</form>
+                                <td>{{$order->customer_id}}</td>
+                                <td>{{$order->pharmacy_id}}</td>
+                                <td>{{$order->driver_id}}</td>
+                                <td>{{$order->state}}</td>
+                                <td>{{$order->total_price}}</td>
+                                <td>{{$order->expected_time}}</td>
+                                <td style="display:flex">
+                                <form action="{{route('productorder',$order)}}" method="get">
+                                    @csrf
+
+                                    <button type="submit">  <i class="fa fa-eye" aria-hidden="true"></i> </button>
+                                    </form>
+                                </td>
+                             {{--  <td style="display:flex">
+
+                                     <form action="{{route('editsupporterpage',$supporter)}}" method="get">
+                                        @csrf
+
+                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
+                                        </form>
+
+                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+
+                                    <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
+                                    @csrf
+                                     @method('DELETE')
+                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
+                                    </form>
+                                </td> --}}
+                            </tr>
+
+            @endforeach
+
+
+                        </tbody>
+
+
+
+
+                    </table>
+                     <div class="clearfix">
+                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+                        @if ($orders->hasPages())
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                @if ($orders->onFirstPage())
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#"
+                                       tabindex="-1">Previous</a>
+                                </li>
+                                @else
+                                <li class="page-item"><a class="page-link"
+                                    href="{{ $orders->previousPageUrl() }}">
+                                          Previous</a>
+                                  </li>
+                                @endif
+
+                                @foreach ($orders as $element)
+                                @if (is_string($element))
+                                <li class="page-item disabled">{{ $element }}</li>
+                                @endif
+
+                                @if (is_array($element))
+                                @foreach ($orders as $page => $url)
+                                @if ($page == $orders->currentPage())
+                                <li class="page-item active">
+                                    <a class="page-link">{{ $page }}</a>
+                                </li>
+                                @else
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                                @endif
+                                @endforeach
+                                @endif
+                                @endforeach
+
+                                @if ($orders->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="{{ $orders->nextPageUrl() }}"
+                                       rel="next">Next</a>
+                                </li>
+                                @else
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                                @endif
+                            </ul>
+                          </nav>
+                            @endif
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -470,7 +562,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="https://medi-order.herokuapp.com/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>

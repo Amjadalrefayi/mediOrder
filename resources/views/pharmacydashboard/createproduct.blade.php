@@ -8,7 +8,7 @@
 	 <link rel="icon" type="image/png" href= {{ asset('dashboard/img/favicon.ico') }}>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Admin DashBoard</title>
+	<title>Pharmacy DashBoard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -283,7 +283,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image={{asset('https://medi-order.herokuapp.com/dashboard/img/sidebar-5.jpg') }}>
+    <div class="sidebar" data-color="purple" data-image={{asset('dashboard/img/sidebar-5.jpg') }}>
 
     <!--
 
@@ -300,31 +300,36 @@
             </div>
 
             <ul class="nav">
-                <li >
-                    <a href={{route('customertable')}}>
-                        <i class="pe-7s-graph"></i>
-                        <p>Customer table</p>
-                    </a>
-                </li>
-                <li>
-                    <a href={{route('supportertable')}}>
-                        <i class="pe-7s-user"></i>
-                        <p>Supporter table</p>
-                    </a>
-                </li>
                 <li class="active">
-                    <a href={{route('pharmacytable')}} >
-                        <i class="pe-7s-user"></i>
-                        <p>Pharmacy table</p>
+                    <a href={{route('producttable')}}>
+                        <i class="pe-7s-graph"></i>
+                        <p>Product table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('drivertable')}}>
+                    <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Drivers table</p>
+                        <p>Defult Order table</p>
                     </a>
                 </li>
-
+                <li>
+                    <a href={{route('rashetaordertable')}} >
+                        <i class="pe-7s-user"></i>
+                        <p>Rasheta Orders table</p>
+                    </a>
+                </li>
+                <li>
+                    <a href={{route('acceptedordertable')}}>
+                        <i class="pe-7s-user"></i>
+                        <p>Accepted Order table</p>
+                    </a>
+                </li>
+                <li>
+                    <a href={{route('rejectedordertable')}}>
+                        <i class="pe-7s-user"></i>
+                        <p>Rejected Order table</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>
@@ -411,10 +416,10 @@
 
         <div class="container-xl">
 
-            <form action={{route('storepharmacy')}} method="POST">
+            <form action={{route('storeproduct')}} method="POST" enctype="multipart/form-data">
                 @csrf
 				<div class="modal-header">
-					<h4 class="modal-title">Add Employee</h4>
+					<h4 class="modal-title">Add Product</h4>
 
 				</div>
 				<div class="modal-body" width="50%">
@@ -424,20 +429,24 @@
 					</div>
 
 					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" name="email" required>
+						<label>Company</label>
+						<input type="text" class="form-control" name="company" required>
 					</div>
                     <div class="form-group">
-						<label>password</label>
-						<input type="text" class="form-control" name="password" required >
+                        <label>Image</label>
+                        <input type="file" class="form-control" name="image" required >
+					</div>
+                    <div class="form-group">
+						<label>Price</label>
+						<input type="text" class="form-control" name="price" required >
+					</div>
+                    <div class="form-group">
+						<label>Type</label>
+						<input type="text" class="form-control" name="type" required >
 					</div>
 					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" name="location" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" name="phone" required>
+						<label>Amount</label>
+						<textarea class="form-control" name="amount" required></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -470,7 +479,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="https://medi-order.herokuapp.com/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
