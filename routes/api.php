@@ -32,7 +32,9 @@ Route::get('loginHome', function(){
 
 //                           -------admain dashboard-------
 
-   Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
 
    Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
@@ -56,6 +58,10 @@ Route::get('loginHome', function(){
    Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
    Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
+
+});
+
+
 
    Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
    Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
