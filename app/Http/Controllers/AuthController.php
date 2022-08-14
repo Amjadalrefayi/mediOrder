@@ -59,6 +59,7 @@ class AuthController extends BaseController
         //   return $this->sendResponse($data,' Admin logedIn successfully');
         if($user->type === 'App\Models\Pharmacy')
         return redirect()->route('producttable');
+
            if($user->type === 'App\Models\Customer' or $user->type === 'App\Models\Driver')
             return $this->sendResponse($data,' User logedIn successfully');
 

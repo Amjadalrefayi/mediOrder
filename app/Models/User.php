@@ -28,6 +28,8 @@ class User extends Authenticatable
         'image',
         'state',
         'type',
+        'lng',
+        'lat'
     ];
 
     /**

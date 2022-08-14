@@ -65,6 +65,39 @@ class OrderController extends BaseController
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all order successfully');
     }
 
+    public function makeOrderDELIVERING($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id)->first();
+        $order->state = orderStatue::DELIVERING;
+        $order->save();
+        return $this->sendResponse('', 'Order DELIVERING successfully');
+    }
+
+    public function makeOrderSOS($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id)->first();
+        $order->state = orderStatue::SOS;
+        $order->save();
+        return $this->sendResponse('', 'Order SOS successfully');
+    }
+
+    public function makeOrderACCEPTED($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id)->first();
+        $order->state = orderStatue::ACCEPTED;
+        $order->save();
+        return $this->sendResponse('', 'Order ACCEPTED successfully');
+    }
+
     public function rashetaCustomerOrder(Request $request)
     {
         $validator = Validator::make($request->all(), [
