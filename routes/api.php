@@ -170,6 +170,8 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
     Route::get('order', [OrderController::class, 'showDriverOrders']);
     Route::get('order/live', [OrderController::class, 'showLiveDriverOrders']);
     Route::get('order/history', [OrderController::class, 'showHistoryDriverOrders']);
+    Route::post('order/sos/{id}', [OrderController::class, 'makeOrderSOS']);
+    Route::post('order/delivering/{id}', [OrderController::class, 'makeOrderDELIVERING']);
 });
 
 

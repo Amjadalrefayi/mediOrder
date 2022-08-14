@@ -17,15 +17,13 @@ class PharmacyResources extends JsonResource
         //return parent::toArray($request);
         return[
             'id' => $this->id,
-            'remember_token' => $this->remember_token,
             'name' =>$this->name,
-            'email' =>$this->email,
             'phone' => $this->phone,
-            //'gender' => $this->gender,
             'location' => $this->location,
             'image' => $this->image,
-            'state' =>$this->state
-
+            'state' =>$this->state,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
         ];
     }
 }
