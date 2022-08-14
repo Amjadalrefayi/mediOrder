@@ -122,6 +122,7 @@ class PharmacyController extends BaseController
         }
 
         $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
 
         if(!array_key_exists('image' , $input))
         {
