@@ -221,9 +221,9 @@ Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], functi
 
 // //------Admin CRUD------//
 
-
+Route::post('/store', [AdminController::class, 'store']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
-    Route::post('/store', [AdminController::class, 'store']);
+
     Route::get('/index', [AdminController::class, 'index']);
     Route::put('/update/{id}', [AdminController::class, 'update']);
     Route::get('/show/{id}', [AdminController::class, 'show']);
