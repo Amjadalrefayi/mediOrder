@@ -32,34 +32,31 @@ Route::get('loginHome', function(){
 
 //                           -------admain dashboard-------
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-
     Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
-   Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
+    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
 
-   Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
-   Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
-   Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
-   Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
-   Route::get('/editpharmacy/{pharmacy}', [PharmacyController::class, 'edit'])->name('editpharmacypage');
-   Route::put('/updatepharmacy/{id}', [PharmacyController::class, 'update'])->name('updatepharmacy');
+    Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
+    Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
+    Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
+    Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
+    Route::get('/editpharmacy/{pharmacy}', [PharmacyController::class, 'edit'])->name('editpharmacypage');
+    Route::put('/updatepharmacy/{id}', [PharmacyController::class, 'update'])->name('updatepharmacy');
 
 
-   Route::get('/driver/all', [DriverController::class, 'index'])->name('drivertable');
-   Route::delete('/deletedriver/{id}', [DriverController::class, 'destroy'])->name('deletedriver');
-   Route::get('driver/create', [DriverController::class, 'create'])->name('createdriver');
-   Route::post('/storedriver', [DriverController::class, 'store'])->name('storedriver');
-   Route::get('/editdriver/{driver}', [DriverController::class, 'edit'])->name('editdriverpage');
-   Route::put('/updatedriver/{id}', [DriverController::class, 'update'])->name('updatedriver');
+    Route::get('/driver/all', [DriverController::class, 'index'])->name('drivertable');
+    Route::delete('/deletedriver/{id}', [DriverController::class, 'destroy'])->name('deletedriver');
+    Route::get('driver/create', [DriverController::class, 'create'])->name('createdriver');
+    Route::post('/storedriver', [DriverController::class, 'store'])->name('storedriver');
+    Route::get('/editdriver/{driver}', [DriverController::class, 'edit'])->name('editdriverpage');
+    Route::put('/updatedriver/{id}', [DriverController::class, 'update'])->name('updatedriver');
 
-   Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
-   Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
-   Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
-   Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
-   Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
-   Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
+    Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
+    Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
+    Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
+    Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
+    Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
+    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
-});
 
 
 
@@ -221,9 +218,10 @@ Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], functi
 
 // //------Admin CRUD------//
 
-Route::post('/store', [AdminController::class, 'store']);
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
 
+    Route::post('/store', [AdminController::class, 'store']);
     Route::get('/index', [AdminController::class, 'index']);
     Route::put('/update/{id}', [AdminController::class, 'update']);
     Route::get('/show/{id}', [AdminController::class, 'show']);
