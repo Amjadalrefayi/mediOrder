@@ -35,6 +35,11 @@ class PharmacyController extends BaseController
         $pharmacies = Pharmacy::latest()->get();
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
     }
+    public function allpharmacies(){
+
+        $pharmacies = Pharmacy::latest()->paginate(5);
+        return view('supportdashboard.allpharmaciestable')->with('pharmacies',$pharmacies);
+    }
 
     public function indexForAdmin()
     {
@@ -231,5 +236,14 @@ class PharmacyController extends BaseController
         $pharmacy->delete();
         return redirect()->route('pharmacytable');
         return $this->sendResponse('', 'Pharmacy deleted successfully');
+    }
+    public function destroypharmacy($id){
+
+        if(! Pharmacy::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $pharmacy = Pharmacy::find($id);
+        $pharmacy->delete();
+        return redirect()->route('allpharmacies');
     }
 }

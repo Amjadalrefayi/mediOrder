@@ -92,6 +92,12 @@ class CustomerController extends BaseController
         // 'All Customers sent');
     }
 
+    public function allcustomers(){
+
+        $customers = Customer::latest()->paginate(5);
+        return view('supportdashboard.allcustomerstable')->with('customers',$customers);
+    }
+
 
     /**
      * Show specified customer.
@@ -160,5 +166,14 @@ class CustomerController extends BaseController
         return $this->sendResponse('', 'Customer deleted successfully');
     }
 
+    public function destroycustomer($id){
 
+        if(! Customer::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $customer = Customer::find($id);
+        $customer->delete();
+        return redirect()->route('destroycustomer');
+
+    }
 }

@@ -28,13 +28,14 @@ class ComplaintController extends BaseController
     public function index()
     {
         $complaints= Complaint::paginate(5);
-        return $this->sendResponse(ComplaintResources::collection($complaints), [
-            'current_page' =>  $complaints->currentPage(),
-            'nextPageUrl' =>  $complaints->nextPageUrl() ,
-            'previousPageUrl' =>  $complaints->previousPageUrl(),
-        ] );
-    }
+        return view('supportdashboard.complaintstable')->with('complaints',$complaints);
 
+        // return $this->sendResponse(ComplaintResources::collection($complaints), [
+        //     'current_page' =>  $complaints->currentPage(),
+        //     'nextPageUrl' =>  $complaints->nextPageUrl() ,
+        //     'previousPageUrl' =>  $complaints->previousPageUrl(),
+        // ] );
+    }
 
     /**
      * Display a listing of the trashed resource.

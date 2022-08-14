@@ -8,7 +8,7 @@
 	 <link rel="icon" type="image/png" href= {{ asset('dashboard/img/favicon.ico') }}>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Pharmacy DashBoard</title>
+	<title>Support DashBoard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -296,37 +296,36 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href={{route('producttable')}}>
+                <li >
+                    <a href={{route('complaintstable')}}>
                         <i class="pe-7s-graph"></i>
-                        <p>Product table</p>
+                        <p>Complaints table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('ordertable')}}>
+                    <a href={{route('allordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Orders table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('rashetaordertable')}} >
+                    <a href={{route('allcustomers')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Rasheta Orders table</p>
+                        <p>Customers table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('acceptedordertable')}}>
+                    <a href={{route('alldrivers')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Accepted Order table</p>
+                        <p>Drivers table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('rejectedordertable')}}>
+                    <a href={{route('allpharmacies')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Rejected Order table</p>
+                        <p>Pharmacies table</p>
                     </a>
                 </li>
-
             </ul>
     	</div>
     </div>
@@ -418,7 +417,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Rasheta <b>Order</b></h2>
+                                <h2><b>Orders</b></h2>
                             </div>
                            {{-- <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
@@ -435,8 +434,11 @@
                                 <th>Image</th>
                                 <th>Text</th>
                                 <th>State</th>
+                                <th>Type</th>
                                 <th>Total Price</th>
                                 <th>Expected Time</th>
+                                <th>Lng</th>
+                                <th>Lat</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -450,9 +452,11 @@
                                 <td>{{$order->image}}</td>
                                 <td>{{$order->text}}</td>
                                 <td>{{$order->state}}</td>
+                                <td>{{$order->type}}</td>
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
-                                <td style="display:flex">
+                                <td>{{$order->lng}}</td>
+                                <td>{{$order->lat}}</td>
 
                              {{--  <td style="display:flex">
 

@@ -1,6 +1,6 @@
 
 
-<!doctype html>
+{{--<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -311,7 +311,7 @@
                 <li>
                     <a href={{route('rashetaordertable')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Rasheta Orders table</p>
+                        <p>Rasheta carts table</p>
                     </a>
                 </li>
                 <li>
@@ -429,8 +429,8 @@
                         <thead>
                             <tr>
 
-                                <th>Order_id</th>
-                                <th>Product_id</th>
+                                <th>OrderId</th>
+                                <th>ProductId</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
@@ -456,11 +456,11 @@
                                     @csrf
                                      @method('DELETE')
                                          <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                                    </form>--}}
-                                </td>
+                                    </form>
+
                             </tr>
 
-            @endforeach
+                            @endforeach
 
 
                         </tbody>
@@ -571,4 +571,4 @@
     	});
 	</script>
 
-</html>
+</html>--}}

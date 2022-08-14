@@ -449,7 +449,7 @@
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
                                 <td style="display:flex">
-                                <form action="{{route('productorder',$order)}}" method="get">
+                                <form action="{{route('productorder',$order->id)}}" method="get">
                                     @csrf
 
                                     <button type="submit">  <i class="fa fa-eye" aria-hidden="true"></i> </button>

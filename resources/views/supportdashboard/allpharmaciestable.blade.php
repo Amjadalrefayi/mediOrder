@@ -8,7 +8,7 @@
 	 <link rel="icon" type="image/png" href= {{ asset('dashboard/img/favicon.ico') }}>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Pharmacy DashBoard</title>
+	<title>Support DashBoard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -296,37 +296,36 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href={{route('producttable')}}>
+                <li >
+                    <a href={{route('complaintstable')}}>
                         <i class="pe-7s-graph"></i>
-                        <p>Product table</p>
+                        <p>Complaints table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('ordertable')}}>
+                    <a href={{route('allordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Orders table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('rashetaordertable')}} >
+                    <a href={{route('allcustomers')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Rasheta Orders table</p>
+                        <p>Customers table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('acceptedordertable')}}>
+                    <a href={{route('alldrivers')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Accepted Order table</p>
+                        <p>Drivers table</p>
                     </a>
                 </li>
                 <li>
-                    <a href={{route('rejectedordertable')}}>
+                    <a href={{route('allpharmacies')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Rejected Order table</p>
+                        <p>Pharmacies table</p>
                     </a>
                 </li>
-
             </ul>
     	</div>
     </div>
@@ -418,10 +417,10 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Rasheta <b>Order</b></h2>
+                                <h2><b>Pharmacies</b></h2>
                             </div>
                            {{-- <div class="col-sm-6">
-                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
+                                <a href={{ route('createdriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Driver</span></a>
 
                             </div>--}}
                         </div>
@@ -429,47 +428,37 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Customer Id</th>
-                                <th>Pharmacy Id</th>
-                                <th>Driver Id</th>
-                                <th>Image</th>
-                                <th>Text</th>
-                                <th>State</th>
-                                <th>Total Price</th>
-                                <th>Expected Time</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                     @foreach ($orders as $order)
+                     @foreach ($pharmacies as $pharmacy)
                             <tr>
 
-                                <td>{{$order->customer_id}}</td>
-                                <td>{{$order->pharmacy_id}}</td>
-                                <td>{{$order->driver_id}}</td>
-                                <td>{{$order->image}}</td>
-                                <td>{{$order->text}}</td>
-                                <td>{{$order->state}}</td>
-                                <td>{{$order->total_price}}</td>
-                                <td>{{$order->expected_time}}</td>
+                                <td>{{$pharmacy->name}}</td>
+                                <td>{{$pharmacy->email}}</td>
+                                <td>{{$pharmacy->phone}}</td>
+                                <td>{{$pharmacy->location}}</td>
                                 <td style="display:flex">
 
-                             {{--  <td style="display:flex">
-
-                                     <form action="{{route('editsupporterpage',$supporter)}}" method="get">
+                                     {{--<form action="{{route('editdriverpage',$driver)}}" method="get">
                                         @csrf
 
                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
                                         </form>
 
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--}}
 
-                                    <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
+                                    <form action="{{ route('destroypharmacy',$pharmacy->id)}}" method="POST">
                                     @csrf
                                      @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
+                                         <button type="submit"><i class="material-icons" style="font-size:20px;color:red">block</i></button>
                                     </form>
-                                </td> --}}
+                                </td>
                             </tr>
 
             @endforeach
@@ -482,30 +471,30 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($orders->hasPages())
+                        <div class="hint-text">Showing <b>{{$pharmacies->count()}}</b> out of <b>5</b> entries</div>
+                        @if ($pharmacies->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                @if ($orders->onFirstPage())
+                                @if ($pharmacies->onFirstPage())
                                 <li class="page-item disabled">
                                     <a class="page-link" href="#"
                                        tabindex="-1">Previous</a>
                                 </li>
                                 @else
                                 <li class="page-item"><a class="page-link"
-                                    href="{{ $orders->previousPageUrl() }}">
+                                    href="{{ $pharmacies->previousPageUrl() }}">
                                           Previous</a>
                                   </li>
                                 @endif
 
-                                @foreach ($orders as $element)
+                                @foreach ($pharmacies as $element)
                                 @if (is_string($element))
                                 <li class="page-item disabled">{{ $element }}</li>
                                 @endif
 
                                 @if (is_array($element))
-                                @foreach ($orders as $page => $url)
-                                @if ($page == $orders->currentPage())
+                                @foreach ($pharmacies as $page => $url)
+                                @if ($page == $pharmacies->currentPage())
                                 <li class="page-item active">
                                     <a class="page-link">{{ $page }}</a>
                                 </li>
@@ -519,10 +508,10 @@
                                 @endif
                                 @endforeach
 
-                                @if ($orders->hasMorePages())
+                                @if ($pharmacies->hasMorePages())
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="{{ $orders->nextPageUrl() }}"
+                                       href="{{ $pharmacies->nextPageUrl() }}"
                                        rel="next">Next</a>
                                 </li>
                                 @else
