@@ -429,12 +429,13 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Customer Id</th>
+                                <th>Customer</th>
                                 <th>Pharmacy Id</th>
-                                <th>Driver Id</th>
+                                <th>Products</th>
                                 <th>State</th>
                                 <th>Total Price</th>
                                 <th>Expected Time</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -442,35 +443,84 @@
                      @foreach ($orders as $order)
                             <tr>
 
-                                <td>{{$order->customer_id}}</td>
+                                <td>{{$order->customer->name}}</td>
                                 <td>{{$order->pharmacy_id}}</td>
-                                <td>{{$order->driver_id}}</td>
-                                <td>{{$order->state}}</td>
+                                <td>
+                                    @foreach ($order->carts as $item)
+                                    {{$item->product->name}}
+                                    {{$item->count}}
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @switch($order->state)
+                                        @case(1)
+                                        On hold
+                                            @break
+                                         @case(2)
+                                         Accepted
+                                            @break
+                                        @case(3)
+                                             Rejected
+                                             @break
+                                        @case(4)
+                                             Rejected
+                                             @break
+                                        @case(5)
+                                            DELIVERING
+                                             @break
+                                        @case(6)
+                                             DONE
+                                             @break
+                                        @case(7)
+                                             SOS
+                                             @break
+                                        @default
+
+                                    @endswitch
+
+                                </td>
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
                                 <td style="display:flex">
-                                <form action="{{route('productorder',$order->id)}}" method="get">
-                                    @csrf
-
-                                    <button type="submit">  <i class="fa fa-eye" aria-hidden="true"></i> </button>
-                                    </form>
-                                </td>
-                             {{--  <td style="display:flex">
-
-                                     <form action="{{route('editsupporterpage',$supporter)}}" method="get">
+                                    @if ($order->state == 1)
+                                    <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
                                         @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
+                                        <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
                                         </form>
+                                        <form action="{{route('orderrejectednow',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
+                                            </form>
 
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-eye" ></i> </button>
+                                            </form>
 
-                                    <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
-                                    @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                                    </form>
-                                </td> --}}
+
+                                        @elseif ($order->state == 2 )
+
+                                        <form action="{{route('makeOrdersosPH',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-warning" style="color:red" aria-hidden="true"></i> </button>
+                                            </form>
+
+                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
+                                            </form>
+
+
+                                            @else
+
+                                            <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                                @csrf
+                                                <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
+                                                </form>
+
+                                            @endif
+
+                                </td>
                             </tr>
 
             @endforeach

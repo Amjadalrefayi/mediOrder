@@ -28,11 +28,7 @@ class OrderController extends BaseController
     public function index()
     {
         $orders = Order::paginate(5);
-        return $this->sendResponse(OrderResources::collection($orders), [
-            'current_page' => $orders->currentPage(),
-            'nextPageUrl' => $orders->nextPageUrl(),
-            'previousPageUrl' => $orders->previousPageUrl(),
-        ]);
+        return view('supportdashboard.allorderstable')->with('orders',$orders);
     }
 
     public function showLiveCustomerOrders()
@@ -92,10 +88,47 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::ACCEPTED;
         $order->save();
-        return $this->sendResponse('', 'Order ACCEPTED successfully');
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA) {
+            $order->pharmacy_id = Auth::id();
+            $order->save();
+            return redirect()->route('rashetaordertable');
+        }
+    }
+
+    public function makeOrderREJECTED($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::REJECTED;
+        $order->save();
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA)
+            return redirect()->route('rashetaordertable');
+    }
+
+    public function makeOrdersosPH($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::SOS;
+        $order->save();
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA)
+            return redirect()->route('rashetaordertable');
     }
 
     public function rashetaCustomerOrder(Request $request)

@@ -437,8 +437,7 @@
                                 <th>Type</th>
                                 <th>Total Price</th>
                                 <th>Expected Time</th>
-                                <th>Lng</th>
-                                <th>Lat</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -449,15 +448,52 @@
                                 <td>{{$order->customer_id}}</td>
                                 <td>{{$order->pharmacy_id}}</td>
                                 <td>{{$order->driver_id}}</td>
-                                <td>{{$order->image}}</td>
+                                <td>
+                                    <img src="{{$order->image}}" alt="Rasheta" style="width:100px;height:100px;">
+                                </td>
                                 <td>{{$order->text}}</td>
-                                <td>{{$order->state}}</td>
-                                <td>{{$order->type}}</td>
+                                <td>
+                                    @switch($order->state)
+                                        @case(1)
+                                        On hold
+                                            @break
+                                         @case(2)
+                                         Accepted
+                                            @break
+                                        @case(3)
+                                             Rejected
+                                             @break
+                                        @case(4)
+                                             Rejected
+                                             @break
+                                        @case(5)
+                                            DELIVERING
+                                             @break
+                                        @case(6)
+                                             DONE
+                                             @break
+                                        @case(7)
+                                             SOS
+                                             @break
+                                        @default
+
+                                    @endswitch
+
+                                </td>
+                                <td>
+                                    @switch($order->type)
+                                    @case(1)
+                                        Default
+                                        @break
+                                     @case(2)
+                                     Rashate
+                                        @break
+                                    @default
+
+                                @endswitch
+                                </td>
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
-                                <td>{{$order->lng}}</td>
-                                <td>{{$order->lat}}</td>
-
                              {{--  <td style="display:flex">
 
                                      <form action="{{route('editsupporterpage',$supporter)}}" method="get">
@@ -486,7 +522,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+                        <div class="hint-text">Showing <b>5</b> out of <b>{{$orders->count()}}</b> entries</div>
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
