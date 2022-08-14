@@ -411,7 +411,7 @@
 
         <div class="container-xl">
 
-            <form action={{route('storepharmacy')}} method="POST">
+            <form action={{route('storepharmacy')}} method="POST" enctype="multipart/form-data">
                 @csrf
 				<div class="modal-header">
 					<h4 class="modal-title">Add Employee</h4>
