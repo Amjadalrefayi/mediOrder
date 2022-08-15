@@ -419,10 +419,10 @@
                             <div class="col-sm-6">
                                 <h2><b>Customers</b></h2>
                             </div>
-                           {{-- <div class="col-sm-6">
-                                <a href={{ route('createdriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Driver</span></a>
+                            <div class="col-sm-6">
+                                <a href={{ route('blockedcustomer') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">block</i> <span>Banned Customers</span></a>
 
-                            </div>--}}
+                            </div>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">

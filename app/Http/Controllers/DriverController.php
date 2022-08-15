@@ -40,6 +40,11 @@ class DriverController extends BaseController
         return view('supportdashboard.alldriverstable')->with('drivers',$drivers);
     }
 
+
+    public function blockeddriver(){
+        $drivers = Driver::onlyTrashed()->latest()->paginate(5);
+        return view('supportdashboard.blockeddriver')->with('drivers',$drivers);
+    }
   /**
      * Show the form for creating a new resource.
      *
@@ -245,6 +250,11 @@ class DriverController extends BaseController
         }
         $driver = Driver::find($id);
         $driver->delete();
+        return redirect()->route('blockeddriver');
+
+    }
+    public function restordriver($id){
+        $driver = Driver::withTrashed()->find($id)->restore();
         return redirect()->route('alldrivers');
 
     }

@@ -417,12 +417,12 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Drivers</b></h2>
+                                <h2><b>Banned Drivers</b></h2>
                             </div>
-                            <div class="col-sm-6">
-                                <a href={{ route('blockeddriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">block</i> <span>Banned Drivers</span></a>
+                            {{--<div class="col-sm-6">
+                                <a href={{ route('blockedcustomer') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">restore</i>  <span>banned customers</span></a>
 
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -446,19 +446,10 @@
                                 <td>{{$driver->gender}}</td>
                                 <td>{{$driver->location}}</td>
                                 <td style="display:flex">
-
-                                     {{--<form action="{{route('editdriverpage',$driver)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form>
-
-                                     <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--}}
-
-                                    <form action="{{ route('destroydriver',$driver->id)}}" method="POST">
+                                    <form action="{{ route('restordriver',$driver->id)}}" method="POST">
                                     @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" style="font-size:20px;color:red">block</i></button>
+                                     @method('GET')
+                                         <button type="submit"><i class="material-icons">restore</i></button>
                                     </form>
                                 </td>
                             </tr>

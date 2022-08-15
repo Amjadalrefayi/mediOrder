@@ -88,8 +88,14 @@ Route::get('loginHome', function(){
    Route::delete('/destroycustomer/{id}', [CustomerController::class, 'destroycustomer'])->name('destroycustomer');
    Route::delete('/destroydriver/{id}', [DriverController::class, 'destroydriver'])->name('destroydriver');
    Route::delete('/destroypharmacy/{id}', [PharmacyController::class, 'destroypharmacy'])->name('destroypharmacy');
+   Route::get('/blocked/customer', [CustomerController::class, 'blockedcustomer'])->name('blockedcustomer');
+   Route::get('/restor/customer/{id}', [CustomerController::class, 'restorcustomer'])->name('restorcustomer');
+   Route::get('/blocked/drivers', [DriverController::class, 'blockeddriver'])->name('blockeddriver');
+   Route::get('/restor/driver/{id}', [DriverController::class, 'restordriver'])->name('restordriver');
+   Route::get('/blocked/pharmacy', [PharmacyController::class, 'blockedpharmacy'])->name('blockedpharmacy');
+   Route::get('/restor/pharmacy/{id}', [PharmacyController::class, 'restorpharmacy'])->name('restorpharmacy');
 
-//------Rigeter / Login------//
+//------Register / Login------//
 
 Route::prefix('auth')->group(function () {
     Route::post('customer/register', [CustomerController::class,'register']);

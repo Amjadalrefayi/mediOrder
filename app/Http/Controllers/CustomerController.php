@@ -97,6 +97,10 @@ class CustomerController extends BaseController
         $customers = Customer::latest()->paginate(5);
         return view('supportdashboard.allcustomerstable')->with('customers',$customers);
     }
+    public function blockedcustomer(){
+        $customers = Customer::onlyTrashed()->latest()->paginate(5);
+        return view('supportdashboard.blockedcustomer')->with('customers',$customers);
+    }
 
 
     /**
@@ -173,7 +177,13 @@ class CustomerController extends BaseController
         }
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect()->route('destroycustomer');
+        return redirect()->route('blockedcustomer');
+
+    }
+
+    public function restorcustomer($id){
+        $customer = Customer::withTrashed()->find($id)->restore();
+        return redirect()->route('allcustomers');
 
     }
 }

@@ -35,6 +35,11 @@ class PharmacyController extends BaseController
         $pharmacies = Pharmacy::latest()->get();
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
     }
+    public function blockedpharmacy(){
+        $pharmacies = Pharmacy::onlyTrashed()->latest()->paginate(5);
+        return view('supportdashboard.blockedpharmacy')->with('pharmacies',$pharmacies);
+    }
+
     public function allpharmacies(){
 
         $pharmacies = Pharmacy::latest()->paginate(5);
@@ -240,6 +245,13 @@ class PharmacyController extends BaseController
         }
         $pharmacy = Pharmacy::find($id);
         $pharmacy->delete();
+        return redirect()->route('blockedpharmacy');
+    }
+
+
+    public function restorpharmacy($id){
+        $pharmacy = Pharmacy::withTrashed()->find($id)->restore();
         return redirect()->route('allpharmacies');
+
     }
 }
