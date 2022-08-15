@@ -440,6 +440,14 @@
 						<input type="text" class="form-control" name="phone" required>
 					</div>
                     <div class="form-group">
+						<label>Latitude</label>
+						<textarea class="form-control" name="lat" required></textarea>
+					</div>
+                    <div class="form-group">
+						<label>Longitude</label>
+						<textarea class="form-control" name="lng" required></textarea>
+					</div>
+                    <div class="form-group">
                         <label>Image</label>
                         <input type="file" class="form-control" name="image" required >
 					</div>

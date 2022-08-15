@@ -113,8 +113,8 @@ class PharmacyController extends BaseController
             'phone'=> 'required|min:13',
             'location'=> 'required',
             'image'=>'required|image',
-            // 'lat' => 'required|between: -90,90',
-            // 'lng' => 'required|between: -180,180',
+            'lat' => 'required|between: -90,90',
+            'lng' => 'required|between: -180,180',
         ]);
 
         if ($validator->fails()) {
@@ -140,8 +140,8 @@ class PharmacyController extends BaseController
             'phone'=> $input['phone'],
             'location'=> $input['location'],
             'image' => $input['image'],
-            // 'lat' => $input['lat'],
-            // 'lng' => $input['lng'],
+            'lat' => $input['lat'],
+            'lng' => $input['lng'],
             'state' => true
         ]);
 
