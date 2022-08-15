@@ -68,6 +68,7 @@ class OrderController extends BaseController
         }
         $order = Order::find($id)->first();
         $order->state = orderStatue::DELIVERING;
+        $order->driver_id = Auth::id();
         $order->save();
         return $this->sendResponse('', 'Order DELIVERING successfully');
     }
