@@ -482,29 +482,11 @@
                                         @csrf
                                         <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
                                         </form>
-                                        <form action="{{route('orderrejectednow',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
-                                            </form>
 
                                         <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
                                             @csrf
                                             <button type="submit">  <i class="fa fa-eye" ></i> </button>
                                             </form>
-
-
-                                        @elseif ($order->state == 2 )
-
-                                        <form action="{{route('makeOrdersosPH',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-warning" style="color:red" aria-hidden="true"></i> </button>
-                                            </form>
-
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
-                                            </form>
-
 
                                             @else
 
