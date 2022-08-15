@@ -66,7 +66,7 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::DELIVERING;
         $order->driver_id = Auth::id();
         $order->save();
@@ -78,7 +78,7 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::SOS;
         $order->save();
         return $this->sendResponse('', 'Order SOS successfully');
