@@ -140,7 +140,7 @@ class ComplaintController extends BaseController
         $input = $request->all();
 
 
-        $user = User::find(Auth::id())->first();
+        $user = User::find(Auth::id());
 
         if($user->type === 'App\Models\Customer')
         $input['customer_id'] = Auth::id();
