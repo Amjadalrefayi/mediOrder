@@ -21,6 +21,8 @@ class SimplePharmacyResources extends JsonResource
         'name' =>$this->name,
         'phone' => $this->phone,
         'location' => $this->location,
+        'lat' => $this->lat,
+        'lng' => $this->lng,
         'image' => $this->image,
         'state' =>$this->state
     ];

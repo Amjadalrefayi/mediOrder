@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('location');
             $table->string('image')->nullable();
+            $table->double('lng')->nullable();
+            $table->double('lat')->nullable();
             $table->string('state');
             $table->string('type');
             $table->softDeletes();
