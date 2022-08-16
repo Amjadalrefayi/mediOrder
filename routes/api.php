@@ -230,3 +230,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function (
     Route::get('/show/{id}', [AdminController::class, 'show']);
     Route::delete('/delete/{id}', [AdminController::class, 'destroy']);
 });
+
+
+Route::get('pharmacy/search/{name}', [PharmacyController::class, 'search']);
+
+Route::get('product/search/{id}/{name}', [ProductController::class, 'search']);

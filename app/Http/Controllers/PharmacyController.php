@@ -247,4 +247,12 @@ class PharmacyController extends BaseController
         $pharmacy->delete();
         return redirect()->route('allpharmacies');
     }
+
+    public function search($name)
+    {
+        $pharmacies = Pharmacy::where('name', 'Like', '%' . $name . '%' )->get();
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
+    }
+
+
 }
