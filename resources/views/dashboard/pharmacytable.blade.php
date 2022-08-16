@@ -364,7 +364,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href={{ route('createpharmacy') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Pharmacy</span></a>
-
+                                <a href={{ route('createpharmacy') }} class="btn btn-success" data-toggle="modal"><span>Search</span></a>
                             </div>
                         </div>
                     </div>
