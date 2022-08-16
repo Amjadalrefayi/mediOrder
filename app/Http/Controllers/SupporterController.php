@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Validator;
 class SupporterController extends BaseController
 {
     protected AuthController $AuthCon;
-
     /**
      * Display a listing of the resource.
      *

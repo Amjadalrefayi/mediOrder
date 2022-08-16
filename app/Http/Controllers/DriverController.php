@@ -23,6 +23,13 @@ class DriverController extends BaseController
 {
     protected AuthController $AuthCon;
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'search'
+        ]);
+    }
+
     /**
      * Get all Drivers
      *

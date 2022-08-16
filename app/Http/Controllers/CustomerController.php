@@ -24,6 +24,13 @@ class CustomerController extends BaseController
 
     protected AuthController $AuthCon;
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'register'
+        ]);
+    }
+
     /**
      * Customer Register
      *
@@ -85,6 +92,8 @@ class CustomerController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
+        $this->middleware('isPharmacy');
 
         $customers = Customer::latest()->paginate(5);
         return view('dashboard.dashboard')->with('customers',$customers);

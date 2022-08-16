@@ -60,10 +60,6 @@ Route::get('loginHome', function(){
 
 
 
-   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
-   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
-   Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {});
-
 
 
    //                           -------pharmacy dashboard-------
@@ -112,6 +108,7 @@ Route::group(['prefix' => 'products', 'middleware' => ['auth:sanctum']], functio
     Route::get('/show/{id}', [ProductController::class, 'show']);
     Route::put('/update/{id}', [ProductController::class, 'update']);
     Route::delete('/delete', [ProductController::class, 'destroy']);
+    Route::get('/search/{id}/{name}', [ProductController::class, 'search']);
 
 });
 
@@ -136,7 +133,7 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
     Route::post('/store', [PharmacyController::class, 'store']);
     Route::get('/index', [PharmacyController::class, 'index']);
-
+    Route::get('/search/{name}', [PharmacyController::class, 'search']);
     Route::get('/showPharmacesPendingOrders/{id}', [PharmacyController::class, 'showPharmacesPendingOrders']);
     Route::get('/showPharmacesDoneOrders/{id}', [PharmacyController::class, 'showPharmacesDoneOrders']);
     Route::put('/update/{id}', [PharmacyController::class, 'update']);
@@ -225,6 +222,7 @@ Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], functi
 // //------Admin CRUD------//
 
 Route::post('/store', [AdminController::class, 'store']);
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/index', [AdminController::class, 'index']);
     Route::put('/update/{id}', [AdminController::class, 'update']);
@@ -233,6 +231,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function (
 });
 
 
-Route::get('pharmacy/search/{name}', [PharmacyController::class, 'search']);
 
-Route::get('product/search/{id}/{name}', [ProductController::class, 'search']);
+
+

@@ -19,8 +19,8 @@ class AdminMiddleware
     {
         if(Auth::check()){
 
-            if(Auth::user()->type === 'App\Model\Admin'){
-                return $next($request);
+            if(Auth::user()->type == 'App\Model\Admin'){
+                return view('dashboard.dashboard');
             }
 
             else{

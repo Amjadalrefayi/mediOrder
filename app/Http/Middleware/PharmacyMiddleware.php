@@ -19,7 +19,7 @@ class PharmacyMiddleware
     {
         if(Auth::check()){
 
-            if(Auth::user()->type === 'App\Model\Pharmacy'){
+            if(Auth::user()->type == 'App\Model\Pharmacy'){
                 return $next($request);
             }
 

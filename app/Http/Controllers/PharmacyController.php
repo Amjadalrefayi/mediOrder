@@ -24,6 +24,13 @@ class PharmacyController extends BaseController
 {
 
     protected AuthController $AuthCon;
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'search'
+        ]);
+    }
     /**
      * Get All pharmacies
      *
