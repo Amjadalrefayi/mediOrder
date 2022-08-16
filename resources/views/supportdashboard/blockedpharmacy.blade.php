@@ -311,7 +311,7 @@
                 <li>
                     <a href={{route('allcustomers')}} >
                         <i class="pe-7s-user"></i>
-                        <p>Customers table</p>
+                        <p>Customer table</p>
                     </a>
                 </li>
                 <li>
@@ -417,12 +417,12 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Drivers</b></h2>
+                                <h2><b>Banned Pharmacies</b></h2>
                             </div>
-                            <div class="col-sm-6">
-                                <a href={{ route('blockeddriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">block</i> <span>Banned Drivers</span></a>
+                            {{--<div class="col-sm-6">
+                                <a href={{ route('blockedcustomer') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">restore</i>  <span>banned pharmacies</span></a>
 
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -431,34 +431,23 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Gender</th>
                                 <th>Location</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                     @foreach ($drivers as $driver)
+                     @foreach ($pharmacies as $pharmacy)
                             <tr>
 
-                                <td>{{$driver->name}}</td>
-                                <td>{{$driver->email}}</td>
-                                <td>{{$driver->phone}}</td>
-                                <td>{{$driver->gender}}</td>
-                                <td>{{$driver->location}}</td>
+                                <td>{{$pharmacy->name}}</td>
+                                <td>{{$pharmacy->email}}</td>
+                                <td>{{$pharmacy->phone}}</td>
+                                <td>{{$pharmacy->location}}</td>
                                 <td style="display:flex">
-
-                                     {{--<form action="{{route('editdriverpage',$driver)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form>
-
-                                     <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--}}
-
-                                    <form action="{{ route('destroydriver',$driver->id)}}" method="POST">
+                                    <form action="{{ route('restorpharmacy',$pharmacy->id)}}" method="POST">
                                     @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" style="font-size:20px;color:red">block</i></button>
+                                     @method('GET')
+                                         <button type="submit"><i class="material-icons">restore</i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -473,30 +462,30 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$drivers->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($drivers->hasPages())
+                        <div class="hint-text">Showing <b>{{$pharmacies->count()}}</b> out of <b>5</b> entries</div>
+                        @if ($pharmacies->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                @if ($drivers->onFirstPage())
+                                @if ($pharmacies->onFirstPage())
                                 <li class="page-item disabled">
                                     <a class="page-link" href="#"
                                        tabindex="-1">Previous</a>
                                 </li>
                                 @else
                                 <li class="page-item"><a class="page-link"
-                                    href="{{ $drivers->previousPageUrl() }}">
+                                    href="{{ $pharmacies->previousPageUrl() }}">
                                           Previous</a>
                                   </li>
                                 @endif
 
-                                @foreach ($drivers as $element)
+                                @foreach ($pharmacies as $element)
                                 @if (is_string($element))
                                 <li class="page-item disabled">{{ $element }}</li>
                                 @endif
 
                                 @if (is_array($element))
-                                @foreach ($drivers as $page => $url)
-                                @if ($page == $drivers->currentPage())
+                                @foreach ($pharmacies as $page => $url)
+                                @if ($page == $pharmacies->currentPage())
                                 <li class="page-item active">
                                     <a class="page-link">{{ $page }}</a>
                                 </li>
@@ -510,10 +499,10 @@
                                 @endif
                                 @endforeach
 
-                                @if ($drivers->hasMorePages())
+                                @if ($pharmacies->hasMorePages())
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="{{ $drivers->nextPageUrl() }}"
+                                       href="{{ $pharmacies->nextPageUrl() }}"
                                        rel="next">Next</a>
                                 </li>
                                 @else

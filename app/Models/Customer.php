@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Http\Traits\child;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends User
 {
-    use HasFactory , child;
+    use HasFactory , child , SoftDeletes;
 
     /**
      * Get all of the orders for the Customer

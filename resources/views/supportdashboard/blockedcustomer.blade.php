@@ -417,12 +417,12 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Drivers</b></h2>
+                                <h2><b>Banned Customers</b></h2>
                             </div>
-                            <div class="col-sm-6">
-                                <a href={{ route('blockeddriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">block</i> <span>Banned Drivers</span></a>
+                            {{--<div class="col-sm-6">
+                                <a href={{ route('blockedcustomer') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">restore</i>  <span>banned customers</span></a>
 
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -437,28 +437,19 @@
                         </thead>
                         <tbody>
 
-                     @foreach ($drivers as $driver)
+                     @foreach ($customers as $customer)
                             <tr>
 
-                                <td>{{$driver->name}}</td>
-                                <td>{{$driver->email}}</td>
-                                <td>{{$driver->phone}}</td>
-                                <td>{{$driver->gender}}</td>
-                                <td>{{$driver->location}}</td>
+                                <td>{{$customer->name}}</td>
+                                <td>{{$customer->email}}</td>
+                                <td>{{$customer->phone}}</td>
+                                <td>{{$customer->gender}}</td>
+                                <td>{{$customer->location}}</td>
                                 <td style="display:flex">
-
-                                     {{--<form action="{{route('editdriverpage',$driver)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form>
-
-                                     <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--}}
-
-                                    <form action="{{ route('destroydriver',$driver->id)}}" method="POST">
+                                    <form action="{{ route('restorcustomer',$customer->id)}}" method="POST">
                                     @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" style="font-size:20px;color:red">block</i></button>
+                                     @method('GET')
+                                         <button type="submit"><i class="material-icons">restore</i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -473,30 +464,30 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$drivers->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($drivers->hasPages())
+                        <div class="hint-text">Showing <b>{{$customers->count()}}</b> out of <b>5</b> entries</div>
+                        @if ($customers->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                @if ($drivers->onFirstPage())
+                                @if ($customers->onFirstPage())
                                 <li class="page-item disabled">
                                     <a class="page-link" href="#"
                                        tabindex="-1">Previous</a>
                                 </li>
                                 @else
                                 <li class="page-item"><a class="page-link"
-                                    href="{{ $drivers->previousPageUrl() }}">
+                                    href="{{ $customers->previousPageUrl() }}">
                                           Previous</a>
                                   </li>
                                 @endif
 
-                                @foreach ($drivers as $element)
+                                @foreach ($customers as $element)
                                 @if (is_string($element))
                                 <li class="page-item disabled">{{ $element }}</li>
                                 @endif
 
                                 @if (is_array($element))
-                                @foreach ($drivers as $page => $url)
-                                @if ($page == $drivers->currentPage())
+                                @foreach ($customers as $page => $url)
+                                @if ($page == $customers->currentPage())
                                 <li class="page-item active">
                                     <a class="page-link">{{ $page }}</a>
                                 </li>
@@ -510,10 +501,10 @@
                                 @endif
                                 @endforeach
 
-                                @if ($drivers->hasMorePages())
+                                @if ($customers->hasMorePages())
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="{{ $drivers->nextPageUrl() }}"
+                                       href="{{ $customers->nextPageUrl() }}"
                                        rel="next">Next</a>
                                 </li>
                                 @else
