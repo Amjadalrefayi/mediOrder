@@ -95,7 +95,7 @@ class CustomerController extends BaseController
 
         $this->middleware('isPharmacy');
 
-        $customers = Customer::latest()->paginate(5);
+        $customers = Customer::latest()->paginate(10);
         return view('dashboard.dashboard')->with('customers',$customers);
         // return $this->sendResponse(CustomerResources::collection($customers),
         // 'All Customers sent');

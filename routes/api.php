@@ -104,6 +104,7 @@ Route::get('loginHome', function(){
 Route::prefix('auth')->group(function () {
     Route::post('customer/register', [CustomerController::class,'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 //------Product CRUD------//

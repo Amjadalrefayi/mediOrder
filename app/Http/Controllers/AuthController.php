@@ -88,7 +88,12 @@ class AuthController extends BaseController
      * Must be authenticated
      */
     public function logout(){
-        User::find(Auth::id())->tokens()->delete();
+        $user = User::find(Auth::id());
+        $user->tokens()->delete();
+        if($user->type == 'App\Models\Customer')
         return $this->sendResponse('', 'log out succssefully');
+
+        else
+        return redirect()->route('loginHome');
     }
 }
