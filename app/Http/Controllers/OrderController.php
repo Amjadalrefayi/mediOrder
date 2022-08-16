@@ -45,7 +45,7 @@ class OrderController extends BaseController
 
     public function showLiveDriverOrders()
     {
-       $orders = Order::latest()->where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING])->get();
+       $orders = Order::where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING, orderStatue::ONWAY])->get();
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
     }
 
@@ -71,6 +71,18 @@ class OrderController extends BaseController
         $order->driver_id = Auth::id();
         $order->save();
         return $this->sendResponse('', 'Order DELIVERING successfully');
+    }
+
+    public function makeOrderOnWay($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::ONWAY;
+        $order->driver_id = Auth::id();
+        $order->save();
+        return $this->sendResponse('', 'Order ONWAY successfully');
     }
 
     public function makeOrderSOS($id)

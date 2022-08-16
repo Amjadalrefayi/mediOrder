@@ -53,7 +53,7 @@ class PharmacyController extends BaseController
             return $this->sendError('' , 'Not Found');
         }
         $pharmacy = Pharmacy::find($id);
-        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::PROCESSING)->paginate(5);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::ONWAY)->paginate(5);
         return $this->sendResponse(OrderResources::collection($orders), [
             'current_page' => $orders->currentPage(),
             'nextPageUrl' => $orders->nextPageUrl(),
