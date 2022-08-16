@@ -76,7 +76,8 @@ Route::get('loginHome', function(){
    Route::post('/storeproduct', [ProductController::class, 'store'])->name('storeproduct');
    Route::get('/editproduct/{product}', [ProductController::class, 'edit'])->name('editproductpage');
    Route::put('/updateproduct/{id}', [ProductController::class, 'update'])->name('updateproduct');
-
+   Route::get('/complaint/create', [ComplaintController::class, 'create'])->name('createcomplaint');
+   Route::post('/storecomplaint', [ComplaintController::class, 'store'])->name('storecomplaint');
 
 
    //                           -------support dashboard-------

@@ -111,12 +111,7 @@ class ComplaintController extends BaseController
      */
     public function create()
     {
-
-
-
-
-
-
+        return view('pharmacydashboard.createcomplaint');
     }
 
     /**
@@ -130,7 +125,6 @@ class ComplaintController extends BaseController
 
         $validator = Validator::make($request->all(), [
             'note'=>'required',
-
         ]);
 
         if ($validator->fails()) {
@@ -138,23 +132,21 @@ class ComplaintController extends BaseController
         }
 
         $input = $request->all();
-
-
-        $user = User::find(Auth::id())->first();
+        $user = User::find(Auth::id());
 
         if($user->type === 'App\Models\Customer')
         $input['customer_id'] = Auth::id();
 
-        if($user->type === 'App\Models\Pharmacy')
-        $input['pharmacy_id'] = Auth::id();
+        if($user->type === 'App\Models\Pharmacy'){
+            $input['pharmacy_id'] = Auth::id();
+            $complaint = Complaint::create($input);
+            return redirect()->route('producttable');
+        }
 
-
-        if($user->type === 'App\Models\Driver')
+        if($user->type === 'App\Models\Driver'){
         $input['driver_id'] = Auth::id();
-
         $complaint = Complaint::create($input);
-
-        return $this->sendResponse(new ComplaintResources($complaint), 'complaint Store successfully');
+        return $this->sendResponse(new ComplaintResources($complaint), 'complaint Store successfully');}
     }
 
     /**

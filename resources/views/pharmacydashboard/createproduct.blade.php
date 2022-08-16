@@ -330,6 +330,12 @@
                         <p>Rejected Order table</p>
                     </a>
                 </li>
+                <li>
+                    <a href={{route('createcomplaint')}}>
+                        <i class="pe-7s-user"></i>
+                        <p>Make a complaint</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>
