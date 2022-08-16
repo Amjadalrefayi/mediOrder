@@ -21,7 +21,7 @@ class SupporterController extends BaseController
     public function index()
     {
         $supporters = Supporter::latest()->paginate(5);
-         return view('dashboard.supportertable')->with('supporters',$supporters);
+        return view('dashboard.supportertable')->with('supporters',$supporters);
     }
 
     /**
