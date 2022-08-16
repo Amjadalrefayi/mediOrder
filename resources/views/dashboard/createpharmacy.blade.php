@@ -283,7 +283,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image={{asset('https://medi-order.herokuapp.com/dashboard/img/sidebar-5.jpg') }}>
+    <div class="sidebar" data-color="purple" data-image={{asset('/dashboard/img/sidebar-5.jpg') }}>
 
     <!--
 
@@ -294,7 +294,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="" class="simple-text">
                     Medi Order
                 </a>
             </div>
@@ -339,67 +339,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">Admin Panel </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-lg hidden-md"></b>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href={{route('logout')}}>
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -411,7 +359,7 @@
 
         <div class="container-xl">
 
-            <form action={{route('storepharmacy')}} method="POST">
+            <form action={{route('storepharmacy')}} method="POST" enctype="multipart/form-data">
                 @csrf
 				<div class="modal-header">
 					<h4 class="modal-title">Add Employee</h4>
@@ -439,8 +387,42 @@
 						<label>Phone</label>
 						<input type="text" class="form-control" name="phone" required>
 					</div>
+                    <div class="form-group">
+						<label>Latitude</label>
+						<textarea class="form-control" name="lat" required></textarea>
+					</div>
+                    <div class="form-group">
+						<label>Longitude</label>
+						<textarea class="form-control" name="lng" required></textarea>
+					</div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" class="form-control" name="image" required >
+					</div>
 				</div>
-				<div class="modal-footer">
+                {{-- <div class="mapouter"><div class="gmap_canvas"><iframe width="872" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=damascus&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.whatismyip-address.com/divi-discount/">divi discount</a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:872px;}</style><a href="https://www.embedgooglemap.net">embedding maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:872px;}</style></div></div> --}}
+
+{{--
+                <div id="googleMap" style="width:100%;height:400px;"></div>
+
+<script>
+function myMap() {
+var mapProp= {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+};
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+google.maps.event.addListener(map, 'click', function(event) {
+alert(event.latLng.lat() + ", " + event.latLng.lng());
+});
+
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script> --}}
+
+
+                <div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 					<input type="submit" class="btn btn-success" value="Add">
 				</div>
@@ -470,7 +452,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="https://medi-order.herokuapp.com/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+	<script src="/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>

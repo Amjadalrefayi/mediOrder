@@ -49,6 +49,8 @@ class AuthController extends BaseController
             return $this->sendError('', 'Unauthorized');
         }
         $user = User::where('email',$request->email)->first();
+        //User::find(Auth::id())->tokens()->delete();
+        $user->tokens()->delete();
         $data['id'] = $user->id;
         $data['token'] = $this->token($user);
         $data['name'] = $user->name;
@@ -86,7 +88,12 @@ class AuthController extends BaseController
      * Must be authenticated
      */
     public function logout(){
-        User::find(Auth::id())->tokens()->delete();
+        $user = User::find(Auth::id());
+        $user->tokens()->delete();
+        if($user->type == 'App\Models\Customer')
         return $this->sendResponse('', 'log out succssefully');
+
+        else
+        return redirect()->route('loginHome');
     }
 }

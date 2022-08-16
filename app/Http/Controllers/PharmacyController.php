@@ -24,6 +24,13 @@ class PharmacyController extends BaseController
 {
 
     protected AuthController $AuthCon;
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'search'
+        ]);
+    }
     /**
      * Get All pharmacies
      *
@@ -58,7 +65,7 @@ class PharmacyController extends BaseController
             return $this->sendError('' , 'Not Found');
         }
         $pharmacy = Pharmacy::find($id);
-        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::PROCESSING)->paginate(5);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::ONWAY)->paginate(5);
         return $this->sendResponse(OrderResources::collection($orders), [
             'current_page' => $orders->currentPage(),
             'nextPageUrl' => $orders->nextPageUrl(),
@@ -118,8 +125,8 @@ class PharmacyController extends BaseController
             'phone'=> 'required|min:13',
             'location'=> 'required',
             'image'=>'required|image',
-            // 'lat' => 'required|between: -90,90',
-            // 'lng' => 'required|between: -180,180',
+            'lat' => 'required|between: -90,90',
+            'lng' => 'required|between: -180,180',
         ]);
 
         if ($validator->fails()) {
@@ -127,6 +134,7 @@ class PharmacyController extends BaseController
         }
 
         $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
 
         if(!array_key_exists('image' , $input))
         {
@@ -144,8 +152,8 @@ class PharmacyController extends BaseController
             'phone'=> $input['phone'],
             'location'=> $input['location'],
             'image' => $input['image'],
-            // 'lat' => $input['lat'],
-            // 'lng' => $input['lng'],
+            'lat' => $input['lat'],
+            'lng' => $input['lng'],
             'state' => true
         ]);
 
@@ -258,4 +266,12 @@ class PharmacyController extends BaseController
         return redirect()->route('allpharmacies');
 
     }
+
+    public function search($name)
+    {
+        $pharmacies = Pharmacy::where('name', 'Like', '%' . $name . '%' )->get();
+        return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
+    }
+
+
 }

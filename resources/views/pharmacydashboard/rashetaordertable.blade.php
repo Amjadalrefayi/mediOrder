@@ -290,7 +290,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="" class="simple-text">
                     Medi Order
                 </a>
             </div>
@@ -346,67 +346,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">Pharmacy Panel </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-lg hidden-md"></b>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href={{route('logout')}}>
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -425,10 +373,6 @@
                             <div class="col-sm-6">
                                 <h2>Rasheta <b>Order</b></h2>
                             </div>
-                           {{-- <div class="col-sm-6">
-                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
-
-                            </div>--}}
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -436,12 +380,12 @@
                             <tr>
                                 <th>Customer Id</th>
                                 <th>Pharmacy Id</th>
-                                <th>Driver Id</th>
                                 <th>Image</th>
                                 <th>Text</th>
                                 <th>State</th>
                                 <th>Total Price</th>
                                 <th>Expected Time</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -451,30 +395,62 @@
 
                                 <td>{{$order->customer_id}}</td>
                                 <td>{{$order->pharmacy_id}}</td>
-                                <td>{{$order->driver_id}}</td>
-                                <td>{{$order->image}}</td>
+                                <td>
+                                <img src="{{$order->image}}" alt="Rasheta" style="width:100px;height:100px;">
+                                </td>
                                 <td>{{$order->text}}</td>
-                                <td>{{$order->state}}</td>
+                                <td>
+                                    @switch($order->state)
+                                        @case(1)
+                                        On hold
+                                            @break
+                                         @case(2)
+                                         Accepted
+                                            @break
+                                        @case(3)
+                                             Rejected
+                                             @break
+                                        @case(4)
+                                             Rejected
+                                             @break
+                                        @case(5)
+                                            DELIVERING
+                                             @break
+                                        @case(6)
+                                             DONE
+                                             @break
+                                        @case(7)
+                                             SOS
+                                             @break
+                                        @default
+
+                                    @endswitch
+
+                                </td>
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
                                 <td style="display:flex">
-
-                             {{--  <td style="display:flex">
-
-                                     <form action="{{route('editsupporterpage',$supporter)}}" method="get">
+                                    @if ($order->state == 1)
+                                    <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
                                         @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
+                                        <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
                                         </form>
 
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-eye" ></i> </button>
+                                            </form>
 
-                                    <form action="{{ route('deletesupporter',$supporter->id)}}" method="POST">
-                                    @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                                    </form>
-                                </td> --}}
+                                            @else
+
+                                            <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                                @csrf
+                                                <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
+                                                </form>
+
+                                            @endif
+
+                                </td>
                             </tr>
 
             @endforeach

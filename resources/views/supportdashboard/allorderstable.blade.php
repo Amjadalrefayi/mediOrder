@@ -290,7 +290,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="" class="simple-text">
                     Medi Order
                 </a>
             </div>
@@ -340,67 +340,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">Supporter Panel </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-lg hidden-md"></b>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href={{route('logout')}}>
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -409,7 +357,6 @@
                 </div>
             </div>
         </nav>
-
 
         <div class="container-xl">
             <div class="table-responsive">
@@ -437,8 +384,7 @@
                                 <th>Type</th>
                                 <th>Total Price</th>
                                 <th>Expected Time</th>
-                                <th>Lng</th>
-                                <th>Lat</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -449,15 +395,52 @@
                                 <td>{{$order->customer_id}}</td>
                                 <td>{{$order->pharmacy_id}}</td>
                                 <td>{{$order->driver_id}}</td>
-                                <td>{{$order->image}}</td>
+                                <td>
+                                    <img src="{{$order->image}}" alt="Rasheta" style="width:100px;height:100px;">
+                                </td>
                                 <td>{{$order->text}}</td>
-                                <td>{{$order->state}}</td>
-                                <td>{{$order->type}}</td>
+                                <td>
+                                    @switch($order->state)
+                                        @case(1)
+                                        On hold
+                                            @break
+                                         @case(2)
+                                         Accepted
+                                            @break
+                                        @case(3)
+                                             Rejected
+                                             @break
+                                        @case(4)
+                                             Rejected
+                                             @break
+                                        @case(5)
+                                            DELIVERING
+                                             @break
+                                        @case(6)
+                                             DONE
+                                             @break
+                                        @case(7)
+                                             SOS
+                                             @break
+                                        @default
+
+                                    @endswitch
+
+                                </td>
+                                <td>
+                                    @switch($order->type)
+                                    @case(1)
+                                        Default
+                                        @break
+                                     @case(2)
+                                     Rashate
+                                        @break
+                                    @default
+
+                                @endswitch
+                                </td>
                                 <td>{{$order->total_price}}</td>
                                 <td>{{$order->expected_time}}</td>
-                                <td>{{$order->lng}}</td>
-                                <td>{{$order->lat}}</td>
-
                              {{--  <td style="display:flex">
 
                                      <form action="{{route('editsupporterpage',$supporter)}}" method="get">
@@ -486,7 +469,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+                        <div class="hint-text">Showing <b>5</b> out of <b>{{$orders->count()}}</b> entries</div>
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

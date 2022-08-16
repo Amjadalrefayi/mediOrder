@@ -14,7 +14,7 @@ final class orderStatue extends Enum
     const CREATED = 1;
     const ACCEPTED = 2;
     const REJECTED = 3;
-    const PROCESSING = 4;
+    const ONWAY = 4;
     const DELIVERING = 5;
     const DONE = 6;
     const SOS = 7;

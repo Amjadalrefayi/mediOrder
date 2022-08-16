@@ -32,34 +32,33 @@ Route::get('loginHome', function(){
 
 //                           -------admain dashboard-------
 
-   Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
-   Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
+    Route::get('/customer/all', [CustomerController::class, 'index'])->name('customertable');
+    Route::delete('/deletecustomer/{id}', [CustomerController::class, 'destroy'])->name('deletecustomer');
 
-   Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
-   Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
-   Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
-   Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
-   Route::get('/editpharmacy/{pharmacy}', [PharmacyController::class, 'edit'])->name('editpharmacypage');
-   Route::put('/updatepharmacy/{id}', [PharmacyController::class, 'update'])->name('updatepharmacy');
+    Route::get('pharmacy/all', [PharmacyController::class, 'indexForAdmin'])->name('pharmacytable');
+    Route::get('pharmacy/create', [PharmacyController::class, 'create'])->name('createpharmacy');
+    Route::post('/storepharmacy', [PharmacyController::class, 'store'])->name('storepharmacy');
+    Route::delete('/deletepharmacy/{id}', [PharmacyController::class, 'destroy'])->name('deletepharmacy');
+    Route::get('/editpharmacy/{pharmacy}', [PharmacyController::class, 'edit'])->name('editpharmacypage');
+    Route::put('/updatepharmacy/{id}', [PharmacyController::class, 'update'])->name('updatepharmacy');
 
 
-   Route::get('/driver/all', [DriverController::class, 'index'])->name('drivertable');
-   Route::delete('/deletedriver/{id}', [DriverController::class, 'destroy'])->name('deletedriver');
-   Route::get('driver/create', [DriverController::class, 'create'])->name('createdriver');
-   Route::post('/storedriver', [DriverController::class, 'store'])->name('storedriver');
-   Route::get('/editdriver/{driver}', [DriverController::class, 'edit'])->name('editdriverpage');
-   Route::put('/updatedriver/{id}', [DriverController::class, 'update'])->name('updatedriver');
+    Route::get('/driver/all', [DriverController::class, 'index'])->name('drivertable');
+    Route::delete('/deletedriver/{id}', [DriverController::class, 'destroy'])->name('deletedriver');
+    Route::get('driver/create', [DriverController::class, 'create'])->name('createdriver');
+    Route::post('/storedriver', [DriverController::class, 'store'])->name('storedriver');
+    Route::get('/editdriver/{driver}', [DriverController::class, 'edit'])->name('editdriverpage');
+    Route::put('/updatedriver/{id}', [DriverController::class, 'update'])->name('updatedriver');
 
-   Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
-   Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
-   Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
-   Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
-   Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
-   Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
+    Route::get('/supporter/all', [SupporterController::class, 'index'])->name('supportertable');
+    Route::delete('/deletesupporter/{id}', [SupporterController::class, 'destroy'])->name('deletesupporter');
+    Route::get('supporter/create', [SupporterController::class, 'create'])->name('createsupporter');
+    Route::post('/storesupporter', [SupporterController::class, 'store'])->name('storesupporter');
+    Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
+    Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
-   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
-   Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum','isAdmin']], function () {});
-   Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum','isPharmacy']], function () {});
+
+
 
 
 
@@ -78,6 +77,9 @@ Route::get('loginHome', function(){
    Route::put('/updateproduct/{id}', [ProductController::class, 'update'])->name('updateproduct');
    Route::get('/complaint/create', [ComplaintController::class, 'create'])->name('createcomplaint');
    Route::post('/storecomplaint', [ComplaintController::class, 'store'])->name('storecomplaint');
+   Route::post('/makeOrderAccepted/{id}', [OrderController::class, 'makeOrderACCEPTED'])->name('orderacceptednow');
+   Route::post('/makeOrderRejected/{id}', [OrderController::class, 'makeOrderREJECTED'])->name('orderrejectednow');
+   Route::post('/makeOrdersos/{id}', [OrderController::class, 'makeOrdersosPH'])->name('makeOrdersosPH');
 
 
    //                           -------support dashboard-------
@@ -101,6 +103,7 @@ Route::get('loginHome', function(){
 Route::prefix('auth')->group(function () {
     Route::post('customer/register', [CustomerController::class,'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 //------Product CRUD------//
@@ -111,6 +114,7 @@ Route::group(['prefix' => 'products', 'middleware' => ['auth:sanctum']], functio
     Route::get('/show/{id}', [ProductController::class, 'show']);
     Route::put('/update/{id}', [ProductController::class, 'update']);
     Route::delete('/delete', [ProductController::class, 'destroy']);
+    Route::get('/search/{id}/{name}', [ProductController::class, 'search']);
 
 });
 
@@ -135,7 +139,7 @@ Route::group(['prefix' => 'pharmacy', 'middleware' => ['auth:sanctum']], functio
 
     Route::post('/store', [PharmacyController::class, 'store']);
     Route::get('/index', [PharmacyController::class, 'index']);
-
+    Route::get('/search/{name}', [PharmacyController::class, 'search']);
     Route::get('/showPharmacesPendingOrders/{id}', [PharmacyController::class, 'showPharmacesPendingOrders']);
     Route::get('/showPharmacesDoneOrders/{id}', [PharmacyController::class, 'showPharmacesDoneOrders']);
     Route::put('/update/{id}', [PharmacyController::class, 'update']);
@@ -179,6 +183,7 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
     Route::get('order/history', [OrderController::class, 'showHistoryDriverOrders']);
     Route::post('order/sos/{id}', [OrderController::class, 'makeOrderSOS']);
     Route::post('order/delivering/{id}', [OrderController::class, 'makeOrderDELIVERING']);
+    Route::post('order/onway/{id}', [OrderController::class, 'makeOrderOnWay']);
 });
 
 
@@ -222,12 +227,16 @@ Route::group(['prefix' => 'supporter', 'middleware' => ['auth:sanctum']], functi
 
 // //------Admin CRUD------//
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+Route::post('/store', [AdminController::class, 'store']);
 
-    Route::post('/store', [AdminController::class, 'store']);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/index', [AdminController::class, 'index']);
     Route::put('/update/{id}', [AdminController::class, 'update']);
     Route::get('/show/{id}', [AdminController::class, 'show']);
     Route::delete('/delete/{id}', [AdminController::class, 'destroy']);
-
 });
+
+
+
+
+

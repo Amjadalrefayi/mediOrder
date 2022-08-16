@@ -174,4 +174,10 @@ class ProductController extends BaseController
         return redirect()->route('producttable');
         return $this->sendResponse('', 'Product Deleted successfully');
     }
+
+    public function search($id, $name)
+    {
+        $products = Product::where('pharmacy_id', $id)->where('name', 'LIKE', '%' . $name . '%')->get();
+        return $this->sendResponse(ProductResources::collection($products), 'Get All Products');
+    }
 }

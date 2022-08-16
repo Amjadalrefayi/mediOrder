@@ -23,6 +23,13 @@ class DriverController extends BaseController
 {
     protected AuthController $AuthCon;
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'search'
+        ]);
+    }
+
     /**
      * Get all Drivers
      *
@@ -79,6 +86,7 @@ class DriverController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
         $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
 
         if(!array_key_exists('image' , $input))
         {

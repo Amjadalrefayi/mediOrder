@@ -29,11 +29,6 @@ class OrderController extends BaseController
     {
         $orders = Order::paginate(5);
         return view('supportdashboard.allorderstable')->with('orders',$orders);
-        // return $this->sendResponse(OrderResources::collection($orders), [
-        //     'current_page' => $orders->currentPage(),
-        //     'nextPageUrl' => $orders->nextPageUrl(),
-        //     'previousPageUrl' => $orders->previousPageUrl(),
-        // ]);
     }
 
     public function showLiveCustomerOrders()
@@ -50,7 +45,7 @@ class OrderController extends BaseController
 
     public function showLiveDriverOrders()
     {
-       $orders = Order::latest()->where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING])->get();
+       $orders = Order::where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING, orderStatue::ONWAY])->get();
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
     }
 
@@ -71,10 +66,23 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::DELIVERING;
+        $order->driver_id = Auth::id();
         $order->save();
         return $this->sendResponse('', 'Order DELIVERING successfully');
+    }
+
+    public function makeOrderOnWay($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::ONWAY;
+        $order->driver_id = Auth::id();
+        $order->save();
+        return $this->sendResponse('', 'Order ONWAY successfully');
     }
 
     public function makeOrderSOS($id)
@@ -82,7 +90,7 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::SOS;
         $order->save();
         return $this->sendResponse('', 'Order SOS successfully');
@@ -93,10 +101,47 @@ class OrderController extends BaseController
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
-        $order = Order::find($id)->first();
+        $order = Order::find($id);
         $order->state = orderStatue::ACCEPTED;
         $order->save();
-        return $this->sendResponse('', 'Order ACCEPTED successfully');
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA) {
+            $order->pharmacy_id = Auth::id();
+            $order->save();
+            return redirect()->route('rashetaordertable');
+        }
+    }
+
+    public function makeOrderREJECTED($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::REJECTED;
+        $order->save();
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA)
+            return redirect()->route('rashetaordertable');
+    }
+
+    public function makeOrdersosPH($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::SOS;
+        $order->save();
+        if ($order->type == orderType::DEFAULT)
+            return redirect()->route('ordertable');
+
+        if ($order->type == orderType::RASHETA)
+            return redirect()->route('rashetaordertable');
     }
 
     public function rashetaCustomerOrder(Request $request)
@@ -115,7 +160,7 @@ class OrderController extends BaseController
         $image = $request->image;
         $saveImage = time() . $image->getClientOriginalName();
         $image->move('uploads/orders', $saveImage);
-        $input['image'] = 'uploads/orders/' . $saveImage;
+        $input['image'] = 'https://medi-order.herokuapp.com/uploads/orders/' . $saveImage;
 
         if(array_key_exists('text',$input)){
         }
@@ -198,25 +243,31 @@ class OrderController extends BaseController
 
     public function showPharmacyRashetaOrdersView(Request $request)
     {
-        $pharmacy = Auth::id();
-        if(! Pharmacy::find($pharmacy)){
-            return $this->sendError('','Not Found');
-        }
-        $orders = Order::where('pharmacy_id',$pharmacy)->where('type',orderType::RASHETA)->latest()->paginate(5);
+        $orders = Order::where('type',orderType::RASHETA)->latest()->paginate(5);
         return view('pharmacydashboard.rashetaordertable')->with('orders',$orders);
     }
 
 
-    // public function showProductsOrder($id)
-    // {
-    //     if(! Order::find($id)){
-    //         return $this->sendError('','Not Found');
-    //     }
-    //      $order = Order::find($id);
-    //      $carts = Cart::where('order_id', $order)->latest()->paginate(5);
-    //     // $orders= new OrderResources($order);
-    //     return view('pharmacydashboard.productorder')->with('carts',$carts);
-    // }
+    public function showProductsOrder(Request $request)
+    {
+        $order = Auth::id();
+        if(! Order::find($order)){
+            return $this->sendError('','Not Found');
+        }
+        $carts = Cart::where('order_id',$order)->where('type',orderType::DEFAULT)->latest()->paginate(5);
+        return view('pharmacydashboard.productorder')->with('carts',$carts);
+    }
+
+
+    public function productrashetaorder(Request $request)
+    {
+        $order = Auth::id();
+        if(! Order::find($order)){
+            return $this->sendError('','Not Found');
+        }
+        $carts = Cart::where('order_id',$order)->where('type',orderType::RASHETA)->latest()->paginate(5);
+        return view('pharmacydashboard.productrashetaorder')->with('carts',$carts);
+    }
 
 
     public function acceptedOrdersTables(Request $request)
