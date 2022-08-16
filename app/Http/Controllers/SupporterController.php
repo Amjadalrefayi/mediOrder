@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supporter;
-use App\Models\User;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
-use App\Http\Resources\SimpleSupporterResources;
 use App\Http\Resources\SupporterResources;
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class SupporterController extends BaseController
