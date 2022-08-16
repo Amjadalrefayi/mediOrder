@@ -244,6 +244,8 @@
         }
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
+
+
         }
         .modal .modal-content {
             border-radius: 3px;
@@ -255,14 +257,16 @@
         }
         .modal .modal-title {
             display: inline-block;
+
         }
         .modal .form-control {
             border-radius: 2px;
             box-shadow: none;
             border-color: #dddddd;
+
         }
         .modal textarea.form-control {
-            resize: vertical;
+             padding: 20px 30px;
         }
         .modal .btn {
             border-radius: 2px;
@@ -290,7 +294,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="" class="simple-text">
+                <a href="http://www.creative-tim.com" class="simple-text">
                     Medi Order
                 </a>
             </div>
@@ -346,15 +350,67 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Pharmacy Panel </a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-dashboard"></i>
+								<p class="hidden-lg hidden-md">Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret hidden-lg hidden-md"></b>
+									<p class="hidden-lg hidden-md">
+										5 Notifications
+										<b class="caret"></b>
+									</p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                           <a href="">
+                                <i class="fa fa-search"></i>
+								<p class="hidden-lg hidden-md">Search</p>
+                            </a>
+                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href={{route('logout')}}>
+                           <a href="">
+                               <p>Account</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+										Dropdown
+										<b class="caret"></b>
+									</p>
+
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -364,182 +420,25 @@
             </div>
         </nav>
 
-
         <div class="container-xl">
-            <div class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>Defult <b>Order</b></h2>
-                            </div>
-                           {{-- <div class="col-sm-6">
-                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
 
-                            </div>--}}
-                        </div>
-                    </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Customer</th>
-                                <th>Pharmacy Id</th>
-                                <th>Products</th>
-                                <th>State</th>
-                                <th>Total Price</th>
-                                <th>Expected Time</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <form action={{route('storecomplaint')}} method="POST">
+                @csrf
+				<div class="modal-header">
+					<h4 class="modal-title">Add Complaint</h4>
 
-                     @foreach ($orders as $order)
-                            <tr>
-
-                                <td>{{$order->customer->name}}</td>
-                                <td>{{$order->pharmacy_id}}</td>
-                                <td>
-                                    @foreach ($order->carts as $item)
-                                    {{$item->product->name}}
-                                    {{$item->count}}
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @switch($order->state)
-                                        @case(1)
-                                        On hold
-                                            @break
-                                         @case(2)
-                                         Accepted
-                                            @break
-                                        @case(3)
-                                             Rejected
-                                             @break
-                                        @case(4)
-                                             Rejected
-                                             @break
-                                        @case(5)
-                                            DELIVERING
-                                             @break
-                                        @case(6)
-                                             DONE
-                                             @break
-                                        @case(7)
-                                             SOS
-                                             @break
-                                        @default
-
-                                    @endswitch
-
-                                </td>
-                                <td>{{$order->total_price}}</td>
-                                <td>{{$order->expected_time}}</td>
-                                <td style="display:flex">
-                                    @if ($order->state == 1)
-                                    <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                        @csrf
-                                        <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
-                                        </form>
-                                        <form action="{{route('orderrejectednow',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
-                                            </form>
-
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-eye" ></i> </button>
-                                            </form>
-
-
-                                        @elseif ($order->state == 2 )
-
-                                        <form action="{{route('makeOrdersosPH',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-warning" style="color:red" aria-hidden="true"></i> </button>
-                                            </form>
-
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                            @csrf
-                                            <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
-                                            </form>
-
-
-                                            @else
-
-                                            <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                                @csrf
-                                                <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
-                                                </form>
-
-                                            @endif
-
-                                </td>
-                            </tr>
-
-            @endforeach
-
-
-                        </tbody>
-
-
-
-
-                    </table>
-                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($orders->hasPages())
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                @if ($orders->onFirstPage())
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#"
-                                       tabindex="-1">Previous</a>
-                                </li>
-                                @else
-                                <li class="page-item"><a class="page-link"
-                                    href="{{ $orders->previousPageUrl() }}">
-                                          Previous</a>
-                                  </li>
-                                @endif
-
-                                @foreach ($orders as $element)
-                                @if (is_string($element))
-                                <li class="page-item disabled">{{ $element }}</li>
-                                @endif
-
-                                @if (is_array($element))
-                                @foreach ($orders as $page => $url)
-                                @if ($page == $orders->currentPage())
-                                <li class="page-item active">
-                                    <a class="page-link">{{ $page }}</a>
-                                </li>
-                                @else
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="{{ $url }}">{{ $page }}</a>
-                                </li>
-                                @endif
-                                @endforeach
-                                @endif
-                                @endforeach
-
-                                @if ($orders->hasMorePages())
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="{{ $orders->nextPageUrl() }}"
-                                       rel="next">Next</a>
-                                </li>
-                                @else
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                                @endif
-                            </ul>
-                          </nav>
-                            @endif
-                    </div>
-                </div>
-            </div>
+				</div>
+				<div class="modal-body" width="50%">
+					<div class="form-group">
+						<label>Note (Keep it brief) </label>
+						<input type="text" class="form-control" name="note" required >
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-success" value="Add">
+				</div>
+			</form>
         </div>
 
 
