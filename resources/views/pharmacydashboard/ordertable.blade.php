@@ -296,13 +296,13 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href={{route('producttable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Product table</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
                         <p>Default Order table</p>

@@ -364,11 +364,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href={{ route('createpharmacy') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Pharmacy</span></a>
-                                <form style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
-                                    <input  type="text" name="searchWord" style="background-color: #566787" required/>
-                                    <button class="teal" type="submit" style=" background-color: white;
-                                    color: black;
-                                    border: 2px solid  #0397d6">Search</button>
+                                <form class="btn btn-success" style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
+                                    <input type="text" placeholder="Search.." name="searchWord" style="color: black" required/>
+                                    <button style=" background-color: white;
+                                    color: black; type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>

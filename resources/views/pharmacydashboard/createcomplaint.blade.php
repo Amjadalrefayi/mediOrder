@@ -300,7 +300,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href={{route('producttable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Product table</p>
@@ -330,7 +330,7 @@
                         <p>Rejected Order table</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href={{route('createcomplaint')}}>
                         <i class="pe-7s-user"></i>
                         <p>Make a complaint</p>

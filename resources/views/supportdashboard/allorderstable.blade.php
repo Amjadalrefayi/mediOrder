@@ -302,7 +302,7 @@
                         <p>Complaints table</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href={{route('allordertable')}}>
                         <i class="pe-7s-user"></i>
                         <p>Orders table</p>
@@ -367,11 +367,10 @@
                                 <h2><b>Orders</b></h2>
                             </div>
 
-                            <form  style="display: flex; justify-content :end!important" action="{{ route('searchOrder') }}" method="POST">
-                                <input type="text" name="id" style="background-color: #566787" required/>
-                                <button class="teal" type="submit" style=" background-color: white;
-                                color: black;
-                                border: 2px solid  #0397d6">Search</button>
+                            <form class="btn btn-success"  style="display: flex; justify-content :end!important" action="{{ route('searchOrder') }}" method="POST">
+                                <input type="text" placeholder="Search.." name="id" style="color: black" required/>
+                                <button style=" background-color: white;
+                                color: black; type="submit"><i class="fa fa-search"></i></button>
                             </form>
                            {{-- <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>

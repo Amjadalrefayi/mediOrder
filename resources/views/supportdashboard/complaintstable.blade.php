@@ -296,7 +296,7 @@
             </div>
 
             <ul class="nav">
-                <li >
+                <li class="active">
                     <a href={{route('complaintstable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Complaints table</p>

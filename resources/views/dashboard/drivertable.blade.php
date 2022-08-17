@@ -364,7 +364,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href={{ route('createdriver') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Driver</span></a>
-
+                                <form class="btn btn-success" style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
+                                    <input type="text" placeholder="Search.." name="searchWord" style="color: black" required/>
+                                    <button style=" background-color: white;
+                                    color: black; type="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
