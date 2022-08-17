@@ -243,6 +243,18 @@ class OrderController extends BaseController
             return $this->sendError('Order Not Found', 404);
         }
 
+        //return view('pharmacydashboard.showOrder')->with('order',new OrderResources($order));
+        return $this->sendResponse(new OrderResources($order), 'Specific order');
+    }
+
+    public function showDashBoard($id)
+    {
+        $order = Order::find($id);
+
+        if (!$order) {
+            return $this->sendError('Order Not Found', 404);
+        }
+
         return view('pharmacydashboard.showOrder')->with('order',new OrderResources($order));
         //return $this->sendResponse(new OrderResources($order), 'Specific order');
     }
