@@ -14,6 +14,8 @@ use App\Http\Controllers\SupporterController;
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ComplaintController;
+use App\Models\Customer;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +59,8 @@ Route::get('loginHome', function(){
     Route::get('/editsupporter/{supporter}', [SupporterController::class, 'edit'])->name('editsupporterpage');
     Route::put('/updatesupporter/{id}', [SupporterController::class, 'update'])->name('updatesupporter');
 
+    Route::post('users/search', [CustomerController::class, 'search'])->name('searchCustomer');
+
 
 
 
@@ -81,6 +85,8 @@ Route::get('loginHome', function(){
    Route::post('/makeOrderRejected/{id}', [OrderController::class, 'makeOrderREJECTED'])->name('orderrejectednow');
    Route::post('/makeOrdersos/{id}', [OrderController::class, 'makeOrdersosPH'])->name('makeOrdersosPH');
 
+   Route::post('products/search', [ProductController::class, 'searchPH'])->name('searchProducts');
+
 
    //                           -------support dashboard-------
    Route::get('/complaint/all', [ComplaintController::class, 'index'])->name('complaintstable');
@@ -97,6 +103,10 @@ Route::get('loginHome', function(){
    Route::get('/restor/driver/{id}', [DriverController::class, 'restordriver'])->name('restordriver');
    Route::get('/blocked/pharmacy', [PharmacyController::class, 'blockedpharmacy'])->name('blockedpharmacy');
    Route::get('/restor/pharmacy/{id}', [PharmacyController::class, 'restorpharmacy'])->name('restorpharmacy');
+
+   Route::post('/makeOrderRejectedSu/{id}', [OrderController::class, 'makeOrderREJECTEDSupport'])->name('orderrejectednowS');
+
+   Route::post('orders/search', [OrderController::class, 'search'])->name('searchOrder');
 
 //------Register / Login------//
 

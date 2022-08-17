@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Customer;
 use App\Models\Pharmacy;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -122,11 +123,26 @@ class OrderController extends BaseController
         $order = Order::find($id);
         $order->state = orderStatue::REJECTED;
         $order->save();
+
         if ($order->type == orderType::DEFAULT)
             return redirect()->route('ordertable');
 
         if ($order->type == orderType::RASHETA)
             return redirect()->route('rashetaordertable');
+
+    }
+
+    public function makeOrderREJECTEDSupport($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::REJECTED;
+        $order->save();
+
+        return redirect()->route('allordertable');
+
     }
 
     public function makeOrdersosPH($id)
@@ -236,14 +252,14 @@ class OrderController extends BaseController
         if(! Pharmacy::find($pharmacy)){
             return $this->sendError('','Not Found');
         }
-        $orders = Order::where('pharmacy_id',$pharmacy)->where('type',orderType::DEFAULT)->latest()->paginate(5);
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('type',orderType::DEFAULT)->latest()->paginate(10);
         return view('pharmacydashboard.ordertable')->with('orders',$orders);
     }
 
 
     public function showPharmacyRashetaOrdersView(Request $request)
     {
-        $orders = Order::where('type',orderType::RASHETA)->latest()->paginate(5);
+        $orders = Order::where('type',orderType::RASHETA)->latest()->paginate(10);
         return view('pharmacydashboard.rashetaordertable')->with('orders',$orders);
     }
 
@@ -254,7 +270,7 @@ class OrderController extends BaseController
         if(! Order::find($order)){
             return $this->sendError('','Not Found');
         }
-        $carts = Cart::where('order_id',$order)->where('type',orderType::DEFAULT)->latest()->paginate(5);
+        $carts = Cart::where('order_id',$order)->where('type',orderType::DEFAULT)->latest()->paginate(10);
         return view('pharmacydashboard.productorder')->with('carts',$carts);
     }
 
@@ -265,7 +281,7 @@ class OrderController extends BaseController
         if(! Order::find($order)){
             return $this->sendError('','Not Found');
         }
-        $carts = Cart::where('order_id',$order)->where('type',orderType::RASHETA)->latest()->paginate(5);
+        $carts = Cart::where('order_id',$order)->where('type',orderType::RASHETA)->latest()->paginate(10);
         return view('pharmacydashboard.productrashetaorder')->with('carts',$carts);
     }
 
@@ -276,7 +292,7 @@ class OrderController extends BaseController
         if(! Pharmacy::find($pharmacy)){
             return $this->sendError('','Not Found');
         }
-        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::ACCEPTED)->latest()->paginate(5);
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::ACCEPTED)->latest()->paginate(10);
         return view('pharmacydashboard.acceptedtable')->with('orders',$orders);
     }
 
@@ -287,7 +303,7 @@ class OrderController extends BaseController
         if(! Pharmacy::find($pharmacy)){
             return $this->sendError('','Not Found');
         }
-        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::REJECTED)->latest()->paginate(5);
+        $orders = Order::where('pharmacy_id',$pharmacy)->where('state',orderStatue::REJECTED)->latest()->paginate(10);
         return view('pharmacydashboard.rejectedtable')->with('orders',$orders);
     }
 
@@ -306,5 +322,20 @@ class OrderController extends BaseController
         $order = Order::find($id);
         $order->delete();
         return $this->sendResponse('', 'Order deleted successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+
+        $orders =  Order::where('id', $request->id)->paginate(10);
+        return view('supportdashboard.allorderstable')->with('orders',$orders);
+
     }
 }

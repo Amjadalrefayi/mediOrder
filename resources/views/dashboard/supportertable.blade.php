@@ -364,7 +364,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
-
+                                <form action="{{ route('searchCustomer') }}" method="POST">
+                                    <input type="text" name="searchWord" style="background-color: #566787" required/>
+                                    <button type="submit" style="color: #0397d6">Search</button>
+                                </form>
                             </div>
                         </div>
                     </div>

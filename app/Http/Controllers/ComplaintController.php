@@ -27,7 +27,7 @@ class ComplaintController extends BaseController
      */
     public function index()
     {
-        $complaints= Complaint::paginate(5);
+        $complaints= Complaint::paginate(10);
         return view('supportdashboard.complaintstable')->with('complaints',$complaints);
 
         // return $this->sendResponse(ComplaintResources::collection($complaints), [
@@ -57,14 +57,14 @@ class ComplaintController extends BaseController
         $user = User::find(Auth::id())->first();
 
         if($user->type === 'App\Models\Customer')
-        $complaints=Customer::find(Auth::id())->complaints()->paginate(5);
+        $complaints=Customer::find(Auth::id())->complaints()->paginate(10);
 
 
          if($user->type === 'App\Models\Pharmacy')
-         $complaints=Pharmacy::find(Auth::id())->complaints()->paginate(5);
+         $complaints=Pharmacy::find(Auth::id())->complaints()->paginate(10);
 
          if($user->type === 'App\Models\Driver')
-         $complaints=Driver::find(Auth::id())->complaints()->paginate(5);
+         $complaints=Driver::find(Auth::id())->complaints()->paginate(10);
 
 
          return $this->sendResponse(ComplaintResources::collection($complaints), [

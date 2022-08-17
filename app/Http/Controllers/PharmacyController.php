@@ -43,19 +43,19 @@ class PharmacyController extends BaseController
         return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
     }
     public function blockedpharmacy(){
-        $pharmacies = Pharmacy::onlyTrashed()->latest()->paginate(5);
+        $pharmacies = Pharmacy::onlyTrashed()->latest()->paginate(10);
         return view('supportdashboard.blockedpharmacy')->with('pharmacies',$pharmacies);
     }
 
     public function allpharmacies(){
 
-        $pharmacies = Pharmacy::latest()->paginate(5);
+        $pharmacies = Pharmacy::latest()->paginate(10);
         return view('supportdashboard.allpharmaciestable')->with('pharmacies',$pharmacies);
     }
 
     public function indexForAdmin()
     {
-        $pharmacies = Pharmacy::latest()->paginate(5);
+        $pharmacies = Pharmacy::latest()->paginate(10);
         return view('dashboard.pharmacytable')->with('pharmacies',$pharmacies);
     }
 
@@ -65,7 +65,7 @@ class PharmacyController extends BaseController
             return $this->sendError('' , 'Not Found');
         }
         $pharmacy = Pharmacy::find($id);
-        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::ONWAY)->paginate(5);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::ONWAY)->paginate(10);
         return $this->sendResponse(OrderResources::collection($orders), [
             'current_page' => $orders->currentPage(),
             'nextPageUrl' => $orders->nextPageUrl(),
@@ -79,7 +79,7 @@ class PharmacyController extends BaseController
             return $this->sendError('' , 'Not Found');
         }
         $pharmacy = Pharmacy::find($id);
-        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::DONE)->paginate(5);
+        $orders = Order::where('pharmacy_id',$id)->where('state' , orderStatue::DONE)->paginate(10);
         return $this->sendResponse(OrderResources::collection($orders), [
             'current_page' => $orders->currentPage(),
             'nextPageUrl' => $orders->nextPageUrl(),
@@ -90,7 +90,7 @@ class PharmacyController extends BaseController
             return $this->sendResponse(SimplePharmacyResources::collection($pharmacies), 'Get All Pharmacies');
         }
         else {
-            $pharmacies = Pharmacy::latest()->paginate(5);
+            $pharmacies = Pharmacy::latest()->paginate(10);
             return $this->sendResponse(SimplePharmacyResources::collection($pharmacies),[
                 'nextPageUrl' =>  $pharmacies->nextPageUrl() ,
                 'previousPageUrl' => $pharmacies->previousPageUrl()

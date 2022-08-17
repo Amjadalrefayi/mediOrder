@@ -37,19 +37,19 @@ class DriverController extends BaseController
      */
     public function index()
     {
-        $drivers = Driver::latest()->paginate(5);
+        $drivers = Driver::latest()->paginate(10);
          return view('dashboard.drivertable')->with('drivers',$drivers);
     }
 
     public function alldrivers(){
 
-        $drivers = Driver::latest()->paginate(5);
+        $drivers = Driver::latest()->paginate(10);
         return view('supportdashboard.alldriverstable')->with('drivers',$drivers);
     }
 
 
     public function blockeddriver(){
-        $drivers = Driver::onlyTrashed()->latest()->paginate(5);
+        $drivers = Driver::onlyTrashed()->latest()->paginate(10);
         return view('supportdashboard.blockeddriver')->with('drivers',$drivers);
     }
   /**

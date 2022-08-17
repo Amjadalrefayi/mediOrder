@@ -362,7 +362,12 @@
                             <div class="col-sm-6">
                                 <h2>Manage <b>Customer</b></h2>
                             </div>
-
+                            <div class="col-sm-6">
+                                <form action="{{ route('searchCustomer') }}" method="POST">
+                                    <input type="text" name="searchWord" style="background-color: #566787" required/>
+                                    <button type="submit" style="color: #0397d6">Search</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">

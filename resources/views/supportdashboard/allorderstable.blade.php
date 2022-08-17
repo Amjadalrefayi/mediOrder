@@ -366,6 +366,11 @@
                             <div class="col-sm-6">
                                 <h2><b>Orders</b></h2>
                             </div>
+
+                            <form action="{{ route('searchOrder') }}" method="POST">
+                                <input type="text" name="id" style="background-color: #566787" required/>
+                                <button type="submit" style="color: #0397d6">Search</button>
+                            </form>
                            {{-- <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
 
@@ -383,7 +388,7 @@
                                 <th>State</th>
                                 <th>Type</th>
                                 <th>Total Price</th>
-                                <th>Expected Time</th>
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -440,7 +445,14 @@
                                 @endswitch
                                 </td>
                                 <td>{{$order->total_price}}</td>
-                                <td>{{$order->expected_time}}</td>
+                                <td>
+
+                                    <form action="{{route('orderrejectednowS',$order->id)}}" method="POST">
+                                        @csrf
+                                        <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
+                                        </form>
+
+                                </td>
                              {{--  <td style="display:flex">
 
                                      <form action="{{route('editsupporterpage',$supporter)}}" method="get">

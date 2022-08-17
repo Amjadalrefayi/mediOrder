@@ -279,7 +279,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image={{asset('dashboard/img/sidebar-5.jpg') }}>
+    <div class="sidebar" data-color="purple" data-image={{asset('/dashboard/img/sidebar-5.jpg') }}>
 
     <!--
 
@@ -296,7 +296,7 @@
             </div>
 
             <ul class="nav">
-                <li >
+                <li class="active">
                     <a href={{route('customertable')}}>
                         <i class="pe-7s-graph"></i>
                         <p>Customer table</p>
@@ -308,7 +308,7 @@
                         <p>Supporter table</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href={{route('pharmacytable')}} >
                         <i class="pe-7s-user"></i>
                         <p>Pharmacy table</p>
@@ -360,10 +360,9 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Manage <b>Pharmacies</b></h2>
+                                <h2>Manage <b>Customer</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <a href={{ route('createpharmacy') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Pharmacy</span></a>
                                 <form action="{{ route('searchCustomer') }}" method="POST">
                                     <input type="text" name="searchWord" style="background-color: #566787" required/>
                                     <button type="submit" style="color: #0397d6">Search</button>
@@ -379,36 +378,19 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Phone</th>
-                                <th>State</th>
-                                <th>Actions</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                     @foreach ($pharmacies as $pharmacy)
+            @foreach ($users as $user)
                             <tr>
 
-                                <td>{{$pharmacy->name}}</td>
-                                <td>{{$pharmacy->email}}</td>
-                                <td>{{$pharmacy->location}}</td>
-                                <td>{{$pharmacy->phone}}</td>
-                                <td>{{$pharmacy->state}}</td>
-                                <td style="display:flex">
-
-                                     <form action="{{route('editpharmacypage',$pharmacy)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form>
-
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> --}}
-
-                                    <form action="{{ route('deletepharmacy',$pharmacy->id)}}" method="POST">
-                                    @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                                    </form>
-                                </td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->location}}</td>
+                                <td>{{$user->phone}}</td>
+                                <td>{{$user->type}}</td>
                             </tr>
 
             @endforeach
@@ -421,30 +403,30 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$pharmacies->count()}}</b> out of <b>5</b> entries</div>
-                        @if ($pharmacies->hasPages())
+
+                        @if ($users->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                @if ($pharmacies->onFirstPage())
+                                @if ($users->onFirstPage())
                                 <li class="page-item disabled">
                                     <a class="page-link" href="#"
                                        tabindex="-1">Previous</a>
                                 </li>
                                 @else
                                 <li class="page-item"><a class="page-link"
-                                    href="{{ $pharmacies->previousPageUrl() }}">
+                                    href="{{ $users->previousPageUrl() }}">
                                           Previous</a>
                                   </li>
                                 @endif
 
-                                @foreach ($pharmacies as $element)
+                                @foreach ($users as $element)
                                 @if (is_string($element))
                                 <li class="page-item disabled">{{ $element }}</li>
                                 @endif
 
                                 @if (is_array($element))
-                                @foreach ($pharmacies as $page => $url)
-                                @if ($page == $pharmacies->currentPage())
+                                @foreach ($users as $page => $url)
+                                @if ($page == $paginator->currentPage())
                                 <li class="page-item active">
                                     <a class="page-link">{{ $page }}</a>
                                 </li>
@@ -458,10 +440,10 @@
                                 @endif
                                 @endforeach
 
-                                @if ($pharmacies->hasMorePages())
+                                @if ($users->hasMorePages())
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="{{ $pharmacies->nextPageUrl() }}"
+                                       href="{{ $users->nextPageUrl() }}"
                                        rel="next">Next</a>
                                 </li>
                                 @else

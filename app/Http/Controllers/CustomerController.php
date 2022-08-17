@@ -103,7 +103,7 @@ class CustomerController extends BaseController
 
     public function allcustomers(){
 
-        $customers = Customer::latest()->paginate(5);
+        $customers = Customer::latest()->paginate(10);
         return view('supportdashboard.allcustomerstable')->with('customers',$customers);
     }
     public function blockedcustomer(){
@@ -191,8 +191,32 @@ class CustomerController extends BaseController
     }
 
     public function restorcustomer($id){
-        $customer = Customer::withTrashed()->find($id)->restore();
+        Customer::withTrashed()->find($id)->restore();
         return redirect()->route('allcustomers');
+    }
+
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'searchWord' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('',$validator->errors());
+        }
+
+        if (is_numeric($request->searchWord))
+        {
+            $users =  User::where('id', $request->searchWord)->paginate(10);
+            return view('dashboard.userResault')->with('users',$users);
+        }
+
+        else {
+            $users = User::where('name', 'LIKE', '%' . $request->searchWord . '%')->paginate(10);
+            return view('dashboard.userResault')->with('users',$users);
+        }
+
+
+
 
     }
 }

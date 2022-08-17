@@ -180,4 +180,19 @@ class ProductController extends BaseController
         $products = Product::where('pharmacy_id', $id)->where('name', 'LIKE', '%' . $name . '%')->get();
         return $this->sendResponse(ProductResources::collection($products), 'Get All Products');
     }
+
+    public function searchPH(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+        $products = Product::where('pharmacy_id', Auth::id())->where('name', 'LIKE', '%' . $request->name . '%')->paginate(10);
+        return view('pharmacydashboard.producttable')->with('products',$products);
+    }
+
 }
