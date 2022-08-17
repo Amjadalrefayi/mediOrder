@@ -138,7 +138,7 @@ Route::group(['prefix' => 'products', 'middleware' => ['auth:sanctum']], functio
 
 Route::group(['prefix' => 'customer', 'middleware' => ['auth:sanctum']], function () {
 
-    Route::put('/update/{id}', [CustomerController::class, 'update']);
+    Route::put('/update', [CustomerController::class, 'update']);
     Route::get('/show/{id}', [CustomerController::class, 'show']);
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
     Route::post('order/default', [OrderController::class, 'customerPhOrderStore']);

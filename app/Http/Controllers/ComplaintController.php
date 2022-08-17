@@ -135,7 +135,7 @@ class ComplaintController extends BaseController
         $user = User::find(Auth::id());
 
         if($user->type === 'App\Models\Customer')
-        $input['customer_id'] = Auth::id();
+            $input['customer_id'] = Auth::id();
 
         if($user->type === 'App\Models\Pharmacy'){
             $input['pharmacy_id'] = Auth::id();
@@ -143,10 +143,11 @@ class ComplaintController extends BaseController
             return redirect()->route('producttable');
         }
 
-        if($user->type === 'App\Models\Driver'){
-        $input['driver_id'] = Auth::id();
+        if($user->type === 'App\Models\Driver')
+            $input['driver_id'] = Auth::id();
+
         $complaint = Complaint::create($input);
-        return $this->sendResponse(new ComplaintResources($complaint), 'complaint Store successfully');}
+        return $this->sendResponse(new ComplaintResources($complaint), 'complaint Store successfully');
     }
 
     /**

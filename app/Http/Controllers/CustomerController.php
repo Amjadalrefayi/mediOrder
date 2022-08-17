@@ -136,12 +136,9 @@ class CustomerController extends BaseController
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update($id , Request  $request){
+    public function update(Request  $request){
 
-        if(! Customer::find($id)) {
-            return $this->sendError('' , 'Not Found');
-        }
-        $customer = Customer::find($id);
+        $customer = Customer::find(Auth::id());
         $validator = Validator::make($request->all(), [
             'name' => 'min:3|nullable',
             'password' => 'min:8|nullable',
@@ -151,14 +148,18 @@ class CustomerController extends BaseController
             'image' => 'mimes:jpeg,jpg,png | nullable',
         ]);
 
-        $customer->name = $request->name;
-        $customer->password = $request['password'] = Hash::make($request['password']);
-        $customer->phone = $request->phone;
-        $customer->gender = $request->gender;
-        $customer->location = $request->location;
-        $customer->image = $request->image;
-        $customer->update();
-        return $this->sendResponse('', 'Customer updated successfully');
+        if ($validator->fails()) {
+            return $this->sendError('',$validator->errors());
+        }
+
+        $input = $request->all();
+        if(array_key_exists('password',$input)){
+            $input['password'] = Hash::make($input['password']);
+        }
+        $customer->update($input);
+
+        $customer->refresh();
+        return $this->sendResponse(new CustomerResources($customer), 'Customer updated successfully');
 
     }
 
