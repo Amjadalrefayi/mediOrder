@@ -106,6 +106,7 @@ class CustomerController extends BaseController
         $customers = Customer::latest()->paginate(10);
         return view('supportdashboard.allcustomerstable')->with('customers',$customers);
     }
+
     public function blockedcustomer(){
         $customers = Customer::onlyTrashed()->latest()->paginate(5);
         return view('supportdashboard.blockedcustomer')->with('customers',$customers);

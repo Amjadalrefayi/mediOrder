@@ -375,8 +375,8 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>CustomerId</th>
-                                <th></th>
                                 <th>PharmacyId</th>
                                 <th>DriverId</th>
                                 <th>Note</th>
@@ -387,8 +387,9 @@
                      @foreach ($complaints as $complaint)
                             <tr>
 
+                                <td>{{$complaint->id}}</td>
                                 <td>{{$complaint->customer_id}}</td>
-                                <td></td>
+
                                 <td>{{$complaint->pharmacy_id}}</td>
                                 <td>{{$complaint->driver_id}}</td>
                                 <td>{{$complaint->note}}</td>

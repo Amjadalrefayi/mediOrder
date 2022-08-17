@@ -381,6 +381,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -393,6 +394,7 @@
                      @foreach ($drivers as $driver)
                             <tr>
 
+                                <td>{{$driver->id}}</td>
                                 <td>{{$driver->name}}</td>
                                 <td>{{$driver->email}}</td>
                                 <td>{{$driver->phone}}</td>

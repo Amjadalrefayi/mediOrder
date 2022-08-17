@@ -380,6 +380,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -391,6 +392,7 @@
                      @foreach ($pharmacies as $pharmacy)
                             <tr>
 
+                                <td>{{$pharmacy->id}}</td>
                                 <td>{{$pharmacy->name}}</td>
                                 <td>{{$pharmacy->email}}</td>
                                 <td>{{$pharmacy->phone}}</td>
