@@ -14,8 +14,7 @@ use App\Http\Controllers\SupporterController;
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ComplaintController;
-use App\Models\Customer;
-use App\Models\Product;
+
 
 /*
 |--------------------------------------------------------------------------

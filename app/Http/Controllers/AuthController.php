@@ -42,7 +42,7 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('', $validator->errors());
+            return $this->sendError('', $validator->errors()->email);
         }
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
