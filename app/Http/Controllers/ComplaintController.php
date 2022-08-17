@@ -122,7 +122,6 @@ class ComplaintController extends BaseController
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'note'=>'required',
         ]);
