@@ -216,6 +216,9 @@ class PharmacyController extends BaseController
             'image' => 'mimes:jpeg,jpg,png | nullable',
         ]);
 
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
 
         $input = $request->all();
 
@@ -224,12 +227,11 @@ class PharmacyController extends BaseController
             $input['image'] = null;
         }
 
-        $pharmacy->name = $input['name'];
-        $pharmacy->password = $input['password'] = Hash::make($request['password']);
-        $pharmacy->phone = $input['phone'];
-        $pharmacy->location = $input['location'];
-        $pharmacy->image = $input['image'];
-        $pharmacy->update();
+        $input = $request->all();
+        if(array_key_exists('password',$input)){
+            $input['password'] = Hash::make($input['password']);
+        }
+        $pharmacy->update($input);
 
         return redirect()->route('pharmacytable');
     }

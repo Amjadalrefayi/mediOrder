@@ -382,6 +382,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Customer</th>
                                 <th>Pharmacy Id</th>
                                 <th>Products</th>
@@ -396,6 +397,7 @@
                      @foreach ($orders as $order)
                             <tr>
 
+                                <td>{{$order->id}}</td>
                                 <td>{{$order->customer->name}}</td>
                                 <td>{{$order->pharmacy_id}}</td>
                                 <td>

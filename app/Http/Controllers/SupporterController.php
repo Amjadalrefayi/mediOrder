@@ -136,6 +136,7 @@ class SupporterController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Please validate error', $validator->errors());
         }
+
         $input = $request->all();
 
         if(!array_key_exists('image' , $input))
@@ -143,14 +144,11 @@ class SupporterController extends BaseController
             $input['image'] = null;
         }
 
-        $supporter->name = $request->name;
-        $supporter->email = $request->email;
-        $supporter->password = $request['password'] = Hash::make($request['password']);
-        $supporter->phone = $request->phone;
-        $supporter->gender = $request->gender;
-        $supporter->location = $request->location;
-        $supporter->image = $request->image;
-        $supporter->update();
+        $input = $request->all();
+        if(array_key_exists('password',$input)){
+            $input['password'] = Hash::make($input['password']);
+        }
+        $supporter->update($input);
         return redirect()->route('supportertable');
         return $this->sendResponse('', 'Supporter updated successfully');
 

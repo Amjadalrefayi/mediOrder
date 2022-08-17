@@ -202,7 +202,7 @@ class DriverController extends BaseController
             'password' => 'min:8|nullable',
             'phone'=> 'min:13|nullable',
             'gender'=>'in:male,female|nullable',
-            'location'=> 'required',
+            'location'=> 'nullable',
             'image' => 'mimes:jpeg,jpg,png | nullable',
         ]);
 
@@ -217,18 +217,13 @@ class DriverController extends BaseController
             $input['image'] = null;
         }
 
-        $driver->name = $input['name'];
-        $driver->password = $input['password'] = Hash::make($request['password']);
-        $driver->phone = $input['phone'];
-        $driver->location = $input['location'];
-        $driver->image = $input['image'];
-        $driver->gender = $input['gender'];
-
-        $driver->update();
+        $input = $request->all();
+        if(array_key_exists('password',$input)){
+            $input['password'] = Hash::make($input['password']);
+        }
+        $driver->update($input);
 
         return redirect()->route('drivertable');
-
-        return $this->sendResponse('', 'Driver updated successfully');
 
 
     }

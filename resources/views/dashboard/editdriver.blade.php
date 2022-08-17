@@ -369,24 +369,24 @@
 				<div class="modal-body" width="50%">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="name" required >
+						<input type="text" class="form-control" name="name" value={{$driver->name}} required>
 					</div>
 
                     <div class="form-group">
 						<label>password</label>
-						<input type="text" class="form-control" name="password" required >
+						<input type="text" class="form-control" name="password"   >
 					</div>
                     <div class="form-group">
 						<label>gender</label>
-						<input type="text" class="form-control" name="gender" required >
+						<input type="text" class="form-control" name="gender" value={{$driver->gender}} required >
 					</div>
 					<div class="form-group">
 						<label>Address</label>
-						<textarea class="form-control" name="location" required></textarea>
+						<textarea class="form-control" name="location" required > {{$driver->location}}</textarea>
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
-						<input type="text" class="form-control" name="phone" required>
+						<input type="text" class="form-control" name="phone" value={{$driver->phone}} required>
 					</div>
 				</div>
 				<div class="modal-footer">

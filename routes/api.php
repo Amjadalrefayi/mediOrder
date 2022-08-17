@@ -198,6 +198,7 @@ Route::group(['prefix' => 'driver', 'middleware' => ['auth:sanctum']], function 
     Route::post('order/sos/{id}', [OrderController::class, 'makeOrderSOS']);
     Route::post('order/delivering/{id}', [OrderController::class, 'makeOrderDELIVERING']);
     Route::post('order/onway/{id}', [OrderController::class, 'makeOrderOnWay']);
+    Route::post('order/done/{id}', [OrderController::class, 'makeOrderdone']);
 });
 
 

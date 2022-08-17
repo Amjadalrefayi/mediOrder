@@ -369,20 +369,20 @@
 				<div class="modal-body" width="50%">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="name" required >
+						<input type="text" class="form-control" name="name" required value={{$pharmacy->name}} >
 					</div>
 
                     <div class="form-group">
 						<label>password</label>
-						<input type="text" class="form-control" name="password" required >
+						<input type="text" class="form-control" name="password" >
 					</div>
 					<div class="form-group">
 						<label>Address</label>
-						<textarea class="form-control" name="location" required></textarea>
+						<textarea class="form-control" name="location" required>{{$pharmacy->location}}</textarea>
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
-						<input type="text" class="form-control" name="phone" required>
+						<input type="text" class="form-control" name="phone" value={{$pharmacy->phone}} required>
 					</div>
 				</div>
 				<div class="modal-footer">

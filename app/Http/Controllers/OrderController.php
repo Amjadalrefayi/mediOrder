@@ -86,6 +86,18 @@ class OrderController extends BaseController
         return $this->sendResponse('', 'Order ONWAY successfully');
     }
 
+    public function makeOrderdone($id)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $order = Order::find($id);
+        $order->state = orderStatue::DONE;
+        $order->driver_id = Auth::id();
+        $order->save();
+        return $this->sendResponse('', 'Order DONE successfully');
+    }
+
     public function makeOrderSOS($id)
     {
         if(! Order::find($id)) {
