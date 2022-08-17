@@ -46,7 +46,7 @@ class OrderController extends BaseController
 
     public function showLiveDriverOrders()
     {
-       $orders = Order::where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING, orderStatue::ONWAY])->get();
+       $orders = Order::where('driver_id', Auth::id())->whereIn('state',[orderStatue::DELIVERING])->get();
        return $this->sendResponse(SimpleOrderResources::collection($orders), 'Get all live order successfully');
     }
 
@@ -144,13 +144,13 @@ class OrderController extends BaseController
 
     }
 
-    public function makeOrderREJECTEDSupport($id)
+    public function makeOrderSOSSupport($id)
     {
         if(! Order::find($id)) {
             return $this->sendError('' , 'Not Found');
         }
         $order = Order::find($id);
-        $order->state = orderStatue::REJECTED;
+        $order->state = orderStatue::SOS;
         $order->save();
 
         return redirect()->route('allordertable');

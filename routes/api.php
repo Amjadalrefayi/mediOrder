@@ -108,7 +108,7 @@ Route::get('loginHome', function(){
    Route::get('/blocked/pharmacy', [PharmacyController::class, 'blockedpharmacy'])->name('blockedpharmacy');
    Route::get('/restor/pharmacy/{id}', [PharmacyController::class, 'restorpharmacy'])->name('restorpharmacy');
 
-   Route::post('/makeOrderRejectedSu/{id}', [OrderController::class, 'makeOrderREJECTEDSupport'])->name('orderrejectednowS');
+   Route::post('/makeOrderRejectedSu/{id}', [OrderController::class, 'makeOrderSOSSupport'])->name('orderrejectednowS');
 
    Route::post('orders/search', [OrderController::class, 'search'])->name('searchOrder');
 
