@@ -305,7 +305,7 @@
                 <li>
                     <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Default Order table</p>
                     </a>
                 </li>
                 <li>
@@ -371,7 +371,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Defult <b>Order</b></h2>
+                                <h2>Default <b>Order</b></h2>
                             </div>
                            {{-- <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
@@ -445,7 +445,7 @@
                                             <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
                                             </form>
 
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                        <form action="{{route('showOrderGeneral',$order->id)}}" method="POST">
                                             @csrf
                                             <button type="submit">  <i class="fa fa-eye" ></i> </button>
                                             </form>
@@ -458,7 +458,7 @@
                                             <button type="submit">  <i class="fa fa-warning" style="color:red" aria-hidden="true"></i> </button>
                                             </form>
 
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                        <form action="{{route('showOrderGeneral',$order->id)}}" method="POST">
                                             @csrf
                                             <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
                                             </form>
@@ -466,7 +466,7 @@
 
                                             @else
 
-                                            <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                            <form action="{{route('showOrderGeneral',$order->id)}}" method="POST">
                                                 @csrf
                                                 <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
                                                 </form>
@@ -486,7 +486,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

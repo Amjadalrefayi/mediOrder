@@ -82,8 +82,13 @@ Route::get('loginHome', function(){
    Route::get('/complaint/create', [ComplaintController::class, 'create'])->name('createcomplaint');
    Route::post('/storecomplaint', [ComplaintController::class, 'store'])->name('storecomplaint');
    Route::post('/makeOrderAccepted/{id}', [OrderController::class, 'makeOrderACCEPTED'])->name('orderacceptednow');
+   Route::post('/makeOrderAcceptedRasheta/{id}', [OrderController::class, 'makeOrderACCEPTEDRasheta'])->name('orderacceptedRasheta');
    Route::post('/makeOrderRejected/{id}', [OrderController::class, 'makeOrderREJECTED'])->name('orderrejectednow');
    Route::post('/makeOrdersos/{id}', [OrderController::class, 'makeOrdersosPH'])->name('makeOrdersosPH');
+
+   Route::post('order/show/{id}', [OrderController::class, 'show'])->name('showOrderPH');
+
+   Route::post('order/show//order/{id}', [OrderController::class, 'showOrderGeneral'])->name('showOrderGeneral');
 
    Route::post('products/search', [ProductController::class, 'searchPH'])->name('searchProducts');
 

@@ -367,9 +367,11 @@
                                 <h2><b>Orders</b></h2>
                             </div>
 
-                            <form action="{{ route('searchOrder') }}" method="POST">
+                            <form  style="display: flex; justify-content :end!important" action="{{ route('searchOrder') }}" method="POST">
                                 <input type="text" name="id" style="background-color: #566787" required/>
-                                <button type="submit" style="color: #0397d6">Search</button>
+                                <button class="teal" type="submit" style=" background-color: white;
+                                color: black;
+                                border: 2px solid  #0397d6">Search</button>
                             </form>
                            {{-- <div class="col-sm-6">
                                 <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
@@ -445,12 +447,17 @@
                                 @endswitch
                                 </td>
                                 <td>{{$order->total_price}}</td>
-                                <td>
+                                <td style="display:flex">
 
                                     <form action="{{route('orderrejectednowS',$order->id)}}" method="POST">
                                         @csrf
                                         <button type="submit">  <i class="fa fa-close" style="color:red" aria-hidden="true"></i> </button>
                                         </form>
+
+                                        <form action="{{route('showOrderGeneral',$order->id)}}" method="POST">
+                                            @csrf
+                                            <button type="submit">  <i class="fa fa-eye" ></i> </button>
+                                            </form>
 
                                 </td>
                              {{--  <td style="display:flex">
@@ -481,7 +488,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>{{$orders->count()}}</b> entries</div>
+
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

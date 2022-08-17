@@ -305,7 +305,7 @@
                 <li>
                     <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Default Order table</p>
                     </a>
                 </li>
                 <li>
@@ -427,7 +427,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

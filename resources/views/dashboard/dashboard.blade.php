@@ -363,9 +363,11 @@
                                 <h2>Manage <b>Customer</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <form action="{{ route('searchCustomer') }}" method="POST">
-                                    <input type="text" name="searchWord" style="background-color: #566787" required/>
-                                    <button type="submit" style="color: #0397d6">Search</button>
+                                <form style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
+                                    <input  type="text" name="searchWord" style="background-color: #566787" required/>
+                                    <button class="teal" type="submit" style=" background-color: white;
+                                    color: black;
+                                    border: 2px solid  #0397d6">Search</button>
                                 </form>
                             </div>
                         </div>

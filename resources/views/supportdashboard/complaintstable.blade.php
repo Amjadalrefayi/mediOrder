@@ -392,22 +392,6 @@
                                 <td>{{$complaint->pharmacy_id}}</td>
                                 <td>{{$complaint->driver_id}}</td>
                                 <td>{{$complaint->note}}</td>
-                               {{-- <td style="display:flex">
-
-                                     <form action="{{route('editdriverpage',$driver)}}" method="get">
-                                        @csrf
-
-                                        <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                                        </form>
-
-                                     {{-- <a href="{{route('editpharmacypage',$pharmacy)}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-
-                                    <form action="{{ route('deletedriver',$driver->id)}}" method="POST">
-                                    @csrf
-                                     @method('DELETE')
-                                         <button type="submit"> <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                                    </form>
-                                </td>--}}
                             </tr>
 
             @endforeach
@@ -420,7 +404,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$complaints->count()}}</b> out of <b>5</b> entries</div>
+
                         @if ($complaints->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

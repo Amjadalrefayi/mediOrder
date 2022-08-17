@@ -412,7 +412,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$customers->count()}}</b> out of <b>5</b> entries</div>
+
                         @if ($customers->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

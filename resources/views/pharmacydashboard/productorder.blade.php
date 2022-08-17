@@ -305,7 +305,7 @@
                 <li>
                     <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Default Order table</p>
                     </a>
                 </li>
                 <li>

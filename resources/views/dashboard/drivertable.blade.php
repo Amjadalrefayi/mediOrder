@@ -413,12 +413,8 @@
 
                         </tbody>
 
-
-
-
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$drivers->count()}}</b> out of <b>5</b> entries</div>
                         @if ($drivers->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

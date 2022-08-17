@@ -305,7 +305,7 @@
                 <li>
                     <a href={{route('ordertable')}}>
                         <i class="pe-7s-user"></i>
-                        <p>Defult Order table</p>
+                        <p>Default Order table</p>
                     </a>
                 </li>
                 <li>
@@ -436,14 +436,14 @@
                                         <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
                                         </form>
 
-                                        <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                        <form action="{{route('showOrderPH',$order->id)}}" method="POST">
                                             @csrf
                                             <button type="submit">  <i class="fa fa-eye" ></i> </button>
                                             </form>
 
                                             @else
 
-                                            <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
+                                            <form action="{{route('showOrderPH',$order->id)}}" method="POST">
                                                 @csrf
                                                 <button type="submit">  <i class="fa fa-eye" style="color:red"></i> </button>
                                                 </form>
@@ -463,7 +463,7 @@
 
                     </table>
                      <div class="clearfix">
-                        <div class="hint-text">Showing <b>{{$orders->count()}}</b> out of <b>5</b> entries</div>
+
                         @if ($orders->hasPages())
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">

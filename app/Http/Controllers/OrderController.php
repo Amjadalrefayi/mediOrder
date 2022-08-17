@@ -242,7 +242,9 @@ class OrderController extends BaseController
         if (!$order) {
             return $this->sendError('Order Not Found', 404);
         }
-        return $this->sendResponse(new OrderResources($order), 'Specific order');
+
+        return view('pharmacydashboard.showOrder')->with('order',new OrderResources($order));
+        //return $this->sendResponse(new OrderResources($order), 'Specific order');
     }
 
 
@@ -337,5 +339,35 @@ class OrderController extends BaseController
         $orders =  Order::where('id', $request->id)->paginate(10);
         return view('supportdashboard.allorderstable')->with('orders',$orders);
 
+    }
+
+    public function makeOrderACCEPTEDRasheta($id, Request $request)
+    {
+        if(! Order::find($id)) {
+            return $this->sendError('' , 'Not Found');
+        }
+        $validator = Validator::make($request->all(), [
+            'price' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+
+        $order = Order::find($id);
+        $order->state = orderStatue::ACCEPTED();
+        $order->total_price = $request->price;
+        $order->save();
+
+        return redirect()->route('rashetaordertable');
+    }
+
+    public function showOrderGeneral($id)
+    {
+            $order = Order::find($id);
+            if (!$order) {
+                return $this->sendError('Order Not Found', 404);
+            }
+            return view('pharmacydashboard.GeneralSHowOrder')->with('order',new OrderResources($order));
     }
 }

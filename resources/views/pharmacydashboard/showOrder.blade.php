@@ -244,8 +244,6 @@
         }
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
-
-
         }
         .modal .modal-content {
             border-radius: 3px;
@@ -257,16 +255,14 @@
         }
         .modal .modal-title {
             display: inline-block;
-
         }
         .modal .form-control {
             border-radius: 2px;
             box-shadow: none;
             border-color: #dddddd;
-
         }
         .modal textarea.form-control {
-             padding: 20px 30px;
+            resize: vertical;
         }
         .modal .btn {
             border-radius: 2px;
@@ -368,48 +364,76 @@
             </div>
         </nav>
 
+
         <div class="container-xl">
+            <div class="table-responsive">
+                <div class="table-wrapper">
 
-            <form  method="POST" action="{{route('updateproduct',$product->id)}}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-				<div class="modal-header">
-					<h4 class="modal-title">edit product</h4>
+                    <div class="jumbotron container" style="display: flex; justify-content :center!important">
 
-				</div>
-				<div class="modal-body" width="50%">
-					<div class="modal-body" width="50%">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="name" required >
-                        </div>
+                        <h3 class="display-2">Order Details</h3>
 
-                        <div class="form-group">
-                            <label>Company</label>
-                            <input type="text" class="form-control" name="company" required>
+                    </div>
+
+
+                    <div class="card container" style="width: 100rem;">
+
+                        @if ($order->image != null)
+                        <img style="width:300px;height:300px;" src="{{URL::asset( $order->image) }}" class="card-img-top" > <hr>
+                        @endif
+                        <div class="card-body">
+                            <p class="card-text">-Order ID: {{ $order->id }}</p><hr>
+                            <p class="card-text">-Customer ID: {{ $order->customer_id }}</p><hr>
+                            <p class="card-text">-Customer name: {{ $order->customer->name }}</p><hr>
+                            <p class="card-text">-State:@switch($order->state)
+                                @case(1)
+                                On hold
+                                    @break
+                                 @case(2)
+                                 Accepted
+                                    @break
+                                @case(3)
+                                     Rejected
+                                     @break
+                                @case(4)
+                                     Rejected
+                                     @break
+                                @case(5)
+                                    DELIVERING
+                                     @break
+                                @case(6)
+                                     DONE
+                                     @break
+                                @case(7)
+                                     SOS
+                                     @break
+                                @default
+
+                            @endswitch</p><hr>
+                            <p class="card-text">-Total Price: {{ $order->total_price }}</p><hr>
+                            <p class="card-text">-Expected Time: {{ $order->expected_time }}</p><hr>
+                            <p class="card-text">-Products:
+                                @foreach ($order->carts as $item)
+                                <p>{{$item->product->name}} - {{$item->count}}
+                                    <img style="width:60px;height:60px;" src="{{URL::asset( $item->product->image) }}" class="card-img-top" > <hr></p><hr>
+                                @endforeach</p>
                         </div>
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input type="file" class="form-control" name="image" required >
-                        </div>
-                        <div class="form-group">
-                            <label>Price</label>
-                            <input type="text" class="form-control" name="price" required >
-                        </div>
-                        <div class="form-group">
-                            <label>Type</label>
-                            <input type="text" class="form-control" name="type" required >
-                        </div>
-                        <div class="form-group">
-                            <label>Amount</label>
-                            <textarea class="form-control" name="amount" required></textarea>
-                        </div>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="save">
-				</div>
-			</form>
+                        <h5 class="card-title">-Text: {{ $order->text }}</h5><hr>
+
+                        @if($order->type == 2 && $order->state == 1 )
+
+                            <div class="center">
+                                <form action="{{route('orderacceptedRasheta',$order->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
+                                    <input type="text" name="price" placeholder="Total Price">
+                                </form>
+                            </div>
+                        @endif
+                </div>
+
+
+            </div>
         </div>
 
 
