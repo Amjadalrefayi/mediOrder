@@ -27,7 +27,7 @@ class ComplaintController extends BaseController
      */
     public function index()
     {
-        $complaints= Complaint::paginate(10);
+        $complaints= Complaint::latest()->paginate(10);
         return view('supportdashboard.complaintstable')->with('complaints',$complaints);
 
         // return $this->sendResponse(ComplaintResources::collection($complaints), [

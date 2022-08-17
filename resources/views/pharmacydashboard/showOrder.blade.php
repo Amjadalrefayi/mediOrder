@@ -271,7 +271,14 @@
         .modal form label {
             font-weight: normal;
         }
+
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
         </style>
+
 
 
 </head>
@@ -379,7 +386,7 @@
                     <div class="card container" style="width: 100rem;">
 
                         @if ($order->image != null)
-                        <img style="width:300px;height:300px;" src="{{URL::asset( $order->image) }}" class="card-img-top" > <hr>
+                        <img class="center" style="width:300px;height:400px;" src="{{URL::asset( $order->image) }}"  > <hr>
                         @endif
                         <div class="card-body">
                             <p class="card-text">-Order ID: {{ $order->id }}</p><hr>

@@ -210,7 +210,6 @@ class PharmacyController extends BaseController
         $pharmacy = Pharmacy::find($id);
         $validator = Validator::make($request->all(), [
             'name' => 'min:3|nullable',
-            'password' => 'min:8|nullable',
             'phone'=> 'min:13|nullable',
             'location'=> 'nullable',
             'image' => 'mimes:jpeg,jpg,png | nullable',

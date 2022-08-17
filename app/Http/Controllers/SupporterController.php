@@ -126,7 +126,6 @@ class SupporterController extends BaseController
         $supporter = Supporter::find($id);
         $validator = Validator::make($request->all(), [
             'name' => 'min:3|nullable',
-            'password' => 'min:8|nullable',
             'phone'=> 'min:13|nullable',
             'gender'=>'in:male,female|nullable',
             'location'=> 'required',
