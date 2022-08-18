@@ -402,7 +402,7 @@
                                 <td>{{$order->pharmacy_id}}</td>
                                 <td>
                                     @foreach ($order->carts as $item)
-                                    {{$item->product->name}}
+                                    {{$item->product->name}} -
                                     {{$item->count}}
                                     @endforeach
                                 </td>
