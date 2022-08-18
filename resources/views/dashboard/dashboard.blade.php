@@ -29,8 +29,8 @@
 
     <link rel="stylesheet" href={{ asset('https://fonts.googleapis.com/icon?family=Material+Icons') }}>
     <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href=  {{ asset('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css') }} rel="stylesheet">
+    <link href={{ asset('http://fonts.googleapis.com/css?family=Roboto:400,700,300') }} rel='stylesheet' type='text/css'>
     <link href={{ asset('dashboard/css/pe-icon-7-stroke.css') }} rel="stylesheet" />
 
 
@@ -363,12 +363,14 @@
                                 <h2>Manage <b>Customer</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <form style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
-                                    <input  type="text" name="searchWord" style="background-color: #566787" required/>
-                                    <button class="teal" type="submit" style=" background-color: white;
-                                    color: black;
-                                    border: 2px solid  #0397d6">Search</button>
+
+                                <form style="display: flex; justify-content :end!important" class="example" action="{{ route('searchCustomer') }}" method="POST">
+                                    <input type="text" placeholder="Search.." name="searchWord" style="color: black" required/>
+                                    <button style=" background-color: white;
+                                    color: black; type="submit"><i class="fa fa-search"></i></button>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>

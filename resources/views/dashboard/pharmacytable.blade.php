@@ -364,7 +364,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <a href={{ route('createpharmacy') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Pharmacy</span></a>
-                                <form style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}" method="POST">
+                                <form style="display: flex; justify-content :end!important" action="{{ route('searchCustomer') }}"  class="btn btn-success" method="POST">
                                     <input  type="text" name="searchWord" style="background-color: #566787" required/>
                                     <button class="teal" type="submit" style=" background-color: white;
                                     color: black;
