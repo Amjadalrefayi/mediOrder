@@ -185,13 +185,11 @@ class OrderController extends BaseController
             return $this->sendError('Please validate error', $validator->errors());
         }
 
+        $input= $request->all();
         $image = $request->image;
         $saveImage = time() . $image->getClientOriginalName();
         $image->move('uploads/orders', $saveImage);
         $input['image'] = 'https://medi-order.herokuapp.com/uploads/orders/' . $saveImage;
-
-        if(array_key_exists('text',$input)){
-        }
 
         $order = new Order();
         $order->type = orderType::RASHETA;
