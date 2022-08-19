@@ -373,6 +373,11 @@
                             <div class="col-sm-6">
                                 <h2>Rasheta <b>Order</b></h2>
                             </div>
+                            <form class="btn btn-success"  style="display: flex; justify-content :end!important" action="{{ route('searchOrderPH') }}" method="POST">
+                                <input type="text" placeholder="Search.." name="id" style="color: black" required/>
+                                <button style=" background-color: white;
+                                color: black; type="submit"><i class="fa fa-search"></i></button>
+                            </form>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -432,10 +437,7 @@
                                 <td>{{$order->expected_time}}</td>
                                 <td style="display:flex">
                                     @if ($order->state == 1)
-                                    <form action="{{route('orderacceptednow',$order->id)}}" method="POST">
-                                        @csrf
-                                        <button type="submit">  <i class="fa fa-check" style="color:rgb(6, 237, 6)" aria-hidden="true"></i> </button>
-                                        </form>
+
 
                                         <form action="{{route('showOrderPH',$order->id)}}" method="POST">
                                             @csrf

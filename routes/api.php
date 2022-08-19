@@ -111,6 +111,7 @@ Route::get('loginHome', function(){
    Route::post('/makeOrderRejectedSu/{id}', [OrderController::class, 'makeOrderSOSSupport'])->name('orderrejectednowS');
 
    Route::post('orders/search', [OrderController::class, 'search'])->name('searchOrder');
+   Route::post('orders/search/Ph', [OrderController::class, 'searchPH'])->name('searchOrderPH');
 
 //------Register / Login------//
 

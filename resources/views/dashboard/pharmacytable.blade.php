@@ -378,6 +378,7 @@
 
                                 <th>name</th>
                                 <th>Email</th>
+                                <th>Image</th>
                                 <th>Address</th>
                                 <th>Phone</th>
                                 <th>State</th>
@@ -391,6 +392,8 @@
 
                                 <td>{{$pharmacy->name}}</td>
                                 <td>{{$pharmacy->email}}</td>
+                                <td><img src="{{URL::asset($pharmacy->image)}}" alt="{{$pharmacy->name}}"
+                                    class="img-tumbnail" width="80" height="50"></td>
                                 <td>{{$pharmacy->location}}</td>
                                 <td>{{$pharmacy->phone}}</td>
                                 <td>{{$pharmacy->state}}</td>

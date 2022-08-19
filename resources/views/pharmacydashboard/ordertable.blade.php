@@ -373,10 +373,12 @@
                             <div class="col-sm-6">
                                 <h2>Default <b>Order</b></h2>
                             </div>
-                           {{-- <div class="col-sm-6">
-                                <a href={{ route('createsupporter') }} class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Supporter</span></a>
 
-                            </div>--}}
+                            <form class="btn btn-success"  style="display: flex; justify-content :end!important" action="{{ route('searchOrderPH') }}" method="POST">
+                                <input type="text" placeholder="Search.." name="id" style="color: black" required/>
+                                <button style=" background-color: white;
+                                color: black; type="submit"><i class="fa fa-search"></i></button>
+                            </form>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">

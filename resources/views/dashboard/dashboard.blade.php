@@ -374,7 +374,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-
+                                <th>ID</th>
                                 <th>name</th>
                                 <th>Email</th>
                                 <th>Address</th>
@@ -386,7 +386,7 @@
 
             @foreach ($customers as $customer)
                             <tr>
-
+                                <td>{{$customer->id}}</td>
                                 <td>{{$customer->name}}</td>
                                 <td>{{$customer->email}}</td>
                                 <td>{{$customer->location}}</td>

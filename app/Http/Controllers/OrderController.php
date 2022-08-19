@@ -283,7 +283,7 @@ class OrderController extends BaseController
 
     public function showPharmacyRashetaOrdersView(Request $request)
     {
-        $orders = Order::where('type',orderType::RASHETA)->latest()->paginate(10);
+        $orders = Order::where('type',orderType::RASHETA)->where('state', orderStatue::CREATED)->latest()->paginate(10);
         return view('pharmacydashboard.rashetaordertable')->with('orders',$orders);
     }
 
@@ -363,6 +363,22 @@ class OrderController extends BaseController
 
     }
 
+
+    public function searchPH(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Please validate error', $validator->errors());
+        }
+
+        $orders =  Order::where('id', $request->id)->where('pharmacy_id', Auth::id())->paginate(10);
+        return view('pharmacydashboard.ordertable')->with('orders',$orders);
+
+    }
+
     public function makeOrderACCEPTEDRasheta($id, Request $request)
     {
         if(! Order::find($id)) {
@@ -378,6 +394,7 @@ class OrderController extends BaseController
 
         $order = Order::find($id);
         $order->state = orderStatue::ACCEPTED();
+        $order->pharmacy_id = Auth::id();
         $order->total_price = $request->price;
         $order->save();
 
